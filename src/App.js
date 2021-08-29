@@ -7,7 +7,7 @@ import { AddBook } from './pages/AddBook'
 import { ReadingLog } from './pages/ReadingLog'
 import { MyStudents } from './pages/MyStudents'
 import { Profile } from './pages/Profile'
-
+import Navigation from './components/Navigation'
 
 // const client = new ApolloClient({
 //   uri: '/graphql',
@@ -18,7 +18,8 @@ function App() {
   return (
     // <ApolloProvider client={client}>
       <Router>
-        <>
+        <div className="App">
+          <Navigation />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/dashboard' component={Dashboard} />
@@ -27,7 +28,7 @@ function App() {
             <Route exact path='/mystudents' component={MyStudents} />
             <Route exact path='/profile' component={Profile} />
           </Switch>
-        </>
+        </div>
       </Router>
     // </ApolloProvider>
   );
