@@ -1,6 +1,6 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
 import bookworm from "../images/CA101-7.png"
-import signinModal from '../components/signin'
+// import signinModal from '../components/signin'
 import { Popover } from '@headlessui/react'
 
 export function Home() {
