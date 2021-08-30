@@ -14,7 +14,7 @@ const Navigation = () => {
     return (
         <>
             <Popover>
-                <nav class="flex items-center justify-between flex-wrap bg-dark text-lt-gray p-6">
+                <nav class="flex items-center justify-between flex-wrap bg-dark text-lt-gray p-8">
                     <div class="flex items-center flex-shrink-0 text-lt-green hover:text-orange mr-6">
                         <span class="font-semibold text-4xl"><a href='/'> Bookworm</a></span>
                     </div>
@@ -26,7 +26,7 @@ const Navigation = () => {
                     </div>
                     <div className="hidden md:block md:ml-3 md:pr-4 md:space-x-8">
                         {navLinks.map((item) => (
-                            <a key={item.name} href={item.href} className="font-medium text-lt-gray hover:text-lt-green">
+                            <a key={item.name} href={item.href} className="font-medium text-lt-gray hover:text-orange">
                                 {item.name}
                             </a>
                         ))}
