@@ -19,18 +19,12 @@ const Navigation = () => {
                         <span class="font-semibold text-4xl"><a href='/'> Bookworm</a></span>
                     </div>
                     <div className="-mr-2 flex items-center md:hidden">
-                        <Popover.Button className="rounded-md p-2 inline-flex items-center justify-center text-lt-gray hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <Popover.Button className="rounded-md p-2 inline-flex items-center justify-center text-lt-gray hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange">
                             <span className="sr-only">Open main menu</span>
                             <MenuIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                     </div>
-                    <div className="hidden md:block md:ml-3 md:pr-4 md:space-x-8">
-                        {navLinks.map((item) => (
-                            <a key={item.name} href={item.href} className="font-medium text-lt-gray hover:text-orange">
-                                {item.name}
-                            </a>
-                        ))}
-                    </div>
+
                     <Transition
                         as={Fragment}
                         enter="duration-150 ease-out"
@@ -45,7 +39,6 @@ const Navigation = () => {
                             className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                         >
                             <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
-
                                 <div className="px-2 pt-2 pb-3 text-dark">
                                     {navLinks.map((item) => (
                                         <a
