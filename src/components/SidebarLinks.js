@@ -8,12 +8,12 @@ const navLinks = [
 
 function SidebarLinks({ currentPage, handlePageChange }) {
     return (
-        <ul className="mt-12">
+        <ul className="mt-2">
             {navLinks.map((item) => (
-                <li className="flex w-full justify-between cursor-pointer items-center mb-6">
-                    <div className="flex items-center ml-2 text-lt-gray hover:text-orange">
+                <li className="flex w-full justify-between cursor-pointer items-center mb-4">
+                    <div className="flex items-center ml-2 tracking-wider text-xl font-light">
                         <p key={item.name} onClick={() => handlePageChange(`${item.href}`)}
-                            className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray'}>
+                            className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray hover:text-orange'}>
                             {item.name}
                         </p>
                     </div>

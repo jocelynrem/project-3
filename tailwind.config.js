@@ -17,6 +17,9 @@ module.exports = {
       'dk-gray': '#5a6d76',
       'dark': '#0e2e3a'
     },
+    fontFamily: {
+      custom: ['Besley', 'serif']
+    },
     extend: {},
   },
   variants: {
