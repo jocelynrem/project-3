@@ -13,7 +13,7 @@ function SidebarLinks({ currentPage, handlePageChange }) {
                 <li className="flex w-full justify-between cursor-pointer items-center mb-6">
                     <div className="flex items-center ml-2 text-lt-gray hover:text-orange">
                         <p key={item.name} onClick={() => handlePageChange(`${item.href}`)}
-                            className={currentPage === `${item.href}`}>
+                            className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray'}>
                             {item.name}
                         </p>
                     </div>
