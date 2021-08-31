@@ -15,8 +15,9 @@ const Navigation = () => {
         <>
             <Popover>
                 <nav class="flex items-center justify-between flex-wrap bg-dark text-lt-gray p-8">
-                    <div class="flex items-center flex-shrink-0 text-lt-green hover:text-orange mr-6">
-                        <span class="font-semibold text-4xl"><a href='/'> Bookworm</a></span>
+                    <div class="items-center flex-shrink-0 hover:text-lt-green text-orange mr-6">
+                        <a href='/'> <h1 className="font-custom text-5xl">Bookworm</h1>
+                            <p className="font-custom">Classroom Library Management</p></a>
                     </div>
                     <div className="-mr-2 flex items-center md:hidden">
                         <Popover.Button className="rounded-md p-2 inline-flex items-center justify-center text-lt-gray hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange">
