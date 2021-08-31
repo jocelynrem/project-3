@@ -1,4 +1,4 @@
-const { TestModel } = require('../models');
+const {  TestModel, Book, Teacher, Student, Log } = require('../models');
 
 const resolvers = {
   Query: {
