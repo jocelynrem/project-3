@@ -8,7 +8,7 @@
     "seed": "node seeds/seed.js",
     "watch": "nodemon server.js"
   },
-  "author": "Santiago Palacios",
+  "author": "Project 3 team",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.19.0",
