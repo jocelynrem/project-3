@@ -23,6 +23,25 @@ const teacherSchema = new Schema(
             required: true,
             minlength: 7,
           },
+           books: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: 'Book',
+            },
+          ]
+          , students: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: 'Student',
+            },
+          ]
+          , logs: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: 'Log',
+            },
+          ]
+
 
     }
 

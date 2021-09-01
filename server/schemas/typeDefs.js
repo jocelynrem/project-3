@@ -8,17 +8,20 @@ const typeDefs = gql`
 
   type Teacher {
     _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    password: String
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    books: [Book]!
+    students: [Student]!
+    logs: [Log]!
   }
 
 
   type Student {
     _id: ID
-    firstName: String
-    lastName: String
+    firstName: String!
+    lastName: String!
     lexile: Int
     comments: String
     teacherID: Teacher
