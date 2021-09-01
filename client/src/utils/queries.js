@@ -4,16 +4,47 @@ export const QUERY_ME = gql`
   {
     me {
       _id
-      username
+      firstName
+      lastName
       email
-      savedBooks {
-        bookId
-        authors
-        image
-        description
+      password
+      books {
+        _id
         title
-        link
+        auther
+        ISBN
+        description
+        lexile
+        copiesAvailable
+        copiesCheckedOut
+        teacherID
+      }
+      students {
+        _id
+        firstName
+        lastName
+        lexile
+        comments
+        teacherID
+      }
+      logs {
+        _id
+        checkedOutDate
+        expectedCheckinDate
+        checkinDate
+        comments
+        teacherID
+        studentID
+        bookID
       }
     }
+    , 
+    test {
+      _id
+      test
+    }
   }
+
+
+
 `;
