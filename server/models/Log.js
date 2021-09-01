@@ -4,12 +4,16 @@ const logSchema = new Schema(
         
         checkoutDate: {
             type: Date,
+            default: Date.now,
             required: true,
 
           },
           expectedCheckinDate: {
             type: Date,
+            default: () => Date.now() + 7*24*60*60*1000, // NEED TO CHECK TO SEE HOW THIS WORKS!
+            required: true
           },
+
           checkinDate: {
             type: Date,
           },
