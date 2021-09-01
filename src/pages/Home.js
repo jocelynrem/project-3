@@ -1,11 +1,41 @@
+import React from 'react';
 import { LockClosedIcon } from '@heroicons/react/solid'
 import bookworm from "../images/CA101-7.png"
 //import signinModal from '../components/signin'
-import { Popover } from '@headlessui/react'
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import Signin from '../components/Signin'
+
+
+const useStyles = makeStyles((theme) => ({
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+}));
 
 export function Home() {
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-        <div className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full">
                 <div className="self-center">
                     <img
@@ -73,10 +103,28 @@ export function Home() {
                             Sign in
                         </button>
                     </div>
-                    <Popover>
-                    <p className="text-right">New to Bookworm? <Popover.Button> Create an account</Popover.Button> </p>
-                    </Popover>
+                    <p className="text-right">New to Bookworm? <button type="button" className='hover:text-orange underline' onClick={handleOpen}> Create an Account</button></p>
                 </form>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
+                        <div className={classes.paper}>
+                            <Signin
+                                onClose={handleClose}
+                            />
+                        </div>
+                    </Fade>
+                </Modal>
             </div>
         </div>
     )
