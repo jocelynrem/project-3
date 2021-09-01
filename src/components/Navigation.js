@@ -15,7 +15,7 @@ const Navigation = () => {
         <>
             <Popover>
                 <nav class="flex items-center justify-between flex-wrap bg-dark text-lt-gray p-8">
-                    <div class="items-center flex-shrink-0 hover:text-lt-green text-orange mr-6">
+                    <div class="items-center flex-shrink-0 hover:text-orange text-lt-green mr-6">
                         <a href='/'> <h1 className="font-custom text-5xl">Bookworm</h1>
                             <p className="font-custom">Classroom Library Management</p></a>
                     </div>
@@ -25,7 +25,6 @@ const Navigation = () => {
                             <MenuIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                     </div>
-
                     <Transition
                         as={Fragment}
                         enter="duration-150 ease-out"

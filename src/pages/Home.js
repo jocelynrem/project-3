@@ -103,10 +103,7 @@ export function Home() {
                             Sign in
                         </button>
                     </div>
-                    <p className="text-right">New to Bookworm?
-                        <button type="button" onClick={handleOpen}>
-                            Create an Account
-                        </button></p>
+                    <p className="text-right">New to Bookworm? <button type="button" className='hover:text-orange underline' onClick={handleOpen}> Create an Account</button></p>
                 </form>
                 <Modal
                     aria-labelledby="transition-modal-title"
@@ -122,7 +119,9 @@ export function Home() {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <Signin />
+                            <Signin
+                                onClose={handleClose}
+                            />
                         </div>
                     </Fade>
                 </Modal>
