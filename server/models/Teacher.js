@@ -46,5 +46,5 @@ const teacherSchema = new Schema(
     }
 
 );
-const TeacherModel = model('TeacherModel', teacherSchema);
-module.exports = teacherSchema;
+const Teacher = model('TeacherModel', teacherSchema);
+module.exports = Teacher;
