@@ -7,36 +7,71 @@ function Signin(props) {
 
     return (
         <>
-            <div onClick={closeModal} className="w-full h-full z-0 absolute inset-0" />
-            <div className="mx-auto container">
-                <div className="flex items-center justify-center h-full w-full">
-                    <div className="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-10/12 md:w-8/12 lg:w-1/2 2xl:w-2/5">
-                        <div className="bg-dark rounded-tl-md rounded-tr-md px-4 md:px-8 md:py-4 py-7 flex items-center justify-between">
-                            <p className="text-white text-lg uppercase">Create New User</p>
-                            <button onClick={closeModal} className="focus:outline-none">
-                                <svg width={28} height={28} viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M21 7L7 21" stroke="#FFFFFF" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M7 7L21 21" stroke="#FFFFFF" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div className="px-4 md:px-10 pt-6 md:pt-12 md:pb-4 pb-7">
-                            <form>
-                                <div className="flex items-center">
-                                    <input placeholder="Full Name" className="w-full focus:outline-none placeholder-dk-gray py-3 px-3 text-sm leading-none text-dk-gray bg-white border rounded border-dark" />
+            <div className="flex items-center justify-center p-8">
+                <div className="md:w-96 bg-lt-gray rounded shadow-sm p-5">
+                    <div className="sm:flex items-strech">
+                        <div className="pt-2 pb-4 w-full">
+                            <div className="flex flex-col items-center w-full">
+                                <p className="text-3xl font-bold leading-6 text-dark">Create An Account</p>
+                            </div>
+                            <div className="mt-4 w-full text-left">
+                                <div className="my-3 py-1">
+                                    <label htmlFor="name" className="sr-only">
+                                        Full Name
+                                    </label>
+                                    <input
+                                        id="name"
+                                        name="name"
+                                        type="name"
+                                        autoComplete="name"
+                                        required="true"
+                                        className="appearance-none opacity-90 relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dk-gray rounded-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                        placeholder="Full Name"
+                                    />
                                 </div>
-                                <div className="flex items-center mt-8">
-                                    <input placeholder="Email" type="email" className="w-full focus:outline-none placeholder-dk-gray py-3 px-3 text-sm leading-none text-dk-gray bg-white border rounded border-dark" />
+                                <div className="my-3 py-1">
+                                    <label htmlFor="email-address" className="sr-only">
+                                        Email address
+                                    </label>
+                                    <input
+                                        id="email-address"
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
+                                        required="true"
+                                        className="appearance-none opacity-90 relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dk-gray rounded-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                        placeholder="Email address"
+                                    />
                                 </div>
-                            </form>
-                            <div className="flex items-center justify-end mt-9">
-                                <button onClick={closeModal} className="px-6 py-3 mx-4 bg-dk-gray hover:bg-opacity-80 hover:text-dark shadow rounded text-sm text-white">
-                                    Cancel
-                                </button>
-                                <button className="px-6 py-3 bg-orange text-dark hover:bg-opacity-80 shadow rounded text-sm">Add User</button>
+                                <div className="my-3 py-1">
+                                    <label htmlFor="password" className="sr-only">
+                                        Password
+                                    </label>
+                                    <input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        autoComplete="current-password"
+                                        required="true"
+                                        className="appearance-none opacity-90 relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dk-gray rounded-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                        placeholder="Password"
+                                    />
+                                </div>
+                                <a href='dashboard'>
+                                    <button type='submit'
+                                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md bg-dark text-white hover:bg-lt-green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lt-green">
+                                        Submit
+                                    </button></a>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div onClick={closeModal} className="cursor-pointer absolute top-0 right-0 m-3 text-lt-gray transition duration-150 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-label="Close" className="icon icon-tabler icon-tabler-x" width={20} height={20} viewBox="0 0 24 24" strokeWidth="2.5" stroke="#FFFFFF" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1={18} y1={6} x2={6} y2={18} />
+                        <line x1={6} y1={6} x2={18} y2={18} />
+                    </svg>
                 </div>
             </div>
         </>
@@ -44,3 +79,4 @@ function Signin(props) {
 }
 
 export default Signin;
+
