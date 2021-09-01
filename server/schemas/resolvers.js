@@ -21,12 +21,13 @@ const resolvers = {
   ,
 
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await Teacher.create(args);
+    addUser: async (parent, {firstName, lastName, email, password}) => {
+      console.log("args", firstName, lastName, email, password);
+      const user = await Teacher.create({firstName, lastName, email, password});
       //const token = signToken(user);
 
-      return { //token, 
-        user };
+      // return { token, user };
+      return user
     },
     login: async (parent, { email, password }) => {
       const user = await Teacher.findOne({ email });

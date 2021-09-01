@@ -12,9 +12,9 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    books: [Book]!
-    students: [Student]!
-    logs: [Log]!
+    books: [Book]
+    students: [Student]
+    logs: [Log]
   }
 
 
@@ -58,8 +58,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(email: String!, password: String!): Teacher
-    addUser(email: String!, password: String!): Teacher
+    login(firstName: String!, lastName: String!, email: String!, password: String!): Teacher
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Teacher
   }
 `;
 
