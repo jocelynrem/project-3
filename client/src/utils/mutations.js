@@ -12,13 +12,16 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
+// *** Add 'token' back in between line 18 and 19 when Auth is created ***
+export const ADD_TEACHER = gql`
+  mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+    addTeacher(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+      teacher {
         _id
-        username
+        firstName
+        lastName
+        email
+        password
       }
     }
   }

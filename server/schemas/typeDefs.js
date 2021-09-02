@@ -1,5 +1,6 @@
 const { gql } = require('apollo-server-express');
 
+// **** Add 'me: Teacher' back into 'type: Query' when Auth is added ****
 const typeDefs = gql`
   type TestModel {
     _id: ID
@@ -60,7 +61,7 @@ const typeDefs = gql`
 
   type Mutation {
     login(firstName: String!, lastName: String!, email: String!, password: String!): Teacher
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Teacher
+    addTeacher(firstName: String!, lastName: String!, email: String!, password: String!): Teacher
   }
 `;
 
