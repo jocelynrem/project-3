@@ -54,7 +54,8 @@ const typeDefs = gql`
 
   type Query {
     test: [TestModel]
-    me: Teacher
+    teachers: [Teacher]
+    findtheteacher(id: ID!): Teacher
   }
 
   type Mutation {
