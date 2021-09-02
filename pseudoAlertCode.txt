@@ -1,0 +1,6 @@
+need a click event on the login button
+if expectedCheckinDate = 7 or more days BEFORE the CURRENT DATE 
+ALERT pops up on teacher's homescreen to alert them that:
+student - NAME
+book - NAME
+Book has been out for a week.
