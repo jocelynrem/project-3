@@ -2,21 +2,27 @@ const {  TestModel, Book, Teacher, Student, Log } = require('../models');
 
 const resolvers = {
   Query: {
-    test: async () => {
-      return await TestModel.find({});
-    
+    teachers: async () => {
+      console.log("I GOT HIT")
+      return await Teacher.find({});
     }
     ,
-    me: async (parent, args, context) => {
-      // if (context.user) {
-        const teacherData = await Teacher.findOne({ _id: //context.
-          Teacher._id }).select('-__v -password');
+    findtheteacher: async (parent, args) => {
+      console.log("WHAT ARE YOU", args)
+      return await Teacher.findById(args.id);
+    }
 
-        return teacherData;
-      // }
+    // me: async (parent, args, context) => {
+    //   if (context.teacher) {
+    //     const teacherData = await Teacher.findOne(
+    //       { _id: context.teacher._id }
+    //       ).select('-__v -password');
 
-      // throw new AuthenticationError('Not logged in');
-    },
+    //     return teacherData;
+    //   }
+
+    //   throw new AuthenticationError('Not logged in');
+    // },
   }
   ,
 
