@@ -7,61 +7,64 @@ function Signin(props) {
 
     return (
         <>
-            <div className="flex items-center justify-center p-8">
-                <div className="md:w-96 bg-lt-gray rounded shadow-sm p-5">
+            <div className="flex items-center bg-dark justify-center p-8">
+                <div className="md:w-96 bg-white rounded shadow-sm p-5">
                     <div className="sm:flex items-strech">
                         <div className="pt-2 pb-4 w-full">
                             <div className="flex flex-col items-center w-full">
                                 <p className="text-3xl font-bold leading-6 text-dark">Create An Account</p>
                             </div>
                             <div className="mt-4 w-full text-left">
-                                <div className="my-3 py-1">
-                                    <label htmlFor="name" className="sr-only">
+                                <form action="#" method="POST">
+                                    <input type="hidden" name="remember" defaultValue="true" />
+                                    <div className="rounded-md shadow-sm -space-y-px">                                    <label htmlFor="name" className="sr-only">
                                         Full Name
                                     </label>
-                                    <input
-                                        id="name"
-                                        name="name"
-                                        type="name"
-                                        autoComplete="name"
-                                        required="true"
-                                        className="appearance-none opacity-90 relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dk-gray rounded-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
-                                        placeholder="Full Name"
-                                    />
-                                </div>
-                                <div className="my-3 py-1">
-                                    <label htmlFor="email-address" className="sr-only">
-                                        Email address
-                                    </label>
-                                    <input
-                                        id="email-address"
-                                        name="email"
-                                        type="email"
-                                        autoComplete="email"
-                                        required="true"
-                                        className="appearance-none opacity-90 relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dk-gray rounded-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
-                                        placeholder="Email address"
-                                    />
-                                </div>
-                                <div className="my-3 py-1">
-                                    <label htmlFor="password" className="sr-only">
-                                        Password
-                                    </label>
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        autoComplete="current-password"
-                                        required="true"
-                                        className="appearance-none opacity-90 relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dk-gray rounded-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
-                                        placeholder="Password"
-                                    />
-                                </div>
-                                <a href='dashboard'>
-                                    <button type='submit'
-                                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md bg-dark text-white hover:bg-lt-green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lt-green">
-                                        Submit
-                                    </button></a>
+                                        <input
+                                            id="name"
+                                            name="name"
+                                            type="name"
+                                            autoComplete="name"
+                                            required
+                                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dark rounded-t-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                            placeholder="Full Name"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email-address" className="sr-only">
+                                            Email address
+                                        </label>
+                                        <input
+                                            id="email-address"
+                                            name="email"
+                                            type="email"
+                                            autoComplete="email"
+                                            required
+                                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dark focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                            placeholder="Email address"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="password" className="sr-only">
+                                            Password
+                                        </label>
+                                        <input
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            autoComplete="current-password"
+                                            required
+                                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dark rounded-b-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                            placeholder="Password"
+                                        />
+                                    </div>
+                                    <a href='dashboard'>
+                                        <button type='submit'
+                                            className="mt-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-dark hover:bg-lt-green focus:outline-none focus:ring-2 focus:ring-lt-green"
+                                        >
+                                            Submit
+                                        </button></a>
+                                </form>
                             </div>
                         </div>
                     </div>
