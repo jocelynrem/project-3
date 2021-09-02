@@ -32,7 +32,7 @@ export default function DashboardContainer() {
     return (
         <div className="flex flex-no-wrap">
             {/* Sidebar */}
-            <div className="w-64 absolute bg-dark shadow h-screen sm:relative flex-col justify-between hidden sm:flex">
+            <div className="w-64 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden sm:flex">
                 <div className="px-8">
                     <ul className="mt-4">
                         <SidebarLinks currentPage={currentPage} handlePageChange={handlePageChange} />

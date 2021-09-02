@@ -1,9 +1,9 @@
-export default function Footer() {
+export default function Footer(props) {
     return (
-        <footer id="footer" className="relative z-50 bg-dk-gray">
+        <footer id="footer" className="relative z-50 bg-dark">
             <div className="flex flex-col justify-center items-center">
                 <p className="my-2 text-xs lg:text-sm leading-none text-lt-gray">
-                    2021 Bookworm Classroom Library Management. All Rights Reserved.
+                    Copyright {props.year} Bookworm Classroom Library Management. All Rights Reserved.
                 </p>
             </div>
         </footer>
