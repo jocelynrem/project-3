@@ -18,16 +18,30 @@ function Signin(props) {
                                 <form action="#" method="POST">
                                     <input type="hidden" name="remember" defaultValue="true" />
                                     <div className="rounded-md shadow-sm -space-y-px">                                    <label htmlFor="name" className="sr-only">
-                                        Full Name
+                                        First Name
                                     </label>
                                         <input
-                                            id="name"
-                                            name="name"
-                                            type="name"
-                                            autoComplete="name"
+                                            id="first-name"
+                                            name="first-name"
+                                            type="first-name"
+                                            autoComplete="first-name"
                                             required
                                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dark rounded-t-md focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
-                                            placeholder="Full Name"
+                                            placeholder="First Name"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="last-name" className="sr-only">
+                                            Last Name
+                                        </label>
+                                        <input
+                                            id="last-name"
+                                            name="last-name"
+                                            type="last-name"
+                                            autoComplete="last-name"
+                                            required
+                                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-lt-gray placeholder-dk-gray text-dark focus:outline-none focus:ring-lt-green focus:border-lt-green focus:z-10 sm:text-sm"
+                                            placeholder="Last Name"
                                         />
                                     </div>
                                     <div>
