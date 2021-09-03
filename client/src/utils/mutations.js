@@ -16,13 +16,11 @@ export const LOGIN_USER = gql`
 export const ADD_TEACHER = gql`
   mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
     addTeacher(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
-      teacher {
         _id
         firstName
         lastName
         email
         password
-      }
     }
   }
 `;

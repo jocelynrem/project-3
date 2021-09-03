@@ -31,10 +31,11 @@ const resolvers = {
       console.log("args", firstName, lastName, email, password);
       const user = await Teacher.create({firstName, lastName, email, password});
       //const token = signToken(user);
-
+      console.log("user", user);
       // return { token, user };
       return user
     },
+    
     login: async (parent, { email, password }) => {
       const user = await Teacher.findOne({ email });
 
