@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {ADD_TEACHER} from '../utils/mutations'
 import { useMutation } from '@apollo/client'; 
+import Auth from '../utils/auth';
 
 //Maybe change name to SignUP?
 
@@ -37,8 +38,10 @@ function Signin(props) {
                 variables: { ...formState},
             });
             console.log("AFTER");
-            console.log("data: ", data);
+            console.log("data from singup: ", data);
+            console.log("id from teacher:", data.addTeacher.teacher._id)
             // Auth.login(data.addTeacher.token);
+            Auth.login(data.addTeacher);    
 
         } catch (error) {
             console.error(error);

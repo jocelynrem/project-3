@@ -8,6 +8,8 @@ import Fade from '@material-ui/core/Fade';
 import Signin from '../components/Signin';
 import { useMutation } from '@apollo/client';
 import { LOGIN_TEACHER } from '../utils/mutations';
+import Auth from '../utils/auth';
+
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,8 +31,6 @@ export function Home() {
     password: '',
   });
   const [login] = useMutation(LOGIN_TEACHER);
-
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -58,6 +58,8 @@ export function Home() {
 
       console.log("login datta", data);
       //   Auth.login(data.login.token);
+      Auth.login(data.login)
+
     } catch (e) {
       console.error(e);
     }
