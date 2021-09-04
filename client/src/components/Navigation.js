@@ -25,7 +25,6 @@ const Navigation = () => {
                             <MenuIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                     </div>
-                    <button>Log Out</button> {/* Santi added this as placeholder so we can use a log out mechanism */}
                     <Transition
                         as={Fragment}
                         enter="duration-150 ease-out"

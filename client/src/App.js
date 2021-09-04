@@ -15,20 +15,20 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-    <Router>
-      <div className="min-h-screen flex-col flex">
-        <header>
-          <Navigation />
-        </header>
-        <main className="flex-grow">
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/dashboard' component={Dashboard} />
-          </Switch>
-        </main>
-        <Footer year={new Date().getFullYear()} />
-      </div>
-    </Router>
+      <Router>
+        <div className="min-h-screen flex-col flex">
+          <header>
+            <Navigation />
+          </header>
+          <main className="flex-grow">
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/dashboard/:teacherId' component={Dashboard} />
+            </Switch>
+          </main>
+          <Footer year={new Date().getFullYear()} />
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }

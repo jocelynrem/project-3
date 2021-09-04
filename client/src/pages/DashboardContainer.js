@@ -8,6 +8,16 @@ import Dashboard from '../components/pages/Dashboard';
 import readingWorm from "../images/CA101-3.png"
 
 export default function DashboardContainer() {
+    const { teacherId: userParam } = useParams();
+
+    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_GET_FINDTHETEACHER, {
+        variables: { teacherId: userParam },
+    });
+
+    const user = data?.teacherId || data?.user || {};
+    if (Auth.loggedIn() && Auth.getProfile().data.teacherId === userParam) {
+        return <Redirect to="dashboard/teacherId" />;
+    }
     const [currentPage, setCurrentPage] = useState('Dashboard');
 
     // This method is checking to see what the va¸lue of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
