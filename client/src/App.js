@@ -39,7 +39,7 @@ function App() {
           <main className="flex-grow">
             <Switch>
               <Route exact path='/' component={Home} />
-              <Route exact path='/dashboard/:email' component={Dashboard} />
+              <Route exact path='/dashboard/:teachId' component={Dashboard} />
             </Switch>
           </main>
           <Footer year={new Date().getFullYear()} />
