@@ -3,7 +3,8 @@ const navLinks = [
     { name: 'Add A Book', href: 'addbook' },
     { name: 'My Students', href: 'mystudents' },
     { name: 'Reading Log', href: 'readinglog' },
-    { name: 'Profile', href: 'profile' }
+    { name: 'Profile', href: 'profile' },
+    { name: 'Log out', href: '/'}
 ]
 
 function SidebarLinks({ currentPage, handlePageChange }) {
