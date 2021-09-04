@@ -1,5 +1,6 @@
 const {  TestModel, Book, Teacher, Student, Log } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -31,8 +32,10 @@ const resolvers = {
     addTeacher: async (parent, {firstName, lastName, email, password}) => {
       console.log("args from addTeacher mutation", firstName, lastName, email, password);
       const user = await Teacher.create({firstName, lastName, email, password});
-      //const token = signToken(user);
+      const token = signToken(user);
+      console.log('token:', token)
       console.log("user", user);
+
       // return { token, user };
       return user
     },
