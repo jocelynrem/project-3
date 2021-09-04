@@ -4,10 +4,12 @@ import { gql } from '@apollo/client';
 export const LOGIN_TEACHER = gql`
 mutation login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
-    
-    _id
-    email
-    password
+    token
+    teacher {
+      _id
+      firstName
+      lastName
+      email
   }
 }
 `;
