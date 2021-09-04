@@ -9,7 +9,7 @@ import Signup from '../components/Signup';
 import { useMutation } from '@apollo/client';
 import { LOGIN_TEACHER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
 
 
 
