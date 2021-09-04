@@ -1,4 +1,4 @@
-const {  TestModel, Book, Teacher, Student, Log } = require('../models');
+const { TestModel, Book, Teacher, Student, Log } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -29,33 +29,33 @@ const resolvers = {
   ,
 
   Mutation: {
-    addTeacher: async (parent, {firstName, lastName, email, password}) => {
-      console.log("args from addTeacher mutation", {firstName, lastName, email, password});
-      const user = await Teacher.create({firstName, lastName, email, password});
-      const token = signToken(user);
+    addTeacher: async (parent, { firstName, lastName, email, password }) => {
+      console.log("args from addTeacher mutation", { firstName, lastName, email, password });
+      const teacher = await Teacher.create({ firstName, lastName, email, password });
+      const token = signToken(teacher);
       console.log('token!!!!!!!!', token);
-      console.log("user!!!!!!!", user);
+      console.log("user!!!!!!!", teacher);
 
-      return {token, user};
-        // return user
+      return { token, teacher };
+      // return user
     },
-    
+
     login: async (parent, { email, password }) => {
       console.log(email, password)
-      const user = await Teacher.findOne({ email });
+      const teacher = await Teacher.findOne({ email });
 
-      if (!user) {
+      if (!teacher) {
         throw new AuthenticationError('Incorrect email');
       }
 
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await teacher.isCorrectPassword(password);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password');
       }
 
-      const token = signToken(user);
-      return { token, user };
+      const token = signToken(teacher);
+      return { token, teacher };
       // return user;
     }
   }
