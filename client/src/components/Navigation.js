@@ -7,7 +7,9 @@ const navLinks = [
     { name: 'Add A Book', href: 'addbook' },
     { name: 'My Students', href: 'mystudents' },
     { name: 'Reading Log', href: 'readinglog' },
-    { name: 'Profile', href: 'profile' }
+    { name: 'Profile', href: 'profile' },
+    { name: 'Log Out', href: '/' }
+
 ]
 
 const Navigation = () => {
