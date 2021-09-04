@@ -7,15 +7,17 @@ const navLinks = [
     { name: 'Add A Book', href: 'addbook' },
     { name: 'My Students', href: 'mystudents' },
     { name: 'Reading Log', href: 'readinglog' },
-    { name: 'Profile', href: 'profile' }
+    { name: 'Profile', href: 'profile' },
+    { name: 'Log Out', href: '/' }
+
 ]
 
 const Navigation = () => {
     return (
         <>
             <Popover>
-                <nav class="flex items-center justify-between flex-wrap bg-dark text-lt-gray p-8">
-                    <div class="items-center flex-shrink-0 text-lt-green mr-6">
+                <nav className="flex items-center justify-between flex-wrap bg-dark text-lt-gray p-8">
+                    <div className="items-center flex-shrink-0 text-lt-green mr-6">
                         <a href='/'> <h1 className="font-custom text-5xl">Bookworm</h1>
                             <p className="font-custom">Classroom Library Management</p></a>
                     </div>
@@ -25,7 +27,6 @@ const Navigation = () => {
                             <MenuIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                     </div>
-                    <button>Log Out</button> {/* Santi added this as placeholder so we can use a log out mechanism */}
                     <Transition
                         as={Fragment}
                         enter="duration-150 ease-out"
