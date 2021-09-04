@@ -29,7 +29,7 @@ function Signin(props) {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log("formState: ", formState);
+        console.log("formState from signup: ", formState);
 
         try {
             console.log("before Mutation")
