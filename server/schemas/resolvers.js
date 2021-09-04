@@ -1,4 +1,5 @@
 const {  TestModel, Book, Teacher, Student, Log } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
   Query: {
@@ -37,20 +38,22 @@ const resolvers = {
     },
     
     login: async (parent, { email, password }) => {
+      console.log(email, password)
       const user = await Teacher.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect email');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect password');
       }
 
-      const token = signToken(user);
-      return { token, user };
+      // const token = signToken(user);
+      // return { token, user };
+      return user;
     }
   }
 };
