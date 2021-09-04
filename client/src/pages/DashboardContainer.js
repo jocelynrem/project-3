@@ -16,7 +16,7 @@ export default function DashboardContainer() {
 
     const { teacherId: userParam } = useParams();
 
-    const { loading, data } = useQuery(userParam = GET_FINDTHETEACHER, {
+    const { loading, data } = useQuery(userParam ? GET_FINDTHETEACHER : GET_FINDTHETEACHER, {
         variables: { _id: userParam },
     });
 
