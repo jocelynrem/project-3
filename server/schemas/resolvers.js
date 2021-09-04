@@ -30,14 +30,14 @@ const resolvers = {
 
   Mutation: {
     addTeacher: async (parent, {firstName, lastName, email, password}) => {
-      console.log("args from addTeacher mutation", firstName, lastName, email, password);
+      console.log("args from addTeacher mutation", {firstName, lastName, email, password});
       const user = await Teacher.create({firstName, lastName, email, password});
       const token = signToken(user);
-      console.log('token:', token)
-      console.log("user", user);
+      console.log('token!!!!!!!!', token);
+      console.log("user!!!!!!!", user);
 
-      // return { token, user };
-      return user
+      return {token, user};
+        // return user
     },
     
     login: async (parent, { email, password }) => {
@@ -54,9 +54,9 @@ const resolvers = {
         throw new AuthenticationError('Incorrect password');
       }
 
-      // const token = signToken(user);
-      // return { token, user };
-      return user;
+      const token = signToken(user);
+      return { token, user };
+      // return user;
     }
   }
 };
