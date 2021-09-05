@@ -15,12 +15,14 @@ const studentSchema = new Schema(
           lexile: {
             type: Number
           },
-          comments: String,
-          teacherID: {
-            type: Schema.Types.ObjectId,
-            ref: 'Teacher',
-            required: true
-          }
+          comments: {
+            type: String
+          },
+          // teacherID: {
+          //   type: Schema.Types.ObjectId,
+          //   ref: 'Teacher',
+          //   required: true
+          // }
     }
 
 );
