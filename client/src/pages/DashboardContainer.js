@@ -7,37 +7,20 @@ import MyStudents from '../components/pages/MyStudents';
 import Profile from '../components/pages/Profile';
 import ReadingLog from '../components/pages/ReadingLog';
 import Dashboard from '../components/pages/Dashboard';
-import readingWorm from "../images/CA101-3.png"
-import { GET_FINDTHETEACHER } from '../utils/queries'
-import Auth from '../utils/auth';
+import readingWorm from "../images/CA101-3.png";
+import { GET_FINDTHETEACHER } from '../utils/queries';
+import { useQuery } from '@apollo/client';
 
 export default function DashboardContainer() {
     const [currentPage, setCurrentPage] = useState('Dashboard');
-
-    const { teacherId: userParam } = useParams();
-
-    const { loading, data } = useQuery(userParam ? GET_FINDTHETEACHER : GET_FINDTHETEACHER, {
-        variables: { _id: userParam },
+    const teacherId = localStorage.getItem('teacher_id');
+    console.log('this is the teachers Id from DashContainer:', teacherId)
+    const { loading, data } = useQuery(GET_FINDTHETEACHER, {
+        variables: { id: teacherId },
     });
 
-    const user = data?._id || {};
-    if (Auth.loggedIn() && Auth.getProfile().data._id === userParam) {
-        return <Redirect to="dashboard/:_id" />;
-    }
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!user?.username) {
-        return (
-            <h4>
-                You need to be logged in to see this. Use the navigation links above to
-                sign up or log in!
-            </h4>
-        );
-    }
-
+    console.log('loading from DashContainer:', loading)
+    console.log('data from DashContainer:', data)
     // This method is checking to see what the va¸lue of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
     const renderPage = () => {
         if (currentPage === 'readinglog') {

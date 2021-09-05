@@ -9,8 +9,6 @@ import Signup from '../components/Signup';
 import { useMutation } from '@apollo/client';
 import { LOGIN_TEACHER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { Link } from 'react-router-dom';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,25 +24,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export function Home(props) {
-    const { teacherId } = useParams();
+const handleChange = (event) => {
+    const { name, value } = event.target;
 
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const [teacherFormData, setTeacherFormData] = useState({
-        email: '',
-        password: '',
+    setTeacherFormData({
+        ...teacherFormData,
+        [name]: value,
     });
-    const [login, { error, data }] = useMutation(LOGIN_TEACHER);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-
-        setTeacherFormData({
-            ...teacherFormData,
-            [name]: value,
-        });
-    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -73,10 +60,6 @@ export function Home(props) {
             password: '',
         });
     };
-
-    if (Auth.loggedIn() && Auth.getProfile().data._id === teacherId) {
-        return <Redirect to="/me" />;
-    }
 
     const handleOpen = () => {
         setOpen(true);
