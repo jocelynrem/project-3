@@ -4,8 +4,8 @@ import { ApolloClient, createHttpLink, ApolloProvider, InMemoryCache } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import Home from './pages/Home'
 import Dashboard from './pages/DashboardContainer'
-import Navigation from './components/Navigation'
-import Footer from './components/footer';
+import Header from './components/Header'
+import Footer from './components/Footr';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -35,7 +35,7 @@ function App() {
       <Router>
         <div className="min-h-screen flex-col flex">
           <header>
-            <Navigation />
+            <Header />
           </header>
           <main className="flex-grow">
             <Switch>

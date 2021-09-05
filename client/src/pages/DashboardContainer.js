@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SidebarLinks from '../components/SidebarLinks';
+import MobileNav from '../components/MobileNav';
 import AddBook from '../components/pages/AddBook';
 import MyStudents from '../components/pages/MyStudents';
 import Profile from '../components/pages/Profile';
@@ -11,6 +12,7 @@ import { useQuery } from '@apollo/client';
 
 export default function DashboardContainer() {
     const [currentPage, setCurrentPage] = useState('Dashboard');
+
     const teacherId = localStorage.getItem('teacher_id');
     console.log('this is the teachers Id from DashContainer:', teacherId)
     const { loading, data } = useQuery(GET_FINDTHETEACHER, {
@@ -41,13 +43,16 @@ export default function DashboardContainer() {
     return (
         <div className="flex flex-no-wrap">
             {/* Sidebar */}
-            <div className="w-64 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden sm:flex">
+            <div className="w-64 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex">
                 <div className="px-8">
                     <ul className="mt-4">
                         <SidebarLinks currentPage={currentPage} handlePageChange={handlePageChange} />
                     </ul>
                     <img className="h-28 mt-8 ml-2 flex items-center" src={readingWorm} alt='watercolor of bookworm reading a book' />
                 </div>
+            </div>
+            <div>
+                <MobileNav handlePageChange={handlePageChange} />
             </div>
 
             <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
