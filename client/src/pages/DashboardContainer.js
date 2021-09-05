@@ -28,7 +28,9 @@ export default function DashboardContainer() {
             return <ReadingLog />;
         }
         if (currentView === 'addbook') {
-            return <AddBook />;
+            return <AddBook
+                name={data.findtheteacher.firstName}
+            />;
         }
         if (currentView === 'mystudents') {
             return <MyStudents />;
@@ -47,9 +49,9 @@ export default function DashboardContainer() {
     const handlePageChange = (page) => setcurrentView(page);
 
     return (
-        <div className="flex flex-no-wrap">
+        <div className="flex">
             {/* Sidebar */}
-            <div className="w-64 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex">
+            <div className="w-52 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex">
                 <div className="px-8">
                     <ul className="mt-4">
                         <SidebarLinks currentView={currentView} handlePageChange={handlePageChange} />
@@ -61,8 +63,8 @@ export default function DashboardContainer() {
                 <MobileNav handlePageChange={handlePageChange} />
             </div>
 
-            <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-                <div className="ml-0 m:ml: w-full h-full rounded border-dashed border-2 border-gray-300">
+            <div className="container mx-auto py-10 md:w-4/5 w-11/12 px-6">
+                <div className="ml-0 rounded border-dashed border-2 border-lt-gray">
                     {renderPage()}
                 </div>
             </div>
