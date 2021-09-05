@@ -17,12 +17,14 @@ const logSchema = new Schema(
           checkinDate: {
             type: Date,
           },
-          comments: String,
-          teacherID: {
-            type: Schema.Types.ObjectId,
-            ref: 'Teacher',
-            required: true
+          comments: {
+            type: String,
           },
+          // teacherID: {
+          //   type: Schema.Types.ObjectId,
+          //   ref: 'Teacher',
+          //   required: true
+          // },
           studentId: {
             type: Schema.Types.ObjectId,
             ref: 'Student',

@@ -31,11 +31,11 @@ const bookSchema = new Schema(
             min: 0,
             default: 0
           }, 
-          teacherID: {
-            type: Schema.Types.ObjectId,
-            ref: 'Teacher',
-            required: true
-          }
+          // teacherID: {
+          //   type: Schema.Types.ObjectId,
+          //   ref: 'Teacher',
+          //   required: true
+          // }
     }
 
 );

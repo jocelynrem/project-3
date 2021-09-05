@@ -1,28 +1,28 @@
 import { gql } from '@apollo/client';
 
-// *** Add 'token' back in line 7 when Auth is created ***
 export const LOGIN_TEACHER = gql`
-mutation login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    token
-    teacher {
-      _id
-      firstName
-      lastName
-      email
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      teacher {
+        _id
+        email
+      }
+    }
   }
-}
 `;
 
-// *** Add 'token' back in between line 18 and 19 when Auth is created ***
 export const ADD_TEACHER = gql`
   mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
     addTeacher(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+      token
+      teacher {
         _id
         firstName
         lastName
         email
         password
+      }
     }
   }
 `;

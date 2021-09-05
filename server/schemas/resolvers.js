@@ -12,19 +12,19 @@ const resolvers = {
     findtheteacher: async (parent, args) => {
       console.log("WHAT ARE YOU", args)
       return await Teacher.findById(args.id);
-    }
+    },
 
-    // me: async (parent, args, context) => {
-    //   if (context.teacher) {
-    //     const teacherData = await Teacher.findOne(
-    //       { _id: context.teacher._id }
-    //       ).select('-__v -password');
+    me: async (parent, args, context) => {
+      if (context.teacher) {
+        const teacherData = await Teacher.findById(
+          { _id: context.teacher._id }
+          ).select('-__v -password');
 
-    //     return teacherData;
-    //   }
+        return teacherData;
+      }
 
-    //   throw new AuthenticationError('Not logged in');
-    // },
+      // throw new AuthenticationError('Not logged in');
+    },
   }
   ,
 
@@ -55,6 +55,7 @@ const resolvers = {
       }
 
       const token = signToken(teacher);
+      console.log('Am i logged in?!', correctPw);
       return { token, teacher };
       // return user;
     }

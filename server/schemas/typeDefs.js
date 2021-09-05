@@ -62,6 +62,7 @@ const typeDefs = gql`
     test: [TestModel]
     teachers: [Teacher]
     findtheteacher(id: ID!): Teacher
+    me(id: ID!): Teacher
   }
 
   type Mutation {
