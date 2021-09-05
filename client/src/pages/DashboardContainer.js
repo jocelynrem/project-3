@@ -40,7 +40,7 @@ export default function DashboardContainer() {
             />;
         }
         return <Dashboard
-            name={data.findtheteacher.firstName}
+        // name={data.findtheteacher.firstName}
         />;
     };
 
