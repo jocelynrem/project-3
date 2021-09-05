@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 import SidebarLinks from '../components/SidebarLinks';
 import AddBook from '../components/pages/AddBook';
 import MyStudents from '../components/pages/MyStudents';
