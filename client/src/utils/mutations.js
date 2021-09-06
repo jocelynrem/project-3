@@ -54,12 +54,9 @@ mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $p
 }`;
 
 export const ADD_BOOK = gql`
-  mutation addBook($title: String!, $author: String!, $ISBN: String!, $description: String) {
-    addBook(title: $title, author: $author, ISBN: $ISBN, description: $description) {
+  mutation addBook($teacherId: ID!, $bookinfo: BookInfo!) {
+    addBook(teacherId: $teacherId, bookinfo: $bookinfo){
       _id
-      firstName
-      lastName
-      email
       books {
         title
         author
@@ -70,20 +67,20 @@ export const ADD_BOOK = gql`
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        image
-        description
-        title
-        link
-      }
-    }
-  }
-`;
+// export const REMOVE_BOOK = gql`
+//   mutation removeBook($bookId: ID!) {
+//     removeBook(bookId: $bookId) {
+//       _id
+//       username
+//       email
+//       savedBooks {
+//         bookId
+//         authors
+//         image
+//         description
+//         title
+//         link
+//       }
+//     }
+//   }
+// `;
