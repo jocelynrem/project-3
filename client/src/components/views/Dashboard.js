@@ -12,11 +12,11 @@ export default function Dashboard({ name }) {
                         </div>
                     </div>
                     <div className="flex items-center mt-7">
-                        <div className="text-center pr-5 border-r">
+                        <div className="text-center pr-7 border-r">
                             <p className="text-dk-gray">Total Books</p>
                             <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-md-green">280</p>
                         </div>
-                        <div className="ml-7 text-center pr-5 border-r">
+                        <div className="ml-7 text-center pr-7 border-r">
                             <p className="text-dk-gray">Books Checked Out</p>
                             <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-md-green">10</p>
                         </div>
