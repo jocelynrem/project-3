@@ -5,7 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import Home from './pages/Home'
 import Dashboard from './pages/DashboardContainer'
 import Header from './components/Header'
-import Footer from './components/Footr';
+import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -33,11 +33,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="min-h-screen flex-col flex">
+        <div className="h-screen flex-col flex">
           <header>
             <Header />
           </header>
-          <main className="flex-grow">
+          <main className="flex-1 overflow-y-auto">
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/dashboard' component={Dashboard} />

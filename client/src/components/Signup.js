@@ -59,7 +59,7 @@ function Signup(props) {
                             </div>
                             <div className="mt-4 w-full text-left">
                                 {data ? (
-                                    <Link to="/dashboard">Go to Dashboard</Link>
+                                    <Link to="/dashboard">Success! Redirecting to Dashboard.</Link>
                                 ) : (
                                     <form onSubmit={handleFormSubmit}>
                                         <input type="hidden" name="remember" defaultValue="true" />
