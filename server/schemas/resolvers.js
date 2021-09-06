@@ -12,21 +12,15 @@ const resolvers = {
     findtheteacher: async (parent, args) => {
       console.log("WHAT ARE YOU", args)
       return await Teacher.findById(args.id);
-    }
+    },
 
-    // me: async (parent, args, context) => {
-    //   if (context.teacher) {
-    //     const teacherData = await Teacher.findOne(
-    //       { _id: context.teacher._id }
-    //       ).select('-__v -password');
-
-    //     return teacherData;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
-    // },
-  }
-  ,
+    me: async (parent, args, context) => {
+      if (context.teacher) {
+        return Teacher.findOne({ _id: context.teacher._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+  },
 
   Mutation: {
     addTeacher: async (parent, { firstName, lastName, email, password }) => {
@@ -37,7 +31,7 @@ const resolvers = {
       console.log("teacher from add teacher!!!!!!!", teacher);
 
       return { token, teacher };
-      // return user
+      // return teacher
     },
 
     login: async (parent, { email, password }) => {
@@ -58,7 +52,7 @@ const resolvers = {
       console.log('token from login!!!!!!!!', token);
       console.log("teacher from login!!!!!!!", teacher);
       return { token, teacher };
-      // return user;
+      // return teacher;
     }
   }
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SidebarLinks from '../components/SidebarLinks';
+import { Redirect, useParams } from 'react-router-dom';
 import MobileNav from '../components/MobileNav';
 import AddBook from '../components/views/AddBook';
 import MyStudents from '../components/views/MyStudents';
@@ -7,18 +8,47 @@ import Profile from '../components/views/Profile';
 import ReadingLog from '../components/views/ReadingLog';
 import Dashboard from '../components/views/Dashboard';
 import readingWorm from "../images/CA101-3.png";
-import { GET_FINDTHETEACHER } from '../utils/queries';
+import { GET_FINDTHETEACHER, QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
+import Auth from '../utils/auth';
 
 export default function DashboardContainer() {
-
+    
     const [currentView, setcurrentView] = useState('Dashboard');
 
-    const teacherId = localStorage.getItem('teacher_id');
-    console.log('this is the teachers Id from DashContainer:', teacherId)
-    const { loading, data } = useQuery(GET_FINDTHETEACHER, {
-        variables: { id: teacherId },
-    });
+    const {id: teacherId} = useParams();
+
+    const {loading, data} = useQuery(
+        teacherId ? GET_FINDTHETEACHER : QUERY_ME,
+        {
+            variables: {id: teacherId}
+        }
+    );
+
+    const teacher = data?.me || data?.findtheteacher || {};
+
+    if (Auth.loggedIn() && Auth.getProfile().data._id === teacherId) {
+        return <Redirect to="/dashboard" />;
+    }
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!teacher?.email) {
+        return (
+            <h4>
+            You need to be logged in to see your Dashboard page. Use the navigation
+            links above to sign up or log in!
+            </h4>
+        );
+    }
+
+    // const teacherId = localStorage.getItem('teacher_id');
+    // console.log('this is the teachers Id from DashContainer:', teacherId)
+    // const { loading, data } = useQuery(GET_FINDTHETEACHER, {
+    //     variables: { id: teacherId },
+    // });
 
     console.log('loading from DashContainer:', loading)
     console.log('data from DashContainer:', data)

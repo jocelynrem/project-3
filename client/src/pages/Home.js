@@ -9,11 +9,6 @@ import Signup from '../components/Signup';
 import { useMutation } from '@apollo/client';
 import { LOGIN_TEACHER } from '../utils/mutations';
 import Auth from '../utils/auth';
-<<<<<<< HEAD
-import { Link, Redirect, useParams } from 'react-router-dom';
-
-=======
->>>>>>> 01e7aaea7f049ec30157f53fa5e78753298b5490
 
 
 const useStyles = makeStyles((theme) => ({
