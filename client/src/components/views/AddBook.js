@@ -13,25 +13,32 @@ export default function AddBook({ name }) {
     const handleFormSubmit = async (event) => {
         console.log('here I am')
         event.preventDefault();
-    
+        
         if (!searchInput) {
-          return false;
+            return false;
         }
-    
+        
         try {
             let response = '';
-            if(optionState === 'ISBN') 
-                 response = await searchGoogleBooksbyISBN(searchInput);
-            else 
+            console.log("optionState during hadleformsubmit:", optionState)
+            console.log('response before fetchign:', response)
+            if(optionState === 'ISBN') {
+                console.log('query from isbn')
+                response = await searchGoogleBooksbyISBN(searchInput);
+            }
+            else {
+                console.log('query by title')
                 response = await searchGoogleBooksbyTitle(searchInput);
+            }
 
-    
-          if (!response.ok) {
-            throw new Error('something went wrong!');
-          }
-    
-          const { items } = await response.json();
-          console.log('items!!!!!!:', items)
+            console.log('response after fetchign:', response)
+
+            if (!response.ok) {
+                throw new Error('something went wrong!');
+            }
+
+            const { items } = await response.json();
+            console.log('items!!!!!!:', items)
     
         //   const bookData = items.map((book) => ({
         //     bookId: book.id,
@@ -63,7 +70,7 @@ export default function AddBook({ name }) {
                         <div className="relative">
                             <div className="absolute text-gray-600 flex items-center border-r pl-1 h-full">
                                 <select value={optionState} onChange={handleChange} className="myoption uppercase border-none text-sm leading-tight tracking-normal focus:outline-none h-8 appearance-none pr-6 z-20 relative bg-transparent">
-                                    <option value="isbn">isbn</option>
+                                    <option value="ISBN">isbn</option>
                                     <option value="title">title</option>
                                 </select>
                                 <div className="mx-1 absolute right-0 z-10">
