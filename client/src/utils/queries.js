@@ -4,6 +4,7 @@ import { gql } from '@apollo/client';
 export const GET_FINDTHETEACHER = gql`
 query findme($id: ID!) {
   findtheteacher(id: $id) {
+    _id
 		firstName
     lastName
     email
