@@ -11,7 +11,7 @@ export default function Dashboard({ name }) {
                             <p className="mt-2 text-2xl uppercase font-semibold text-center text-dark">{name}'s Library</p>
                         </div>
                     </div>
-                    <div className="flex items-center mt-7">
+                    <div className="flex items-center mt-7 px-3">
                         <div className="text-center pr-7 border-r">
                             <p className="text-dk-gray">Total Books</p>
                             <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-md-green">280</p>
