@@ -7,6 +7,7 @@ import Profile from '../components/views/Profile';
 import ReadingLog from '../components/views/ReadingLog';
 import Dashboard from '../components/views/Dashboard';
 import readingWorm from '../images/CA101-3.png';
+import spinner from '../images/icons8-fidget-spinner-50.png';
 import { GET_FINDTHETEACHER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
