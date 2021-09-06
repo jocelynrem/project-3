@@ -1,8 +1,66 @@
+import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
+import { useState } from 'react';
+
 
 export default function AddBook({ name }) {
+
+
+    const [searchInput, setSearchInput] = useState('');
+    const [optionState, setOptionState] = useState('ISBN');
+    console.log('optionState:', optionState)
+    const handleChange = (event) => setOptionState(event.target.value);
+
+    const handleFormSubmit = async (event) => {
+        console.log('here I am')
+        event.preventDefault();
+        
+        if (!searchInput) {
+            return false;
+        }
+        
+        try {
+            let response = '';
+            console.log("optionState during hadleformsubmit:", optionState)
+            console.log('response before fetchign:', response)
+            if(optionState === 'ISBN') {
+                console.log('query from isbn')
+                response = await searchGoogleBooksbyISBN(searchInput);
+            }
+            else {
+                console.log('query by title')
+                response = await searchGoogleBooksbyTitle(searchInput);
+            }
+
+            console.log('response after fetchign:', response)
+
+            if (!response.ok) {
+                throw new Error('something went wrong!');
+            }
+
+            const { items } = await response.json();
+            console.log('items!!!!!!:', items)
+    
+        //   const bookData = items.map((book) => ({
+        //     bookId: book.id,
+        //     authors: book.volumeInfo.authors || ['No author to display'],
+        //     title: book.volumeInfo.title,
+        //     description: book.volumeInfo.description,
+        //     image: book.volumeInfo.imageLinks?.thumbnail || '',
+        //   }));
+    
+        //   setSearchedBooks(bookData);
+          setSearchInput('');
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+
+
+
     return (
         <>
-            <h2 className="flex md:mr-16 pl-5 pt-5">Two ways to add a book to {name}'s Library: </h2>
+            <h2 className="flex md:mr-16 pl-5 pt-5">Two ways to add a book to {name.toUpperCase()}'s Library: </h2>
             <div className="bg-gray-200 items-center justify-center">
                 <div className="flex md:flex-row flex-col items-center py-8 px-4">
                     <div className="flex flex-col md:mr-16 md:py-0 py-4">
@@ -11,8 +69,8 @@ export default function AddBook({ name }) {
                         </p>
                         <div className="relative">
                             <div className="absolute text-gray-600 flex items-center border-r pl-1 h-full">
-                                <select className="uppercase border-none text-sm leading-tight tracking-normal focus:outline-none h-8 appearance-none pr-6 z-20 relative bg-transparent">
-                                    <option value="isbn">isbn</option>
+                                <select value={optionState} onChange={handleChange} className="myoption uppercase border-none text-sm leading-tight tracking-normal focus:outline-none h-8 appearance-none pr-6 z-20 relative bg-transparent">
+                                    <option value="ISBN">isbn</option>
                                     <option value="title">title</option>
                                 </select>
                                 <div className="mx-1 absolute right-0 z-10">
@@ -22,8 +80,18 @@ export default function AddBook({ name }) {
                                     </svg>
                                 </div>
                             </div>
-                            <input id="bookSearch" className="text-gray-600 focus:outline-none focus:border focus:border-lt-green font-normal w-80 h-10 flex items-center pl-20 text-sm border-gray-300 rounded border shadow" />
+                            <input 
+                                id="bookSearch" 
+                                name='searchInput' 
+                                value = {searchInput} 
+                                onChange={(e) => 
+                                    {
+                                    setSearchInput(e.target.value);
+                                    console.log( e.target.value )
+                                }} 
+                                className="text-gray-600 focus:outline-none focus:border focus:border-lt-green font-normal w-80 h-10 flex items-center pl-20 text-sm border-gray-300 rounded border shadow" />
                         </div>
+                        <button onClick={handleFormSubmit}>click me to Search</button>
                     </div>
                 </div>
             </div>
