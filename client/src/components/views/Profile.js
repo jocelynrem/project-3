@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { UPDATE_TEACHER } from '../utils/mutations'
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
 
 export default function Profile({ name, lastName, email}) {
-    
-    
-    
-    const [searchInput, setSearchInput] = useState('');
+    const [formState, setFormState] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    });
     const teacherId = localStorage.getItem('teacher_id');
     console.log('this is the teachers Id from Profile:', teacherId)
     return (
