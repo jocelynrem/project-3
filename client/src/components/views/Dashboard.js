@@ -1,4 +1,5 @@
 import books from "../../images/CA101-16.png";
+import BooksOut from "../BooksOut";
 
 export default function Dashboard({ name }) {
     return (
@@ -22,11 +23,12 @@ export default function Dashboard({ name }) {
                         </div>
                         <div className="ml-7 text-center">
                             <p className="text-dk-gray">Books Past Due</p>
-                            <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-md-green">3</p>
+                            <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-orange">3</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <BooksOut />
         </>
     );
 }
