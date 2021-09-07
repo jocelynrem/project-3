@@ -68,6 +68,16 @@ const resolvers = {
         {$push: {books: bookInfo}},
         {new: true},
       )
+    },
+
+    addStudent: async (parent, {teacherId, studentInfo}) => {
+      console.log("teacherId: ", teacherId);
+      console.log("bookinfo: ", studentInfo);
+      return Teacher.findByIdAndUpdate(
+        {_id: teacherId},
+        {$push: {students: studentInfo}},
+        {new: true},
+      )
     }
 
     // addBook: async (parent, {data}, context) => {
