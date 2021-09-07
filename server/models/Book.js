@@ -7,16 +7,19 @@ const bookSchema = new Schema(
             required: true,
             trim: true
           },
-          author: {
-            type: String,
-            required: true
-          },
+          authors: [
+            {
+              type: String,
+            },
+          ],
           ISBN: {
             type: String,
-            required: true
           },
           description: {
             type: String
+          },
+          bookId: {
+            type: String,
           },
           copiesAvailable: {
             type: Number,

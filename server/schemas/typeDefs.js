@@ -28,10 +28,11 @@ const typeDefs = gql`
 
   type Book {
     _id: ID
-    title: String
-    author: String
+    title: String!
+    authors: [String]
     ISBN: String
     description: String
+    bookId: String
     copiesAvailable: Int
     copiesCheckedOut: Int
   }
@@ -55,10 +56,11 @@ const typeDefs = gql`
   }
 
   input BookInfo {
-    title: String!,
-    author: String!,
-    ISBN: String!,
-    description: String!,
+    title: String!
+    authors: [String]
+    ISBN: String,
+    description: String,
+    bookId: String,
     copiesAvailable: Int,
     copiesCheckedOut: Int
   }
