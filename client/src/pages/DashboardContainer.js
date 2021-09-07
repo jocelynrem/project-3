@@ -81,11 +81,11 @@ export default function DashboardContainer() {
                     />
                 </div>
             </div>
-            <div>
-                <MobileNav handlePageChange={handlePageChange} />
-            </div>
 
-            <div className='container mx-auto py-10 md:w-4/5 w-11/12 px-6'>
+            <div className='container mx-auto py-2 md:w-4/5 w-11/12 px-3'>
+                <div className='p-2'>
+                    <MobileNav handlePageChange={handlePageChange} />
+                </div>
                 <div className='ml-0 rounded border-dashed border-2 border-lt-gray'>
                     {renderPage()}
                 </div>

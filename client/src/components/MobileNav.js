@@ -1,14 +1,14 @@
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 import { Fragment } from 'react';
+import Auth from '../utils/auth';
 
 const navLinks = [
     { name: 'Dashboard', href: 'dashboard' },
     { name: 'Add A Book', href: 'addbook' },
     { name: 'My Students', href: 'mystudents' },
     { name: 'Reading Log', href: 'readinglog' },
-    { name: 'Profile', href: 'profile' },
-    { name: 'Log out', href: '/' }
+    { name: 'Profile', href: 'profile' }
 ]
 
 export default function MobileNav({ handlePageChange }) {
@@ -31,7 +31,7 @@ export default function MobileNav({ handlePageChange }) {
             >
                 <Popover.Panel
                     focus
-                    className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+                    className="relative top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                 >
                     <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="px-2 pt-2 pb-3 text-dark">
@@ -43,6 +43,11 @@ export default function MobileNav({ handlePageChange }) {
                                     {item.name}
                                 </p>
                             ))}
+                            <p
+                                onClick={() => Auth.logout()}
+                                className='block px-3 py-2 rounded-md text-base font-medium text-dark hover:text-white hover:bg-dark'>
+                                Log out
+                            </p>
                         </div>
 
                     </div>
