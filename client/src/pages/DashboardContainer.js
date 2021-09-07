@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SidebarLinks from '../components/SidebarLinks';
-import { Redirect, useParams } from 'react-router-dom';
+// import { Redirect, useParams } from 'react-router-dom';
 import MobileNav from '../components/MobileNav';
 import AddBook from '../components/views/AddBook';
 import MyStudents from '../components/views/MyStudents';
@@ -8,9 +8,9 @@ import Profile from '../components/views/Profile';
 import ReadingLog from '../components/views/ReadingLog';
 import Dashboard from '../components/views/Dashboard';
 import readingWorm from "../images/CA101-3.png";
-import { GET_FINDTHETEACHER, QUERY_ME } from '../utils/queries';
+import { GET_FINDTHETEACHER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 
 export default function DashboardContainer() {
     
