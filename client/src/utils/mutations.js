@@ -53,19 +53,37 @@ mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $p
   }
 }`;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($bookData: BookInput!) {
-    saveBook(bookData: $bookData) {
+export const ADD_BOOK = gql`
+  mutation addBook($bookInfo: BookInput!) {
+    addBook(bookInfo: $bookInfo) {
       _id
-      username
+      firstName
+      lastName
       email
-      savedBooks {
-        bookId
-        authors
-        image
-        description
-        title
-        link
+      books {
+          _id
+          title
+          author
+          ISBN
+          description
+      }
+    }
+  }
+`;
+
+export const ADD_STUDENT = gql`
+  mutation addStudent($studentInfo: StudentInfo!) {
+    addStudent(studentInfo: $studentInfo) {
+      _id
+      firstName
+      lastName
+      email
+      students {
+          _id
+          firstName
+          lastName
+          lexile
+          comments
       }
     }
   }
