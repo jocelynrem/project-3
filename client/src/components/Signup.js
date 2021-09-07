@@ -4,6 +4,8 @@ import { ADD_TEACHER } from '../utils/mutations'
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 
+//Maybe change name to SignUP?
+
 function Signup(props) {
     const closeModal = () => {
         props.onClose()
@@ -36,8 +38,10 @@ function Signup(props) {
                 variables: { ...formState },
             });
             console.log("AFTER");
-            console.log("data: ", data);
-            Auth.login(data.addTeacher.token);
+            console.log("data from singup: ", data);
+            console.log("id from teacher:", data.addTeacher.teacher._id)
+            // Auth.login(data.addTeacher.token);
+            Auth.login(data.addTeacher);
 
         } catch (error) {
             console.error(error);
@@ -55,7 +59,7 @@ function Signup(props) {
                             </div>
                             <div className="mt-4 w-full text-left">
                                 {data ? (
-                                    <Link to="dashboard/:_id">Go to Dashboard</Link>
+                                    <Link to="/dashboard">Success! Redirecting to Your Dashboard.</Link>
                                 ) : (
                                     <form onSubmit={handleFormSubmit}>
                                         <input type="hidden" name="remember" defaultValue="true" />

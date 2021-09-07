@@ -33,8 +33,8 @@ const resolvers = {
       console.log("args from addTeacher mutation", { firstName, lastName, email, password });
       const teacher = await Teacher.create({ firstName, lastName, email, password });
       const token = signToken(teacher);
-      console.log('token!!!!!!!!', token);
-      console.log("user!!!!!!!", teacher);
+      console.log('token from add teacher!!!!!!!!', token);
+      console.log("teacher from add teacher!!!!!!!", teacher);
 
       return { token, teacher };
       // return user
@@ -55,6 +55,8 @@ const resolvers = {
       }
 
       const token = signToken(teacher);
+      console.log('token from login!!!!!!!!', token);
+      console.log("teacher from login!!!!!!!", teacher);
       return { token, teacher };
       // return user;
     }
