@@ -16,39 +16,11 @@ export default function DashboardContainer() {
     
     const [currentView, setcurrentView] = useState('Dashboard');
 
-    const {id: teacherId} = useParams();
-
-    const {loading, data} = useQuery(
-        teacherId ? GET_FINDTHETEACHER : QUERY_ME,
-        {
-            variables: {id: teacherId}
-        }
-    );
-
-    const teacher = data?.me || data?.findtheteacher || {};
-
-    if (Auth.loggedIn() && Auth.getProfile().data._id === teacherId) {
-        return <Redirect to="/dashboard" />;
-    }
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!teacher?.email) {
-        return (
-            <h4>
-            You need to be logged in to see your Dashboard page. Use the navigation
-            links above to sign up or log in!
-            </h4>
-        );
-    }
-
-    // const teacherId = localStorage.getItem('teacher_id');
-    // console.log('this is the teachers Id from DashContainer:', teacherId)
-    // const { loading, data } = useQuery(GET_FINDTHETEACHER, {
-    //     variables: { id: teacherId },
-    // });
+    const teacherId = localStorage.getItem('teacher_id');
+    console.log('this is the teachers Id from DashContainer:', teacherId)
+    const { loading, data } = useQuery(GET_FINDTHETEACHER, {
+        variables: { id: teacherId },
+    });
 
     console.log('loading from DashContainer:', loading)
     console.log('data from DashContainer:', data)

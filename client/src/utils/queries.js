@@ -12,7 +12,7 @@ export const QUERY_TEACHERS = gql`
 `
 
 export const GET_FINDTHETEACHER = gql`
-query findtheteacher($id: ID!) {
+query findme($id: ID!) {
   findtheteacher(id: $id) {
 		firstName
     lastName
@@ -25,50 +25,50 @@ query findtheteacher($id: ID!) {
 };
 `
 
-export const QUERY_ME = gql`
-  query me {
-    me {
-      firstName
-      lastName
-      email
-      password
-      books {
-        _id
-        title
-        auther
-        ISBN
-        description
-        lexile
-        copiesAvailable
-        copiesCheckedOut
-      }
-      students {
-        _id
-        firstName
-        lastName
-        lexile
-        comments
-      }
-      logs {
-        _id
-        checkedOutDate
-        expectedCheckinDate
-        checkinDate
-        comments
-        studentID
-        bookID
-      }
-    }
-    , 
-    test {
-      _id
-      test
-    }
-  }
+// export const QUERY_ME = gql`
+//   query me {
+//     me {
+//       firstName
+//       lastName
+//       email
+//       password
+//       books {
+//         _id
+//         title
+//         auther
+//         ISBN
+//         description
+//         lexile
+//         copiesAvailable
+//         copiesCheckedOut
+//       }
+//       students {
+//         _id
+//         firstName
+//         lastName
+//         lexile
+//         comments
+//       }
+//       logs {
+//         _id
+//         checkedOutDate
+//         expectedCheckinDate
+//         checkinDate
+//         comments
+//         studentID
+//         bookID
+//       }
+//     }
+//     , 
+//     test {
+//       _id
+//       test
+//     }
+//   }
 
 
 
-`;
+// `;
 
 
 

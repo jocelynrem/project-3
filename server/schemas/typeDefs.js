@@ -69,7 +69,6 @@ const typeDefs = gql`
     test: [TestModel]
     teachers: [Teacher]
     findtheteacher(id: ID!): Teacher
-    me: Teacher
   }
 
   type Mutation {
@@ -84,4 +83,5 @@ module.exports = typeDefs;
 
 //     addBook(teacherId: ID!, title: String!, author: String!, ISBN: String!, description: String!): Teacher
 
+//     me: Teacher
 

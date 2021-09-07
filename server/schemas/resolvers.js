@@ -14,12 +14,17 @@ const resolvers = {
       return await Teacher.findById(args.id);
     },
 
-    me: async (parent, args, context) => {
-      if (context.teacher) {
-        return Teacher.findOne({ _id: context.teacher._id });
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    // me: async (parent, args, context) => {
+    //   if (context.teacher) {
+    //     const teacherData = await Teacher.findOne(
+    //       { _id: context.teacher._id }
+    //       ).select('-__v -password');
+
+    //     return teacherData;
+    //   }
+
+    //   throw new AuthenticationError('Not logged in');
+    // },
   },
 
   Mutation: {
