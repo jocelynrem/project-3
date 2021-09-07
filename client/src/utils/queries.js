@@ -14,6 +14,7 @@ export const QUERY_TEACHERS = gql`
 export const GET_FINDTHETEACHER = gql`
 query findme($id: ID!) {
   findtheteacher(id: $id) {
+    _id
 		firstName
     lastName
     email

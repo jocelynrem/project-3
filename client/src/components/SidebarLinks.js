@@ -1,3 +1,5 @@
+import Auth from '../utils/auth';
+
 
 const navLinks = [
     { name: 'Dashboard', href: 'dashboard' },
@@ -5,7 +7,6 @@ const navLinks = [
     { name: 'My Students', href: 'mystudents' },
     { name: 'Reading Log', href: 'readinglog' },
     { name: 'Profile', href: 'profile' },
-    { name: 'Log out', href: '/' }
 ]
 
 function SidebarLinks({ currentPage, handlePageChange }) {
@@ -23,6 +24,15 @@ function SidebarLinks({ currentPage, handlePageChange }) {
                         </div>
                     </li>
                 ))}
+                <li className="flex w-full justify-between cursor-pointer items-center mb-4">
+                        <div className="flex items-center ml-2 tracking-wider text-xl font-light">
+                            <p
+                                onClick={() => Auth.logout()}
+                                className='text-lt-gray hover:text-orange'>
+                                Log out
+                            </p>
+                        </div>
+                    </li>
             </ul>
         </>
     );
