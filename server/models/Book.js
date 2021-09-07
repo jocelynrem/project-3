@@ -18,23 +18,17 @@ const bookSchema = new Schema(
           description: {
             type: String
           },
-          lexile: {
-            type: Number
-          },
           copiesAvailable: {
             type: Number,
             min: 0,
+            max: 1000,
             default: 0
           },
           copiesCheckedOut: {
             type: Number,
             min: 0,
+            max: 1000,
             default: 0
-          }, 
-          teacherID: {
-            type: Schema.Types.ObjectId,
-            ref: 'Teacher',
-            required: true
           }
     }
 

@@ -82,7 +82,6 @@ export const ADD_STUDENT = gql`
           _id
           firstName
           lastName
-          lexile
           comments
       }
     }

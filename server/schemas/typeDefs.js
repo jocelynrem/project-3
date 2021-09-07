@@ -23,9 +23,7 @@ const typeDefs = gql`
     _id: ID
     firstName: String!
     lastName: String!
-    lexile: Int
     comments: String
-    teacherID: Teacher
   }
 
   type Book {
@@ -34,10 +32,8 @@ const typeDefs = gql`
     author: String
     ISBN: String
     description: String
-    lexile: Int
     copiesAvailable: Int
     copiesCheckedOut: Int
-    teacherID: Teacher
   }
 
   scalar Date
@@ -62,13 +58,14 @@ const typeDefs = gql`
     title: String!,
     author: String!,
     ISBN: String!,
-    description: String!
+    description: String!,
+    copiesAvailable: Int,
+    copiesCheckedOut: Int
   }
 
   input StudentInfo {
     firstName: String!,
     lastName: String!,
-    lexile: Int,
     comments: String
   }
 
