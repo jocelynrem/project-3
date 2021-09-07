@@ -37,10 +37,9 @@ export default function DashboardContainer() {
     }
     if (!data) {
         return (
-            <h4>
-                You need to be logged in to see your profile page. Use the navigation
-                links above to sign up or log in!
-            </h4>
+            <h2>
+                You need to be logged in to see your profile page.
+            </h2>
         );
     }
     const renderPage = () => {
