@@ -1,15 +1,5 @@
-import { gql } from '@apollo/client'
-
-export const QUERY_TEACHERS = gql`
-  query allTeachers {
-    teachers {
-      _id
-      firstName
-      lastName
-      email
-    }
-  };
-`
+import { gql } from '@apollo/client';
+// *** Can uncomment 'GET_ME' when the Auth is added ***
 
 export const GET_FINDTHETEACHER = gql`
 query findme($id: ID!) {
@@ -23,7 +13,17 @@ query findme($id: ID!) {
       checkoutDate
     }
   }
-};
+}
+`
+export const QUERY_TEACHERS = gql`
+  query allTeachers {
+    teachers {
+      _id
+      firstName
+      lastName
+      email
+    }
+  }
 `
 
 // export const QUERY_ME = gql`
@@ -117,3 +117,14 @@ query findme($id: ID!) {
 //       test
 //     }
 //   }
+
+// export const QUERY_TEACHERS = gql`
+//   query allTeachers {
+//     teachers {
+//       _id
+//       firstName
+//       lastName
+//       email
+//     }
+//   };
+// `
