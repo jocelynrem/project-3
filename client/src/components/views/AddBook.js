@@ -139,8 +139,37 @@ export default function AddBook({ name }) {
                             rows={3}
                             defaultValue={""} />
                     </div>
+                    <button className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Add Book</button>
                 </div>
             </div>
+            <div>
+                <table className="w-full shadow text-left bg-white dark:bg-gray-800">
+                    <thead>
+                        <tr className="border-b border-gray-300 dark:border-gray-700">
+                            <th className="py-5 sm:pl-10 pl-2 w-1/4 text-base text-gray-800 dark:text-gray-100">Title</th>
+                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100">Author</th>
+                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">ISBN</th>
+                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Title</td>
+                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Author</td>
+                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">ISBN</td>
+                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">Description</td>
+                        </tr>
+                        <tr className="bg-gray-200 dark:bg-gray-700">
+                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Title</td>
+                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Author</td>
+                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">ISBN</td>
+                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">Description</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
         </>
     )
 }
