@@ -58,6 +58,20 @@ const typeDefs = gql`
     teacher: Teacher
   }
 
+  input BookInfo {
+    title: String!,
+    author: String!,
+    ISBN: String!,
+    description: String!
+  }
+
+  input StudentInfo {
+    firstName: String!,
+    lastName: String!,
+    lexile: Int,
+    comments: String
+  }
+
   type Query {
     test: [TestModel]
     teachers: [Teacher]
@@ -67,9 +81,14 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addTeacher(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addBook(teacherId: ID!, bookInfo: BookInfo!): Teacher
+    addStudent(teacherId: ID!, studentInfo: StudentInfo!): Teacher
   }
 `;
 
 module.exports = typeDefs;
 
+//     addBook(teacherId: ID!, title: String!, author: String!, ISBN: String!, description: String!): Teacher
+
+//     me: Teacher
 

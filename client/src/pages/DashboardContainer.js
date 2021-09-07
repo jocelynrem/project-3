@@ -7,7 +7,6 @@ import Profile from '../components/views/Profile';
 import ReadingLog from '../components/views/ReadingLog';
 import Dashboard from '../components/views/Dashboard';
 import readingWorm from '../images/CA101-3.png';
-import spinner from '../images/icons8-fidget-spinner-50.png';
 import { GET_FINDTHETEACHER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
@@ -24,15 +23,9 @@ export default function DashboardContainer() {
     console.log('data from DashContainer:', data);
 
     if (loading) {
-        return <div className='flex justify-center items-center mt-20'>
-            <button type="button" className="" disabled>
-                <img src={spinner} alt='fidget spinner' />
-                Loading
-            </button>
-        </div>;
+        return <div>Loading...</div>;
     }
     if (!data) {
-
         return (
             <h4>
                 You need to be logged in to see your profile page. Use the navigation

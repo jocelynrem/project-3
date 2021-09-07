@@ -12,7 +12,7 @@ const resolvers = {
     findtheteacher: async (parent, args) => {
       console.log("WHAT ARE YOU", args)
       return await Teacher.findById(args.id);
-    }
+    },
 
     // me: async (parent, args, context) => {
     //   if (context.teacher) {
@@ -25,8 +25,7 @@ const resolvers = {
 
     //   throw new AuthenticationError('Not logged in');
     // },
-  }
-  ,
+  },
 
   Mutation: {
     addTeacher: async (parent, { firstName, lastName, email, password }) => {
@@ -37,7 +36,7 @@ const resolvers = {
       console.log("teacher from add teacher!!!!!!!", teacher);
 
       return { token, teacher };
-      // return user
+      // return teacher
     },
 
     login: async (parent, { email, password }) => {
@@ -59,7 +58,41 @@ const resolvers = {
       console.log("teacher from login!!!!!!!", teacher);
       return { token, teacher };
       // return user;
+    },
+
+    addBook: async (parent, {teacherId, bookInfo}) => {
+      console.log("teacherId: ", teacherId);
+      console.log("bookinfo: ", bookInfo);
+      return Teacher.findByIdAndUpdate(
+        {_id: teacherId},
+        {$push: {books: bookInfo}},
+        {new: true},
+      )
+    },
+
+    addStudent: async (parent, {teacherId, studentInfo}) => {
+      console.log("teacherId: ", teacherId);
+      console.log("bookinfo: ", studentInfo);
+      return Teacher.findByIdAndUpdate(
+        {_id: teacherId},
+        {$push: {students: studentInfo}},
+        {new: true},
+      )
     }
+
+    // addBook: async (parent, {data}, context) => {
+
+    //   if (context.teacher) {
+    //     const bookAdd = await Teacher.findByIdAndUpdate(
+    //       {_id: context.teacher._id},
+    //       {$push: {books: data}},
+    //       {new: true},
+    //       );
+    //     return bookAdd;
+    //   }
+      
+    //   throw new AuthenticationError('Please login to Add a book')
+    // }
   }
 };
 
