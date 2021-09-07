@@ -52,8 +52,32 @@ const resolvers = {
       console.log('token from login!!!!!!!!', token);
       console.log("teacher from login!!!!!!!", teacher);
       return { token, teacher };
-      // return teacher;
+      // return user;
+    },
+
+    addBook: async (parent, {teacherId, bookInfo}) => {
+      console.log("teacherId: ", teacherId);
+      console.log("bookinfo: ", bookInfo);
+      return Teacher.findByIdAndUpdate(
+        {_id: teacherId},
+        {$push: {books: bookInfo}},
+        {new: true},
+      )
     }
+
+    // addBook: async (parent, {data}, context) => {
+
+    //   if (context.teacher) {
+    //     const bookAdd = await Teacher.findByIdAndUpdate(
+    //       {_id: context.teacher._id},
+    //       {$push: {books: data}},
+    //       {new: true},
+    //       );
+    //     return bookAdd;
+    //   }
+      
+    //   throw new AuthenticationError('Please login to Add a book')
+    // }
   }
 };
 
