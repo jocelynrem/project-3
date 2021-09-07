@@ -39,6 +39,36 @@ const resolvers = {
       return { token, teacher };
       // return user
     },
+    // modifyTeacher: async (_, { id, firstName, lastName, email, password }) => { 
+    //   const teacher = await Teacher.findById(id); 
+    //   const token = signToken(teacher);
+    //   console.log('TEACHERRR', teacher)
+    //   if (!teacher) {
+    //     throw new Error('Couldnt find teacher');
+    //   }
+
+    //   teacher.firstName = firstName; 
+    //   teacher.lastName = lastName; 
+    //   return { token, teacher };
+    //  },
+
+     modifyTeacher: async (parent, { id, firstName, lastName, email, password }) => { 
+      const teacher = await Teacher.findById(id); 
+      const token = signToken(teacher);
+      console.log('TEACHERRR', teacher)
+      if (!teacher) {
+        throw new Error('Couldnt find teacher');
+      }
+      return Teacher.findByIdAndUpdate(
+        // {_id: id},
+        [{firstName: teacher.firstName}, 
+        {lastName: teacher.lastName},
+        {email: teacher.email},
+        {password: teacher.password},
+        {new: true}]
+      )},
+     
+
 
     login: async (parent, { email, password }) => {
       console.log(email, password)

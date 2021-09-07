@@ -62,11 +62,13 @@ const typeDefs = gql`
     test: [TestModel]
     teachers: [Teacher]
     findtheteacher(id: ID!): Teacher
+    me(id: ID!): Teacher
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addTeacher(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    modifyTeacher(id: String!, firstName: String!, lastName: String!, email: String!, password: String!): Auth  
   }
 `;
 

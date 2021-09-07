@@ -53,7 +53,9 @@ export default function DashboardContainer() {
         if (currentView === 'profile') {
             return (
                 <Profile
-                    name={data.findtheteacher.firstName}
+                    id={data.findtheteacher._id}
+                    firstName={data.findtheteacher.firstName}
+                    lastName={data.findtheteacher.lastName}
                     email={data.findtheteacher.email}
                 />
             );
