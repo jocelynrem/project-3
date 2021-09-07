@@ -1,5 +1,9 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const bookSchema = require('./Book')
+const studentSchema = require('./Student')
+const logSchema = require('./Log')
+
 
 const teacherSchema = new Schema(
     {
@@ -25,26 +29,11 @@ const teacherSchema = new Schema(
             required: true,
             minlength: 7,
           },
-          books: [
-            {
-              type: Schema.Types.ObjectId,
-              ref: 'Book',
-            },
-          ]
-          , students: [
-            {
-              type: Schema.Types.ObjectId,
-              ref: 'Student',
-            },
-          ]
-          , logs: [
-            {
-              type: Schema.Types.ObjectId,
-              ref: 'Log',
-            },
-          ]
+          books: [bookSchema],
 
+          students: [studentSchema],
 
+          logs: [logSchema],
     }
 
 );
