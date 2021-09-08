@@ -54,15 +54,14 @@ mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $p
 }`;
 
 export const MODIFY_TEACHER = gql`
-mutation modifyTeacher($id: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!){
-  modifyTeacher(id: $id, firstName: $firstName, lastName: $lastName, email: $email, password: $password){
+mutation modifyTeacher($id: String!, $firstName: String!, $lastName: String!, $email: String!){
+  modifyTeacher(id: $id, firstName: $firstName, lastName: $lastName, email: $email{
     token
     teacher {
       _id
       firstName
     	lastName
     	email
-    	password
     }
   }
 }`;
