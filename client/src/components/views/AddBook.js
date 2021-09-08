@@ -6,7 +6,9 @@ export default function AddBook({ name }) {
 
 
     const [searchInput, setSearchInput] = useState('');
+    // const [searchResults, setSearchResults] = useState('');
     const [optionState, setOptionState] = useState('ISBN');
+    const [searchedBooks, setSearchedBooks] = useState([]);
     console.log('optionState:', optionState)
     const handleChange = (event) => setOptionState(event.target.value);
 
@@ -40,24 +42,53 @@ export default function AddBook({ name }) {
             const { items } = await response.json();
             console.log('items!!!!!!:', items)
 
-            //   const bookData = items.map((book) => ({
-            //     bookId: book.id,
-            //     authors: book.volumeInfo.authors || ['No author to display'],
-            //     title: book.volumeInfo.title,
-            //     description: book.volumeInfo.description,
-            //     image: book.volumeInfo.imageLinks?.thumbnail || '',
-            //   }));
+            
+                // const navLinks = [
+                //     { name: 'Dashboard', href: 'dashboard' },
+                //     { name: 'Add A Book', href: 'addbook' },
+                //     { name: 'My Students', href: 'mystudents' },
+                //     { name: 'Reading Log', href: 'readinglog' },
+                //     { name: 'Profile', href: 'profile' },
+                // ]
 
-            //   setSearchedBooks(bookData);
+
+            const bookData = items.map((book) => ({
+                bookId: book.id,
+                authors: book.volumeInfo.authors || ['No author to display'],
+                title: book.volumeInfo.title,
+                description: book.volumeInfo.description,
+                // ISBN: book.volumeInfo.
+                image: book.volumeInfo.imageLinks?.thumbnail || '',
+              }));
+            // const bookdata2 = [bookData];
+
+            // // console.log("Bookdata: ", bookData);
+            // console.log("Bookdata: ", bookData);
+            setSearchedBooks(bookData);
             setSearchInput('');
         } catch (err) {
             console.error(err);
         }
     };
-
-
-
-
+    
+    // // function SidebarLinks({ currentPage, handlePageChange }) {
+    // //     return (
+    // //         <>
+    // //             <ul className="mt-2">
+    //                 {navLinks.map((item) => (
+    //                     <li key={item.name} className="flex w-full justify-between cursor-pointer items-center mb-4">
+    //                         <div className="flex items-center ml-2 tracking-wider text-xl font-light">
+    //                             <p
+    //                                 onClick={() => handlePageChange(`${item.href}`)}
+    //                                 className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray hover:text-orange'}>
+    //                                 {item.name}
+    //                             </p>
+    //                         </div>
+    //                     </li>
+    //                 ))}
+    
+    
+    
     return (
         <>
             <h2 className="flex md:mr-16 pl-5 pt-5">Two ways to add a book to {name.toUpperCase()}'s Library: </h2>
@@ -145,27 +176,24 @@ export default function AddBook({ name }) {
             <div>
                 <table className="w-full shadow text-left bg-white dark:bg-gray-800">
                     <thead>
+
                         <tr className="border-b border-gray-300 dark:border-gray-700">
                             <th className="py-5 sm:pl-10 pl-2 w-1/4 text-base text-gray-800 dark:text-gray-100">Title</th>
                             <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100">Author</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">ISBN</th>
                             <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Description</th>
+                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">ISBN</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Title</td>
-                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Author</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">ISBN</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">Description</td>
+                    <tbody >
+                    {console.log(searchedBooks)}
+                    {searchedBooks.map((item) => (
+                        <tr key={item.bookId}>
+                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.title}</td>
+                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.authors}</td>
+                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">{item.description}</td>
+                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right"><img src = {item.image}/></td>
                         </tr>
-                        <tr className="bg-gray-200 dark:bg-gray-700">
-                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Title</td>
-                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">Author</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">ISBN</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">Description</td>
-                        </tr>
-
+                        ))}
                     </tbody>
                 </table>
             </div>
