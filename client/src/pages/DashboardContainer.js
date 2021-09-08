@@ -9,6 +9,7 @@ import Dashboard from '../components/views/Dashboard';
 import readingWorm from '../images/CA101-3.png';
 import { GET_FINDTHETEACHER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
+import Auth from '../utils/auth'; // 9/8 adding for jwt authentication
 
 export default function DashboardContainer() {
     const [currentView, setcurrentView] = useState('Dashboard');
@@ -43,6 +44,7 @@ export default function DashboardContainer() {
       </h4>
     );
   }
+
     const renderPage = () => {
         if (currentView === 'readinglog') {
             return <ReadingLog />;
@@ -65,36 +67,48 @@ export default function DashboardContainer() {
         }
         return <Dashboard name={data.findtheteacher.firstName} />;
     };
-
     const handlePageChange = (page) => setcurrentView(page);
+    const loggedIn = Auth.loggedIn();
+    console.log('loggedIn:', loggedIn)
 
     return (
-        <div className='flex'>
-            {/* Sidebar */}
-            <div className='w-52 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex'>
-                <div className='px-8'>
-                    <ul className='mt-4'>
-                        <SidebarLinks
-                            currentView={currentView}
-                            handlePageChange={handlePageChange}
+
+
+            <div className='flex'>
+                {/* Sidebar */}
+                <div className='w-52 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex'>
+                    <div className='px-8'>
+                        <ul className='mt-4'>
+                            <SidebarLinks
+                                currentView={currentView}
+                                handlePageChange={handlePageChange}
+                            />
+                        </ul>
+                        <img
+                            className='h-28 mt-8 ml-2 flex items-center'
+                            src={readingWorm}
+                            alt='watercolor of bookworm reading a book'
                         />
-                    </ul>
-                    <img
-                        className='h-28 mt-8 ml-2 flex items-center'
-                        src={readingWorm}
-                        alt='watercolor of bookworm reading a book'
-                    />
+                    </div>
+                </div>
+    
+                <div className='container mx-auto py-2 md:w-4/5 w-11/12 px-3'>
+                    <div className='p-2'>
+                        <MobileNav handlePageChange={handlePageChange} />
+                    </div>
+                    {loggedIn ? (
+                        <div className='ml-0 rounded border-dashed border-2 border-lt-gray'>
+                            {renderPage()}
+                        </div>
+                    ) : (
+                        <h4>
+                        You need to be logged in to see your profile page. Use the navigation
+                        links above to sign up or log in!
+                      </h4>
+                    )}
                 </div>
             </div>
 
-            <div className='container mx-auto py-2 md:w-4/5 w-11/12 px-3'>
-                <div className='p-2'>
-                    <MobileNav handlePageChange={handlePageChange} />
-                </div>
-                <div className='ml-0 rounded border-dashed border-2 border-lt-gray'>
-                    {renderPage()}
-                </div>
-            </div>
-        </div>
+
     );
 }
