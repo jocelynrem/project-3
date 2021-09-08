@@ -102,9 +102,9 @@ export default function AddBook({ name }) {
                                     setSearchInput(e.target.value);
                                     console.log(e.target.value)
                                 }}
-                                className="text-gray-600 focus:outline-none focus:border focus:border-lt-green font-normal w-80 h-10 flex items-center pl-20 text-sm border-gray-300 rounded border shadow" />
+                                className="text-gray-600 focus:outline-none focus:border focus:border-lt-green font-normal w-60 h-10 flex items-center pl-20 text-sm border-gray-300 rounded border shadow" />
                         </div>
-                        <button onClick={handleFormSubmit}>click me to Search</button>
+                        <button onClick={handleFormSubmit} className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Search</button>
                     </div>
                 </div>
             </div>

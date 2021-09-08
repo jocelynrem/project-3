@@ -48,7 +48,7 @@ const SearchResults = ({ key, title, author, image, descpiption, }) => {
                 </div>
                 {/* ADD BOOK ARROW STARTS HERE */}
                 <div className="flex-col absolute top-6 right-6 float-right md:flex-row flex items-center md:justify-center">
-                    <div className="mt-20 md:mt-0" onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
+                    <div className="mt-0 md:mt-0 m-5" onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
                         {tooltipStatus == 1 && (
                             <div role="tooltip" className="z-20 transition duration-150 ease-in-out top-0 right-10 mb-8 absolute shadow-lg p-2 bg-dark text-white rounded w-40">
                                 <svg className="absolute bottom-0 -mb-2" width="10px" height="8px" viewBox="0 0 10 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
