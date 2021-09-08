@@ -1,5 +1,6 @@
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
 import { useState } from 'react';
+import SearchResults from '../SearchResults.js';
 
 
 export default function AddBook({ name }) {
@@ -42,14 +43,14 @@ export default function AddBook({ name }) {
             const { items } = await response.json();
             console.log('items!!!!!!:', items)
 
-            
-                // const navLinks = [
-                //     { name: 'Dashboard', href: 'dashboard' },
-                //     { name: 'Add A Book', href: 'addbook' },
-                //     { name: 'My Students', href: 'mystudents' },
-                //     { name: 'Reading Log', href: 'readinglog' },
-                //     { name: 'Profile', href: 'profile' },
-                // ]
+
+            // const navLinks = [
+            //     { name: 'Dashboard', href: 'dashboard' },
+            //     { name: 'Add A Book', href: 'addbook' },
+            //     { name: 'My Students', href: 'mystudents' },
+            //     { name: 'Reading Log', href: 'readinglog' },
+            //     { name: 'Profile', href: 'profile' },
+            // ]
 
 
             const bookData = items.map((book) => ({
@@ -59,7 +60,7 @@ export default function AddBook({ name }) {
                 description: book.volumeInfo.description,
                 // ISBN: book.volumeInfo.
                 image: book.volumeInfo.imageLinks?.thumbnail || '',
-              }));
+            }));
             // const bookdata2 = [bookData];
 
             // // console.log("Bookdata: ", bookData);
@@ -70,28 +71,10 @@ export default function AddBook({ name }) {
             console.error(err);
         }
     };
-    
-    // // function SidebarLinks({ currentPage, handlePageChange }) {
-    // //     return (
-    // //         <>
-    // //             <ul className="mt-2">
-    //                 {navLinks.map((item) => (
-    //                     <li key={item.name} className="flex w-full justify-between cursor-pointer items-center mb-4">
-    //                         <div className="flex items-center ml-2 tracking-wider text-xl font-light">
-    //                             <p
-    //                                 onClick={() => handlePageChange(`${item.href}`)}
-    //                                 className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray hover:text-orange'}>
-    //                                 {item.name}
-    //                             </p>
-    //                         </div>
-    //                     </li>
-    //                 ))}
-    
-    
-    
+
     return (
         <>
-            <h2 className="flex md:mr-16 pl-5 pt-5">Two ways to add a book to {name.toUpperCase()}'s Library: </h2>
+            <h2 className="flex md:mr-16 pl-5 pt-5">Two ways to add a book to {name}'s Library: </h2>
             <div className="bg-gray-200 items-center justify-center">
                 <div className="flex md:flex-row flex-col items-center py-8 px-4">
                     <div className="flex flex-col md:mr-16 md:py-0 py-4">
@@ -119,9 +102,9 @@ export default function AddBook({ name }) {
                                     setSearchInput(e.target.value);
                                     console.log(e.target.value)
                                 }}
-                                className="text-gray-600 focus:outline-none focus:border focus:border-lt-green font-normal w-80 h-10 flex items-center pl-20 text-sm border-gray-300 rounded border shadow" />
+                                className="text-gray-600 focus:outline-none focus:border focus:border-lt-green font-normal w-60 h-10 flex items-center pl-20 text-sm border-gray-300 rounded border shadow" />
                         </div>
-                        <button onClick={handleFormSubmit}>click me to Search</button>
+                        <button onClick={handleFormSubmit} className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Search</button>
                     </div>
                 </div>
             </div>
@@ -173,31 +156,21 @@ export default function AddBook({ name }) {
                     <button className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Add Book</button>
                 </div>
             </div>
-            <div>
-                <table className="w-full shadow text-left bg-white dark:bg-gray-800">
-                    <thead>
 
-                        <tr className="border-b border-gray-300 dark:border-gray-700">
-                            <th className="py-5 sm:pl-10 pl-2 w-1/4 text-base text-gray-800 dark:text-gray-100">Title</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100">Author</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Description</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">ISBN</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                    {console.log(searchedBooks)}
-                    {searchedBooks.map((item) => (
-                        <tr key={item.bookId}>
-                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.title}</td>
-                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.authors}</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">{item.description}</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right"><img src = {item.image}/></td>
-                        </tr>
-                        ))}
-                    </tbody>
-                </table>
+
+            {console.log(searchedBooks)}
+
+            <div className="rounded-lg bg-dark overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
+                {searchedBooks.map((item) => (
+                    <SearchResults
+                        key={item.bookId}
+                        title={item.title}
+                        author={item.authors}
+                        image={item.image}
+                        descpiption={item.description}
+                    />
+                ))}
             </div>
-
         </>
     )
 }
