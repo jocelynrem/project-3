@@ -1,17 +1,31 @@
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
-import { useState } from 'react';
-
+import { useState, useMutation, useEffect } from 'react';
+import { ADD_BOOK } from '../../utils/mutations.js';
+import { saveBookIds, getSavedBookIds } from '../../utils/localStorage.js';
 
 export default function AddBook({ name }) {
+    const teacherId1 = localStorage.getItem('teacher_id');
+    // console.log('this is the teachers Id from DashContainer:', teacherId);
 
 
     const [searchInput, setSearchInput] = useState('');
     // const [searchResults, setSearchResults] = useState('');
     const [optionState, setOptionState] = useState('ISBN');
     const [searchedBooks, setSearchedBooks] = useState([]);
+      // create state to hold saved bookId values
+    const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+
+//    try{
+    const [addBook, { error }] = useMutation(ADD_BOOK);
+//     } catch (err) {
+//     console.error(err);
+//   }
+    useEffect(() => {
+        return () => saveBookIds(savedBookIds);
+      });
     console.log('optionState:', optionState)
     const handleChange = (event) => setOptionState(event.target.value);
-
+    
     const handleFormSubmit = async (event) => {
         console.log('here I am')
         event.preventDefault();
@@ -41,52 +55,44 @@ export default function AddBook({ name }) {
 
             const { items } = await response.json();
             console.log('items!!!!!!:', items)
-
             
-                // const navLinks = [
-                //     { name: 'Dashboard', href: 'dashboard' },
-                //     { name: 'Add A Book', href: 'addbook' },
-                //     { name: 'My Students', href: 'mystudents' },
-                //     { name: 'Reading Log', href: 'readinglog' },
-                //     { name: 'Profile', href: 'profile' },
-                // ]
-
-
-            const bookData = items.map((book) => ({
+            
+            
+            
+            const bookInfo = items.map((book) => ({
                 bookId: book.id,
                 authors: book.volumeInfo.authors || ['No author to display'],
                 title: book.volumeInfo.title,
                 description: book.volumeInfo.description,
                 // ISBN: book.volumeInfo.
                 image: book.volumeInfo.imageLinks?.thumbnail || '',
-              }));
-            // const bookdata2 = [bookData];
-
-            // // console.log("Bookdata: ", bookData);
-            // console.log("Bookdata: ", bookData);
-            setSearchedBooks(bookData);
+            }));
+            
+            
+            setSearchedBooks(bookInfo);
             setSearchInput('');
         } catch (err) {
             console.error(err);
         }
     };
+
     
-    // // function SidebarLinks({ currentPage, handlePageChange }) {
-    // //     return (
-    // //         <>
-    // //             <ul className="mt-2">
-    //                 {navLinks.map((item) => (
-    //                     <li key={item.name} className="flex w-full justify-between cursor-pointer items-center mb-4">
-    //                         <div className="flex items-center ml-2 tracking-wider text-xl font-light">
-    //                             <p
-    //                                 onClick={() => handlePageChange(`${item.href}`)}
-    //                                 className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray hover:text-orange'}>
-    //                                 {item.name}
-    //                             </p>
-    //                         </div>
-    //                     </li>
-    //                 ))}
-    
+        const handleSaveBook = async (bookId) => {
+            // find the book in `searchedBooks` state by the matching id
+            const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+        
+        
+            try {
+              const { data } = await addBook({
+                variables: //{teacherId: {teacherId1},  bookInfo: { ...bookToSave } },
+                    {teacherId1, ...bookToSave},
+              });
+              console.log(savedBookIds);
+              setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+            } catch (err) {
+              console.error(err);
+            }
+          };
     
     
     return (
@@ -182,6 +188,7 @@ export default function AddBook({ name }) {
                             <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100">Author</th>
                             <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Description</th>
                             <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">ISBN</th>
+                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Save Book?</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -192,6 +199,8 @@ export default function AddBook({ name }) {
                             <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.authors}</td>
                             <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">{item.description}</td>
                             <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right"><img src = {item.image}/></td>
+                            <td><input type="checkbox" onClick={() => handleSaveBook(item.bookId)} className="checkbox opacity-0 absolute cursor-pointer w-full h-full" /></td>
+                            
                         </tr>
                         ))}
                     </tbody>
@@ -201,3 +210,24 @@ export default function AddBook({ name }) {
         </>
     )
 }
+
+//  <Button
+// disabled={savedBookIds?.some(
+//   (savedId) => savedId === book.bookId
+// )}
+// className="btn-block btn-info"
+// onClick={() => handleSaveBook(book.bookId)}
+// >
+// {savedBookIds?.some((savedId) => savedId === book.bookId)
+//   ? 'Book Already Saved!'
+//   : 'Save This Book!'}
+// </Button> 
+
+// disabled={savedBookIds?.some(
+//     (savedId) => savedId === book.bookId
+// )}
+// className="btn-block btn-info"
+// onClick={() => handleSaveBook(book.bookId)}
+// {savedBookIds?.some((savedId) => savedId === book.bookId)
+//     ? 'Book Already Saved!'
+//     : 'Save This Book!'}
