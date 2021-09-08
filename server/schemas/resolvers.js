@@ -78,7 +78,7 @@ const resolvers = {
         {$push: {students: studentInfo}},
         {new: true},
       )
-    }
+    },
 
     // addBook: async (parent, {data}, context) => {
 
@@ -93,6 +93,21 @@ const resolvers = {
       
     //   throw new AuthenticationError('Please login to Add a book')
     // }
+    modifyTeacher: async (parent, {id, email, firstName, lastName}) => { 
+
+      
+      const teacher = await Teacher.findOneAndUpdate({
+        _id: id
+      }, {
+        email,
+        firstName,
+        lastName,
+      },
+      {new: true}
+      );
+      const token = signToken(teacher);
+      return { token, teacher };
+    },
   }
 };
 
