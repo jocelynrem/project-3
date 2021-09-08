@@ -109,7 +109,7 @@ export default function AddBook({ name }) {
                 </div>
             </div>
             <h2 className="ml-20">OR</h2>
-            <div className="bg-gray-100 pl-5">
+            <div className="bg-gray-100 pl-5" id='book-form'>
                 <p className="text-gray-800 font-bold text-lg leading-tight tracking-normal pt-5">
                     Manually Enter Book Information
                 </p>

@@ -56,7 +56,7 @@ const SearchResults = ({ key, title, author, image, descpiption, }) => {
                                 <p className="text-xs text-white leading-4">Add this book to your library.</p>
                             </div>
                         )}
-                        <a href={'/'} className="focus:outline-none">
+                        <a href='#book-form' className="focus:outline-none">
                             <span
                                 className="text-md-green hover:text-dark cursor-pointer"
                                 aria-hidden="true">
