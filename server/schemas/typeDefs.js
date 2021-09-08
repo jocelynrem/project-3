@@ -23,21 +23,18 @@ const typeDefs = gql`
     _id: ID
     firstName: String!
     lastName: String!
-    lexile: Int
     comments: String
-    teacherID: Teacher
   }
 
   type Book {
     _id: ID
-    title: String
-    author: String
+    title: String!
+    authors: [String]
     ISBN: String
     description: String
-    lexile: Int
+    bookId: String
     copiesAvailable: Int
     copiesCheckedOut: Int
-    teacherID: Teacher
   }
 
   scalar Date
@@ -59,16 +56,18 @@ const typeDefs = gql`
   }
 
   input BookInfo {
-    title: String!,
-    author: String!,
-    ISBN: String!,
-    description: String!
+    title: String!
+    authors: [String]
+    ISBN: String,
+    description: String,
+    bookId: String,
+    copiesAvailable: Int,
+    copiesCheckedOut: Int
   }
 
   input StudentInfo {
     firstName: String!,
     lastName: String!,
-    lexile: Int,
     comments: String
   }
 

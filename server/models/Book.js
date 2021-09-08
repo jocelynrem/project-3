@@ -7,34 +7,31 @@ const bookSchema = new Schema(
             required: true,
             trim: true
           },
-          author: {
-            type: String,
-            required: true
-          },
+          authors: [
+            {
+              type: String,
+            },
+          ],
           ISBN: {
             type: String,
-            required: true
           },
           description: {
             type: String
           },
-          lexile: {
-            type: Number
+          bookId: {
+            type: String,
           },
           copiesAvailable: {
             type: Number,
             min: 0,
+            max: 1000,
             default: 0
           },
           copiesCheckedOut: {
             type: Number,
             min: 0,
+            max: 1000,
             default: 0
-          }, 
-          teacherID: {
-            type: Schema.Types.ObjectId,
-            ref: 'Teacher',
-            required: true
           }
     }
 

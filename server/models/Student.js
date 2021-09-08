@@ -12,9 +12,6 @@ const studentSchema = new Schema(
             required: true,
             trim: true
           },
-          lexile: {
-            type: Number
-          },
           comments: {
             type: String
           },
