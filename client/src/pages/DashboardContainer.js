@@ -35,14 +35,14 @@ export default function DashboardContainer() {
             </svg>
         </div>;
     }
-  if (!data) {
-    return (
-      <h4>
-        You need to be logged in to see your profile page. Use the navigation
-        links above to sign up or log in!
-      </h4>
-    );
-  }
+    if (!data) {
+        return (
+            <h4>
+                You need to be logged in to see your profile page. Use the navigation
+                links above to sign up or log in!
+            </h4>
+        );
+    }
     const renderPage = () => {
         if (currentView === 'readinglog') {
             return <ReadingLog />;
@@ -57,8 +57,8 @@ export default function DashboardContainer() {
             return (
                 <Profile
                     id={data.findtheteacher._id}
-                    firstName={data.findtheteacher.firstName.toUpperCase()}
-                    lastName={data.findtheteacher.lastName.toUpperCase()}
+                    firstName={data.findtheteacher.firstName}
+                    lastName={data.findtheteacher.lastName}
                     email={data.findtheteacher.email}
                 />
             );
