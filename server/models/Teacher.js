@@ -34,7 +34,13 @@ const teacherSchema = new Schema(
           students: [studentSchema],
 
           logs: [logSchema],
-    }
+    },
+      // set this to use virtual below
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
 
 );
 

@@ -1,4 +1,4 @@
-const { TestModel, Book, Teacher, Student, Log } = require('../models');
+const {Teacher} = require('../models'); //const { TestModel, Book, Teacher, Student, Log } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
