@@ -53,6 +53,19 @@ mutation addTeacher($firstName: String!, $lastName: String!, $email: String!, $p
   }
 }`;
 
+export const MODIFY_TEACHER = gql`
+mutation modifyTeacher($id: String!, $firstName: String!, $lastName: String!, $email: String!){
+  modifyTeacher(id: $id, firstName: $firstName, lastName: $lastName, email: $email){
+    token
+    teacher {
+      _id
+      firstName
+    	lastName
+    	email
+    }
+  }
+}`;
+
 export const ADD_BOOK = gql`
   mutation addBook($bookInfo: BookInput!) {
     addBook(bookInfo: $bookInfo) {
