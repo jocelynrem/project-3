@@ -7,20 +7,24 @@ import { ADD_STUDENT } from "../../utils/mutations";
 import { GET_FINDTHETEACHER} from "../../utils/queries"
 
 const MyStudents = (props) => {
+    
+    const teacherId = localStorage.getItem('teacher_id');
 
     const [formState, setFormState] = useState({
         firstName: '',
         lastName: '',
-        comments: ''
+        comments: '',
     });
-
-    const [addStudent, {error}] = useMutation(ADD_STUDENT);
-
-    const teacherId = localStorage.getItem('teacher_id');
+    
 
     const {loading, data } = useQuery(GET_FINDTHETEACHER, {
         variables: { id: teacherId },
     });
+
+    const [addStudent, {error, studentInfo}] = useMutation(ADD_STUDENT);
+
+
+
     console.log('data from MyStudents:', data);
 
 
@@ -38,12 +42,12 @@ const MyStudents = (props) => {
 
         try {
             console.log("before Mutation")
-            const { data } = await addStudent({
-                variables: { ...formState },
+            const { studentInfo } = await addStudent({
+                variables: { students: {...formState} },
             });
             console.log("AFTER");
-            console.log("data from singup: ", data);
-            console.log("name from student:", data.addStudent.student.firstName)
+            console.log("data from add Student: ", studentInfo);
+            console.log("name from student:", studentInfo.addStudent.student.firstName)
             // Auth.login(data.addTeacher.token);
             // Auth.login(data.addStudent);
 
@@ -51,15 +55,15 @@ const MyStudents = (props) => {
             console.error(error);
         }
 
-        // {data ? (
-        //     <Link to="/dashboard">Success! Redirecting to Your Dashboard.</Link> 
-        // ) : (
     }
     return (
         <>
             <div className="container p-6 mx-auto">
                 <div className="flex flex-wrap">
                     <div className="md:w-3/5 w-full md:pb-0 md:pr-6">
+                        {studentInfo ? (
+                            <Link to="/dashboard">Success! Redirecting to Your Dashboard.</Link> 
+                        ) : (
                         <form onSubmit={handleFormSubmit}> 
                         <div className="rounded border-gray-300  border-dashed border-2 p-5 bg-gray-100">
                             <p className="text-gray-800 font-bold text-lg leading-tight tracking-normal">
@@ -107,6 +111,12 @@ const MyStudents = (props) => {
                             </div>
                         </div>
                         </form>
+                        )}
+                        {error && (
+                            <div className="my-3 p-3 bg-orange text-white">
+                                    {error.message}
+                            </div>               
+                        )}
                     </div>
                     <div className="md:w-2/5 w-full">
                         <div className="rounded border-gray-300 p-5 border-dashed border-2 bg-gray-500">
@@ -151,10 +161,3 @@ const MyStudents = (props) => {
 };
 
 export default MyStudents;
-
-// )}
-// {error && (
-//     <div className="my-3 p-3 bg-orange text-white">
-//             {error.message}
-//     </div>               
-// )}
