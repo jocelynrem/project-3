@@ -9,7 +9,7 @@ const navLinks = [
     { name: 'Profile', href: 'profile' },
 ]
 
-function SidebarLinks({ currentPage, handlePageChange }) {
+function SidebarLinks({ currentView, handlePageChange }) {
     return (
         <>
             <ul className="mt-2">
@@ -18,7 +18,7 @@ function SidebarLinks({ currentPage, handlePageChange }) {
                         <div className="flex items-center ml-2 tracking-wider text-xl font-light">
                             <p
                                 onClick={() => handlePageChange(`${item.href}`)}
-                                className={`${currentPage}` === `${item.href}` ? 'text-orange' : 'text-lt-gray hover:text-orange'}>
+                                className={`${currentView}` === `${item.href}` ? 'text-lime-400' : 'text-lt-gray hover:text-lime-400'}>
                                 {item.name}
                             </p>
                         </div>
@@ -28,7 +28,7 @@ function SidebarLinks({ currentPage, handlePageChange }) {
                     <div className="flex items-center ml-2 tracking-wider text-xl font-light">
                         <p
                             onClick={() => Auth.logout()}
-                            className='text-lt-gray hover:text-orange'>
+                            className='text-lt-gray hover:text-lime-400'>
                             Log out
                         </p>
                     </div>

@@ -31,14 +31,14 @@ export default function MobileNav({ handlePageChange }) {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                     >
-                        <Menu.Items className="z-40 origin-top-left absolute left-0 w-72 rounded-md shadow-lg py-3 bg-white ring-1 ring-dark ring-opacity-50 focus:outline-none">
+                        <Menu.Items className="z-40 origin-top-left absolute left-0 w-72 rounded-md shadow-lg py-3 bg-white ring-1 ring-blue-900 ring-opacity-50 focus:outline-none">
                             {navLinks.map((item) => (
                                 <Menu.Item>
                                     {({ active }) => (
                                         <p
                                             key={item.name}
                                             onClick={() => handlePageChange(`${item.href}`)}
-                                            className="block px-3 py-2 rounded-md text-base font-medium text-dark hover:text-white hover:bg-dark">
+                                            className="block px-3 py-2 rounded-md text-base font-medium text-dark hover:text-white hover:bg-blue-900">
                                             {item.name}
                                         </p>
                                     )}
@@ -49,7 +49,7 @@ export default function MobileNav({ handlePageChange }) {
                                 {({ active }) => (
                                     <p
                                         onClick={() => Auth.logout()}
-                                        className='block px-3 py-2 rounded-md text-base font-medium text-dark hover:text-white hover:bg-dark'>
+                                        className='block px-3 py-2 rounded-md text-base font-medium text-dark hover:text-white hover:bg-blue-900'>
                                         Log out
                                     </p>
                                 )}
