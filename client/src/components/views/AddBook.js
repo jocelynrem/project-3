@@ -59,22 +59,22 @@ export default function AddBook({ name }) {
 
     return (
         <>
-            <h2 className="flex md:mr-16 pt-5">Two ways to add a book to {name}'s Library: </h2>
+            <h1 className="md:mr-16 pt-3 text-center font-bold w-full uppercase tracking-wider">Two ways to add books to {name}'s Library: </h1>
             <section className="relative bg-white" id="book-form">
-                <div className="my-2 justify-center">
+                <div className="">
                     <div className="relative bg-white shadow-sm">
                         <div className="grid grid-cols-1 lg:grid-cols-3">
                             {/* Google API Search */}
-                            <div className="relative overflow-hidden m-2">
+                            <div className="relative overflow-hidden bg-dark">
 
-                                <h3 className="text-xl font-semibold text-gray-900 pt-1 pb-2">1. Search by Title or ISBN</h3>
-                                <div className="relative">
+                                <h3 className="text-xl mx-2 text-gray-100 pt-2 pb-2">1. Search by Title or ISBN</h3>
+                                <div className="relative m-2">
                                     <div className="absolute text-gray-600 flex items-center border-r pl-1 h-full">
                                         <select value={optionState} onChange={handleChange} className="myoption uppercase border-none text-sm leading-tight tracking-normal focus:outline-none h-8 appearance-none pr-6 z-20 relative bg-transparent">
                                             <option value="title">title</option>
                                             <option value="ISBN">isbn</option>
                                         </select>
-                                        <div className="mx-1 absolute right-0 z-10">
+                                        <div className="mx-1 absolute right-0">
                                             <svg className="icon icon-tabler icon-tabler-chevron-down" width={20} height={20} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" />
                                                 <polyline points="6 9 12 15 18 9" />
@@ -92,8 +92,8 @@ export default function AddBook({ name }) {
                                         }}
                                         className="py-3 px-4 pl-20 w-full shadow-sm text-gray-900 focus:ring-lt-green focus:border-lt-green border-gray-300 rounded-md" />
                                 </div>
-                                <div className="sm:col-span-2 mt-2 sm:flex sm:justify-end">
-                                    <button onClick={handleFormSubmit} className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-10 py-2">Search</button>
+                                <div className="sm:col-span-2 mt-2 sm:flex sm:justify-end m-2">
+                                    <button onClick={handleFormSubmit} className="my-2 bg-lt-green transition duration-150 ease-in-out hover:bg-dk-gray rounded text-white px-10 py-2">Search</button>
                                 </div>
                             </div>
 
@@ -192,7 +192,7 @@ export default function AddBook({ name }) {
 
             {console.log(searchedBooks)}
 
-            <div className="rounded-lg bg-dark overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
+            <div id='search-results' className="bg-dark overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
                 {searchedBooks.map((item) => (
                     <SearchResults
                         key={item.bookId}
