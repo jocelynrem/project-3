@@ -75,7 +75,7 @@ export default function DashboardContainer() {
 
         <div className='flex'>
             {/* Sidebar */}
-            <div className='w-52 absolute bg-gradient-to-t from-blue-800 to-blue-900  shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex'>
+            <div className='w-52 bg-gradient-to-t from-blue-800 to-blue-900 shadow-sm h-screen sticky top-0 justify-between sm:hidden md:flex'>
                 <div className='px-8'>
                     <ul className='mt-4'>
                         <SidebarLinks
