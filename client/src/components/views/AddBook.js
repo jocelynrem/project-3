@@ -189,9 +189,6 @@ export default function AddBook({ name }) {
                     </div>
                 </div>
             </section>
-
-            {console.log(searchedBooks)}
-
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
                 {searchedBooks.map((item) => (
                     <SearchResults
@@ -199,7 +196,7 @@ export default function AddBook({ name }) {
                         title={item.title}
                         author={item.authors}
                         image={item.image}
-                        descpiption={item.description}
+                        description={item.description}
                     />
                 ))}
             </div>
