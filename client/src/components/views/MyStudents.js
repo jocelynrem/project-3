@@ -30,6 +30,11 @@ const Students = [
 ]
 
 const MyStudents = ({ name }) => {
+    const teacherId = localStorage.getItem('teacher_id');
+
+    const { loading, data } = useQuery(GET_FINDTHETEACHER, {
+        variables: { id: teacherId },
+    });
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -53,23 +58,25 @@ const MyStudents = ({ name }) => {
                     </div>
                     <div className="mt-4">
                         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                            {Students.map((item) => (
-                                <div key={item.id} className="pt-6">
-                                    <div className="flow-root bg-gray-100 rounded-lg px-6 pb-8">
-                                        <div className="-mt-6">
-                                            <div>
-                                                <span className="inline-flex items-center justify-center p-3 bg-lime-500 rounded-md shadow-lg">
-                                                    <h3 className="text-lg font-medium text-gray-900 tracking-tight">{item.firstName} {item.lastName}</h3>
-                                                </span>
-                                            </div>
+                            {data.findtheteacher.students.map((student) => {
+                                return (
+                                    <div key={student.id} className="pt-6">
+                                        <div className="flow-root bg-gray-100 rounded-lg px-6 pb-8">
+                                            <div className="-mt-6">
+                                                <div>
+                                                    <span className="inline-flex items-center justify-center p-3 bg-lime-500 rounded-md shadow-lg">
+                                                        <h3 className="text-lg font-medium text-gray-900 tracking-tight">{student.firstName} {student.lastName}</h3>
+                                                    </span>
+                                                </div>
 
-                                            <p className="my-5 py-5 text-base text-gray-600">
-                                                {item.comments}
-                                            </p>
+                                                <p className="my-5 py-5 text-base text-gray-600">
+                                                    {student.comments}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                     <Modal
