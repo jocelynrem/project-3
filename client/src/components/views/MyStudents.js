@@ -21,12 +21,30 @@ const MyStudents = (props) => {
         variables: { id: teacherId },
     });
 
-    const [addStudent, {error, studentInfo}] = useMutation(ADD_STUDENT);
-
-
+    const [addStudent, {error, stuinfo}] = useMutation(ADD_STUDENT);
 
     console.log('data from MyStudents:', data);
 
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            console.log("before Mutation")
+            const { info } = await addStudent({
+                variables: { 
+                    teacherId,
+                    studentInfo: {...formState} },
+            });
+            console.log("AFTER");
+            console.log("data from add Student: ", formState);
+            console.log("name from student:", info)
+
+            // setFormState('')
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -37,31 +55,12 @@ const MyStudents = (props) => {
         });
     };
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            console.log("before Mutation")
-            const { studentInfo } = await addStudent({
-                variables: { students: {...formState} },
-            });
-            console.log("AFTER");
-            console.log("data from add Student: ", studentInfo);
-            console.log("name from student:", studentInfo.addStudent.student.firstName)
-            // Auth.login(data.addTeacher.token);
-            // Auth.login(data.addStudent);
-
-        } catch (error) {
-            console.error(error);
-        }
-
-    }
     return (
         <>
             <div className="container p-6 mx-auto">
                 <div className="flex flex-wrap">
                     <div className="md:w-3/5 w-full md:pb-0 md:pr-6">
-                        {studentInfo ? (
+                        {stuinfo ? (
                             <Link to="/dashboard">Success! Redirecting to Your Dashboard.</Link> 
                         ) : (
                         <form onSubmit={handleFormSubmit}> 
