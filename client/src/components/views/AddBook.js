@@ -65,7 +65,7 @@ export default function AddBook({ name }) {
                     <div className="relative bg-white shadow-sm">
                         <div className="grid grid-cols-1 lg:grid-cols-3">
                             {/* Google API Search */}
-                            <div className="relative overflow-hidden bg-gradient-to-t from-blue-800 to-blue-900">
+                            <div className="relative overflow-hidden bg-gradient-to-t from-blue-900 via-blue-800 to-blue-900">
 
                                 <h3 className="text-xl mx-2 text-gray-100 pt-2 pb-2">1. Search by Title or ISBN</h3>
                                 <div className="relative m-2">
