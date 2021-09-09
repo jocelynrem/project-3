@@ -52,7 +52,7 @@ export default function DashboardContainer() {
             return <AddBook name={data.findtheteacher.firstName} />;
         }
         if (currentView === 'mystudents') {
-            return <MyStudents />;
+            return <MyStudents/>;
         }
         if (currentView === 'profile') {
             return (
