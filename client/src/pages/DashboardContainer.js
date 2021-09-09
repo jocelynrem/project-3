@@ -52,7 +52,9 @@ export default function DashboardContainer() {
             return <AddBook name={data.findtheteacher.firstName} />;
         }
         if (currentView === 'mystudents') {
-            return <MyStudents/>;
+            return <MyStudents
+                name={data.findtheteacher.firstName}
+            />;
         }
         if (currentView === 'profile') {
             return (
@@ -75,7 +77,7 @@ export default function DashboardContainer() {
 
         <div className='flex'>
             {/* Sidebar */}
-            <div className='w-52 bg-gradient-to-t from-blue-800 to-blue-900 shadow-sm h-screen sticky top-0 justify-between sm:hidden md:flex'>
+            <div className='w-52 bg-gradient-to-t from-blue-800 to-blue-900 shadow-sm h-screen hidden md:sticky top-0 justify-between md:flex'>
                 <div className='px-8'>
                     <ul className='mt-4'>
                         <SidebarLinks
