@@ -39,7 +39,11 @@ const MyStudents = (props) => {
             console.log("data from add Student: ", formState);
             console.log("name from student:", info)
 
-            // setFormState('')
+            setFormState({
+                firstName: '',
+                lastName: '',
+                comments: '',
+            })
         } catch (error) {
             console.error(error);
         }
