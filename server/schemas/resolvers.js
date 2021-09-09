@@ -94,8 +94,7 @@ const resolvers = {
     //   throw new AuthenticationError('Please login to Add a book')
     // }
     modifyTeacher: async (parent, {id, email, firstName, lastName}) => { 
-
-      
+    console.log('id from what is passed to this mutation:', id)      
       const teacher = await Teacher.findOneAndUpdate({
         _id: id
       }, {
