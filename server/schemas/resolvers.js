@@ -71,14 +71,14 @@ const resolvers = {
     },
 
     addStudent: async (parent, {teacherId, studentInfo}) => {
-      console.log("teacherId: ", teacherId);
-      console.log("bookinfo: ", studentInfo);
+      console.log("ADDSTUDENT - teacherId: ", teacherId);
+      console.log("ADDSTUDENT - studentInfo: ", studentInfo);
       return Teacher.findByIdAndUpdate(
         {_id: teacherId},
         {$push: {students: studentInfo}},
         {new: true},
       )
-    }
+    },
 
     // addBook: async (parent, {data}, context) => {
 
@@ -93,6 +93,20 @@ const resolvers = {
       
     //   throw new AuthenticationError('Please login to Add a book')
     // }
+    modifyTeacher: async (parent, {id, email, firstName, lastName}) => { 
+    console.log('id from what is passed to this mutation:', id)      
+      const teacher = await Teacher.findOneAndUpdate({
+        _id: id
+      }, {
+        email,
+        firstName,
+        lastName,
+      },
+      {new: true}
+      );
+      const token = signToken(teacher);
+      return { token, teacher };
+    },
   }
 };
 

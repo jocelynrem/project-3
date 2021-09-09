@@ -9,6 +9,7 @@ import Dashboard from '../components/views/Dashboard';
 import readingWorm from '../images/CA101-3.png';
 import { GET_FINDTHETEACHER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
+import Auth from '../utils/auth'; // 9/8 adding for jwt authentication
 
 export default function DashboardContainer() {
     const [currentView, setcurrentView] = useState('Dashboard');
@@ -37,11 +38,12 @@ export default function DashboardContainer() {
     }
     if (!data) {
         return (
-            <h2>
+            <h4>
                 You need to be logged in to see your profile page.
-            </h2>
+            </h4>
         );
     }
+
     const renderPage = () => {
         if (currentView === 'readinglog') {
             return <ReadingLog />;
@@ -50,25 +52,30 @@ export default function DashboardContainer() {
             return <AddBook name={data.findtheteacher.firstName} />;
         }
         if (currentView === 'mystudents') {
-            return <MyStudents />;
+            return <MyStudents/>;
         }
         if (currentView === 'profile') {
             return (
                 <Profile
-                    name={data.findtheteacher.firstName}
+                    id={data.findtheteacher._id}
+                    firstName={data.findtheteacher.firstName}
+                    lastName={data.findtheteacher.lastName}
                     email={data.findtheteacher.email}
                 />
             );
         }
         return <Dashboard name={data.findtheteacher.firstName} />;
     };
-
     const handlePageChange = (page) => setcurrentView(page);
+    const loggedIn = Auth.loggedIn();
+    console.log('loggedIn:', loggedIn)
 
     return (
+
+
         <div className='flex'>
             {/* Sidebar */}
-            <div className='w-52 absolute bg-dark shadow-sm h-screen sm:relative flex-col justify-between hidden md:flex'>
+            <div className='w-52 bg-gradient-to-t from-blue-800 to-blue-900 shadow-sm h-screen sticky top-0 justify-between sm:hidden md:flex'>
                 <div className='px-8'>
                     <ul className='mt-4'>
                         <SidebarLinks
@@ -88,10 +95,19 @@ export default function DashboardContainer() {
                 <div className='p-2'>
                     <MobileNav handlePageChange={handlePageChange} />
                 </div>
-                <div className='ml-0 rounded border-dashed border-2 border-lt-gray'>
-                    {renderPage()}
-                </div>
+                {loggedIn ? (
+                    <div className='ml-0 rounded border-dashed border-2 border-lt-gray'>
+                        {renderPage()}
+                    </div>
+                ) : (
+                    <h4>
+                        You need to be logged in to see your profile page. Use the navigation
+                        links above to sign up or log in!
+                    </h4>
+                )}
             </div>
         </div>
+
+
     );
 }
