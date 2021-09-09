@@ -10,6 +10,8 @@ module.exports = {
       white: colors.white,
       black: colors.black,
       gray: colors.coolGray,
+      blue: colors.blueGray,
+      lime: colors.lime,
       'orange': '#ffa600',
       'lt-green': '#51b847',
       'md-green': '#3c8e42',

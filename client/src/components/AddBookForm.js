@@ -61,7 +61,7 @@ const AddBookForm = () => {
             <div className="flex justify-center">
                 <div className="relative bg-white shadow-xl border-2 border-dark rounded">
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                        {/* Contact information */}
+                        {/* Google API Search */}
                         <div className="relative justify-center text-center overflow-hidden py-2 pl-2">
 
                             <h3 className="text-xl font-semibold text-gray-900 py-3">Search by Title or ISBN</h3>
@@ -93,7 +93,7 @@ const AddBookForm = () => {
                             </div>
                         </div>
 
-                        {/* Contact form */}
+                        {/* Manual  */}
                         <div className="py-3 px-6 sm:px-10 lg:col-span-2 xl:p-12 bg-gray-100">
                             <h3 className="text-xl font-semibold text-gray-900">Manually Enter a Book</h3>
                             <form action="#" method="POST" className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
