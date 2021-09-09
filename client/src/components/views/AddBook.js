@@ -74,7 +74,7 @@ export default function AddBook({ name }) {
                                             <option value="title">title</option>
                                             <option value="ISBN">isbn</option>
                                         </select>
-                                        <div className="mx-1 absolute right-0 z-10">
+                                        <div className="mx-1 absolute right-0">
                                             <svg className="icon icon-tabler icon-tabler-chevron-down" width={20} height={20} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" />
                                                 <polyline points="6 9 12 15 18 9" />
