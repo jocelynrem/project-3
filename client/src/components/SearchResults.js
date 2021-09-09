@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import React, { useState } from "react";
 
-const SearchResults = ({ key, title, author, image, descpiption, }) => {
+const SearchResults = ({ key, title, author, image, description, }) => {
 
     const [show, setShow] = useState(null);
     const [tooltipStatus, setTooltipStatus] = useState(0);
@@ -39,7 +39,7 @@ const SearchResults = ({ key, title, author, image, descpiption, }) => {
                                 </div>
                                 {show == 0 && (
                                     <p className="mt-2 text-sm text-gray-600">
-                                        {descpiption}
+                                        {description}
                                     </p>
                                 )}
                             </div>
