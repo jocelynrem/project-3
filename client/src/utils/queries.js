@@ -12,6 +12,21 @@ query findme($id: ID!) {
       checkinDate
       checkoutDate
     }
+    students {
+      _id
+      firstName
+      lastName
+      comments
+    }
+    books {
+      _id
+      title
+      authors
+      ISBN
+      bookId
+      copiesAvailable
+      copiesCheckedOut
+    }
   }
 }
 `
