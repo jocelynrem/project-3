@@ -67,7 +67,7 @@ export default function AddBook({ name }) {
                             {/* Google API Search */}
                             <div className="relative overflow-hidden bg-gradient-to-t from-blue-900 via-blue-800 to-blue-900">
 
-                                <h3 className="text-xl mx-2 text-gray-100 pt-2 pb-2">1. Search by Title or ISBN</h3>
+                                <h3 className="text-xl mx-2 text-gray-100 pt-16 pb-2">1. Search by Title or ISBN</h3>
                                 <div className="relative m-2">
                                     <div className="absolute text-gray-600 flex items-center border-r pl-1 h-full">
                                         <select value={optionState} onChange={handleChange} className="myoption uppercase border-none text-sm leading-tight tracking-normal focus:outline-none h-8 appearance-none pr-6 z-20 relative bg-transparent">
