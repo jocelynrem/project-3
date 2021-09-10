@@ -2,12 +2,10 @@ import { gql, useMutation } from '@apollo/client';
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
 import { useState, useEffect } from 'react';
 import SearchResults from '../SearchResults.js';
-import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from "../../utils/mutations";
 import { isValueNode } from 'graphql';
 
-import {ADD_BOOK} from '../../utils/mutations'
-import {getSavedBookIds, saveBookIds} from '../../utils/localStorage'
+import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
 // import Auth from '../utils/auth';
 
 export default function AddBook({ name }) {
@@ -16,14 +14,14 @@ export default function AddBook({ name }) {
     const [searchInput, setSearchInput] = useState('');
     // const [searchResults, setSearchResults] = useState('');
     const [optionState, setOptionState] = useState('ISBN');
-    const [searchedBooks, setSearchedBooks] = useState([])  
-                
+    const [searchedBooks, setSearchedBooks] = useState([])
+
     console.log('optionState:', optionState)
     // console.log("current formstate: ", formState )
     const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
-    const [addBook, {error, bookInfo}] = useMutation(ADD_BOOK);
-//     const [addBook, { error, data}] = useMutation(ADD_BOOK)
+    const [addBook, { error, bookInfo }] = useMutation(ADD_BOOK);
+    //     const [addBook, { error, data}] = useMutation(ADD_BOOK)
     // console.log('data from AddBooks:', data);
 
 
@@ -32,8 +30,8 @@ export default function AddBook({ name }) {
     });
 
     console.log("savedBookIds: ", savedBookIds);
-  
-  
+
+
     const handleChange = (event) => setOptionState(event.target.value);
 
     const [formState, setFormState] = useState({
@@ -50,7 +48,7 @@ export default function AddBook({ name }) {
             ...formState,
             [name]: value,
         });
-        
+
     };
     const handleFormSubmit = async (event) => {
         console.log('here I am')
@@ -99,32 +97,33 @@ export default function AddBook({ name }) {
     };
 
 
-    const handleFormSubmit2  = async (event) => {
-    event.preventDefault();
+    const handleFormSubmit2 = async (event) => {
+        event.preventDefault();
 
-    try {
-        console.log("before Mutation: ", formState )
+        try {
+            console.log("before Mutation: ", formState)
 
-        const { info } = await addBook({
-            variables: { 
-                teacherId,
-                bookInfo: {...formState} },
-        });
-        // console.log("AFTER");
-        console.log("data from add book: ", formState);
-        console.log("bookinfo submission:", info)
+            const { info } = await addBook({
+                variables: {
+                    teacherId,
+                    bookInfo: { ...formState }
+                },
+            });
+            // console.log("AFTER");
+            console.log("data from add book: ", formState);
+            console.log("bookinfo submission:", info)
 
-        setFormState({
+            setFormState({
                 title: '',
                 authors: '',
                 ISBN: '',
                 description: '',
-        })
-    } catch (error) {
-        console.error(error);
-    }
+            })
+        } catch (error) {
+            console.error(error);
+        }
 
-}
+    }
 
 
     const handleAddBook = async (bookId) => {
@@ -132,7 +131,7 @@ export default function AddBook({ name }) {
         const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
         console.log('HANDLE Add BOok, bookToSave', bookToSave);
         try {
-            const {data} = await addBook({
+            const { data } = await addBook({
                 variables: {
                     teacherId,
                     bookInfo: {
@@ -217,7 +216,7 @@ export default function AddBook({ name }) {
                                                 name="title"
                                                 id="title"
                                                 required
-                                                value = {formState.title}
+                                                value={formState.title}
                                                 onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
@@ -250,7 +249,7 @@ export default function AddBook({ name }) {
                                         <div className="mt-1">
                                             <textarea
                                                 id="message"
-                                                value = {formState.description}
+                                                value={formState.description}
                                                 onChange={handleChange2}
                                                 name="description"
                                                 rows={2}
@@ -288,7 +287,7 @@ export default function AddBook({ name }) {
                                                 name="ISBN"
                                                 id="isbn"
                                                 type='text'
-                                                value = {formState.isbn}
+                                                value={formState.isbn}
                                                 onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
@@ -306,7 +305,7 @@ export default function AddBook({ name }) {
                 </div>
             </section>
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
-            {console.log('searchedBooks:', searchedBooks)}
+                {console.log('searchedBooks:', searchedBooks)}
                 {searchedBooks.map((item) => (
                     <SearchResults
                         key={item.bookId}
@@ -321,7 +320,7 @@ export default function AddBook({ name }) {
             </div>
         </>
     )
-// } in case
+    // } in case
 }
 
 //                {console.log("SearchBooks: ", searchedBooks)}
