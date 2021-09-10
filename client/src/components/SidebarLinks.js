@@ -5,6 +5,7 @@ const navLinks = [
     { name: 'Dashboard', href: 'dashboard' },
     { name: 'Add A Book', href: 'addbook' },
     { name: 'My Students', href: 'mystudents' },
+    { name: 'My Library', href: 'mylibrary' },
     { name: 'Reading Log', href: 'readinglog' },
     { name: 'Profile', href: 'profile' },
 ]

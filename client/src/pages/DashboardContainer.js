@@ -6,6 +6,7 @@ import MyStudents from '../components/views/MyStudents';
 import Profile from '../components/views/Profile';
 import ReadingLog from '../components/views/ReadingLog';
 import Dashboard from '../components/views/Dashboard';
+import MyLibrary from '../components/views/MyLibrary';
 import readingWorm from '../images/CA101-3.png';
 import { GET_FINDTHETEACHER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
@@ -46,7 +47,10 @@ export default function DashboardContainer() {
 
     const renderPage = () => {
         if (currentView === 'readinglog') {
-            return <ReadingLog />;
+            return <ReadingLog name={data.findtheteacher.firstName} />;
+        }
+        if (currentView === 'mylibrary') {
+            return <MyLibrary name={data.findtheteacher.firstName} />;
         }
         if (currentView === 'addbook') {
             return <AddBook name={data.findtheteacher.firstName} />;
@@ -103,8 +107,7 @@ export default function DashboardContainer() {
                     </div>
                 ) : (
                     <h4>
-                        You need to be logged in to see your profile page. Use the navigation
-                        links above to sign up or log in!
+                        You need to be logged in to see this page.
                     </h4>
                 )}
             </div>
