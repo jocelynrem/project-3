@@ -1,30 +1,39 @@
+  
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
 import { useState } from 'react';
 import SearchResults from '../SearchResults.js';
+import { useMutation } from '@apollo/client';
+import { ADD_BOOK } from "../../utils/mutations";
+import { isValueNode } from 'graphql';
 
 export default function AddBook({ name }) {
-    const teacherId1 = localStorage.getItem('teacher_id');
-    // console.log('this is the teachers Id from DashContainer:', teacherId);
 
-
+    const teacherId = localStorage.getItem('teacher_id');
     const [searchInput, setSearchInput] = useState('');
     // const [searchResults, setSearchResults] = useState('');
     const [optionState, setOptionState] = useState('ISBN');
     const [searchedBooks, setSearchedBooks] = useState([]);
-      // create state to hold saved bookId values
-    const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-
-//    try{
-    // const [addBook, { error }] = useMutation(ADgit D_BOOK);
-//     } catch (err) {
-//     console.error(err);
-//   }
-    useEffect(() => {
-        return () => saveBookIds(savedBookIds);
-      });
-    console.log('optionState:', optionState)
+    // console.log('optionState:', optionState)
+    // console.log("current formstate: ", formState )
+    const [addBook, {error, bookInfo}] = useMutation(ADD_BOOK);
     const handleChange = (event) => setOptionState(event.target.value);
-    
+
+    const [formState, setFormState] = useState({
+        title: '',
+        authors: '',
+        ISBN: '',
+        description: '',
+    });
+    const handleChange2 = (event) => {
+        const { name, value } = event.target;
+        // console.log('name:', name);
+        // console.log('value:', value);
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+        
+    };
     const handleFormSubmit = async (event) => {
         console.log('here I am')
         event.preventDefault();
@@ -54,25 +63,49 @@ export default function AddBook({ name }) {
 
             const { items } = await response.json();
             console.log('items!!!!!!:', items)
-            
-            
-            
-            
-            const bookInfo = items.map((book) => ({
+
+            const bookData = items.map((book) => ({
                 bookId: book.id,
                 authors: book.volumeInfo.authors || ['No author to display'],
                 title: book.volumeInfo.title,
                 description: book.volumeInfo.description,
                 image: book.volumeInfo.imageLinks?.thumbnail || '',
             }));
-            
-            
-            setSearchedBooks(bookInfo);
+
+            setSearchedBooks(bookData);
             setSearchInput('');
         } catch (err) {
             console.error(err);
         }
     };
+
+    const handleFormSubmit2  = async (event) => {
+    event.preventDefault();
+
+    try {
+        console.log("before Mutation: ", formState )
+
+        const { info } = await addBook({
+            variables: { 
+                teacherId,
+                bookInfo: {...formState} },
+        });
+        // console.log("AFTER");
+        console.log("data from add book: ", formState);
+        console.log("bookinfo submission:", info)
+
+        setFormState({
+                title: '',
+                authors: '',
+                ISBN: '',
+                description: '',
+        })
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+
 
     return (
         <>
@@ -128,6 +161,8 @@ export default function AddBook({ name }) {
                                                 name="title"
                                                 id="title"
                                                 required
+                                                value = {formState.title}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
@@ -139,8 +174,10 @@ export default function AddBook({ name }) {
                                         <div className="mt-1">
                                             <input
                                                 type="text"
-                                                name="author"
-                                                id="author"
+                                                name="authors"
+                                                id="authors"
+                                                value={formState.authors}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
@@ -157,6 +194,8 @@ export default function AddBook({ name }) {
                                         <div className="mt-1">
                                             <textarea
                                                 id="message"
+                                                value = {formState.description}
+                                                onChange={handleChange2}
                                                 name="description"
                                                 rows={2}
                                                 className="pt-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border border-gray-300 rounded-md"
@@ -174,6 +213,7 @@ export default function AddBook({ name }) {
                                                 id="copies"
                                                 name="copies"
                                                 type="text"
+
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
@@ -189,15 +229,17 @@ export default function AddBook({ name }) {
                                         </div>
                                         <div className="mt-1">
                                             <input
-                                                name="isbn"
+                                                name="ISBN"
                                                 id="isbn"
                                                 type='text'
+                                                value = {formState.isbn}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
                                     </div>
                                     <div className="sm:col-span-6 sm:flex sm:justify-end">
-                                        <button onClick={handleFormSubmit} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
+                                        <button onClick={handleFormSubmit2} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
 
                                     </div>
                                 </form>
@@ -217,55 +259,6 @@ export default function AddBook({ name }) {
                     />
                 ))}
             </div>
-            <div>
-                <table className="w-full shadow text-left bg-white dark:bg-gray-800">
-                    <thead>
-
-                        <tr className="border-b border-gray-300 dark:border-gray-700">
-                            <th className="py-5 sm:pl-10 pl-2 w-1/4 text-base text-gray-800 dark:text-gray-100">Title</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100">Author</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Description</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">ISBN</th>
-                            <th className="py-5 w-1/4 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Save Book?</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                    {console.log(searchedBooks)}
-                    {searchedBooks.map((item) => (
-                        <tr key={item.bookId}>
-                            <td className="sm:pl-10 pl-2 pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.title}</td>
-                            <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.authors}</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">{item.description}</td>
-                            <td className="py-5 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right"><img src = {item.image}/></td>
-                            {/* <td><input type="checkbox" onClick={() => handleSaveBook(item.bookId)} className="checkbox opacity-0 absolute cursor-pointer w-full h-full" /></td> */}
-                            
-                        </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
         </>
     )
 }
-
-//  <Button
-// disabled={savedBookIds?.some(
-//   (savedId) => savedId === book.bookId
-// )}
-// className="btn-block btn-info"
-// onClick={() => handleSaveBook(book.bookId)}
-// >
-// {savedBookIds?.some((savedId) => savedId === book.bookId)
-//   ? 'Book Already Saved!'
-//   : 'Save This Book!'}
-// </Button> 
-
-// disabled={savedBookIds?.some(
-//     (savedId) => savedId === book.bookId
-// )}
-// className="btn-block btn-info"
-// onClick={() => handleSaveBook(book.bookId)}
-// {savedBookIds?.some((savedId) => savedId === book.bookId)
-//     ? 'Book Already Saved!'
-//     : 'Save This Book!'}
