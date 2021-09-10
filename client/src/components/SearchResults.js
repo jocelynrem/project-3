@@ -1,7 +1,9 @@
 /* eslint-disable eqeqeq */
 import React, { useState } from "react";
 
-const SearchResults = ({ key, title, author, image, description, }) => {
+const SearchResults = props => {
+// const SearchResults = ({ key, title, author, image, description, handleAddBook }) => {
+
 
     const [show, setShow] = useState(null);
     const [tooltipStatus, setTooltipStatus] = useState(0);
@@ -10,16 +12,16 @@ const SearchResults = ({ key, title, author, image, description, }) => {
     return (
         <>
             <ul
-                key={key}
                 className='sm:rounded-tr-lg sm:rounded-bl-lg relative bg-white p-6 m-2'>
-                <div>
+                <div key={props.resultId}>
+                    {console.log("WHAT IS THIS PROPS>KEY: ", props.resultId)}
                     <span className='rounded-lg p-3'>
-                        <img src={image} alt='book cover' className="h-18 float-left pr-4" aria-hidden="true" />
+                        <img src={props.image} alt='book cover' className="h-18 float-left pr-4" aria-hidden="true" />
                         <div className="mt-2">
                             <h3 className="text-lg font-bold">
-                                {title}
+                                {props.title}
                             </h3>
-                            <h3>Author:{author}</h3>
+                            <h3>Author:{props.author}</h3>
                             <div className="">
                                 <div className="flex items-center">
                                     <div className="cursor-pointer">
@@ -39,7 +41,7 @@ const SearchResults = ({ key, title, author, image, description, }) => {
                                 </div>
                                 {show == 0 && (
                                     <p className="mt-2 text-sm text-gray-600">
-                                        {description}
+                                        {props.description}
                                     </p>
                                 )}
                             </div>
@@ -47,7 +49,7 @@ const SearchResults = ({ key, title, author, image, description, }) => {
                     </span>
                 </div>
                 {/* ADD BOOK ARROW STARTS HERE */}
-                <div className="flex-col absolute top-6 right-6 float-right md:flex-row flex items-center md:justify-center">
+                <div  className="flex-col absolute top-6 right-6 float-right md:flex-row flex items-center md:justify-center">
                     <div className="mt-0 md:mt-0 m-5" onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
                         {tooltipStatus == 1 && (
                             <div role="tooltip" className="z-20 transition duration-150 ease-in-out top-0 right-10 mb-8 absolute shadow-lg p-2 bg-dark text-white rounded w-40">
@@ -56,7 +58,7 @@ const SearchResults = ({ key, title, author, image, description, }) => {
                                 <p className="text-xs text-white leading-4">Add this book to your library.</p>
                             </div>
                         )}
-                        <a href='#book-form' className="focus:outline-none">
+                        <a href='#book-form' className="focus:outline-none" onClick={() => props.handleAddBook(props.resultId)}>
                             <span
                                 className="text-md-green hover:text-dark cursor-pointer"
                                 aria-hidden="true">
@@ -73,3 +75,4 @@ const SearchResults = ({ key, title, author, image, description, }) => {
 }
 
 export default SearchResults;
+
