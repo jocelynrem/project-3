@@ -38,6 +38,7 @@ export default function AddBook({ name }) {
         authors: '',
         ISBN: '',
         description: '',
+        copiesAvailable: '',
     });
     const handleChange2 = (event) => {
         const { name, value } = event.target;
@@ -100,12 +101,18 @@ export default function AddBook({ name }) {
         event.preventDefault();
 
         try {
-            console.log("before Mutation: ", formState)
+            console.log("before Mutation: ", formState);
 
             const { info } = await addBook({
                 variables: {
                     teacherId,
-                    bookInfo: { ...formState }
+                    bookInfo: { 
+                        title: formState.title,
+                        authors: formState.authors,
+                        description: formState.description,
+                        ISBN: formState.ISBN,
+                        copiesAvailable: parseInt(formState.copiesAvailable)
+                    }
                 },
             });
             // console.log("AFTER");
@@ -117,6 +124,7 @@ export default function AddBook({ name }) {
                 authors: '',
                 ISBN: '',
                 description: '',
+                copiesAvailable: '',
             })
         } catch (error) {
             console.error(error);
@@ -265,9 +273,10 @@ export default function AddBook({ name }) {
                                         <div className="mt-1">
                                             <input
                                                 id="copies"
-                                                name="copies"
+                                                name="copiesAvailable"
                                                 type="text"
-
+                                                value={formState.copiesAvailable}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
