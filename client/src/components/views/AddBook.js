@@ -1,17 +1,57 @@
+import { gql, useMutation } from '@apollo/client';
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchResults from '../SearchResults.js';
+import { useMutation } from '@apollo/client';
+import { ADD_BOOK } from "../../utils/mutations";
+import { isValueNode } from 'graphql';
+
+import {ADD_BOOK} from '../../utils/mutations'
+import {getSavedBookIds, saveBookIds} from '../../utils/localStorage'
+// import Auth from '../utils/auth';
 
 export default function AddBook({ name }) {
 
-
+    const teacherId = localStorage.getItem('teacher_id');
     const [searchInput, setSearchInput] = useState('');
     // const [searchResults, setSearchResults] = useState('');
     const [optionState, setOptionState] = useState('ISBN');
-    const [searchedBooks, setSearchedBooks] = useState([]);
+    const [searchedBooks, setSearchedBooks] = useState([])  
+                
     console.log('optionState:', optionState)
+    // console.log("current formstate: ", formState )
+    const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+
+    const [addBook, {error, bookInfo}] = useMutation(ADD_BOOK);
+//     const [addBook, { error, data}] = useMutation(ADD_BOOK)
+    // console.log('data from AddBooks:', data);
+
+
+    useEffect(() => {
+        return () => saveBookIds(savedBookIds);
+    });
+
+    console.log("savedBookIds: ", savedBookIds);
+  
+  
     const handleChange = (event) => setOptionState(event.target.value);
 
+    const [formState, setFormState] = useState({
+        title: '',
+        authors: '',
+        ISBN: '',
+        description: '',
+    });
+    const handleChange2 = (event) => {
+        const { name, value } = event.target;
+        // console.log('name:', name);
+        // console.log('value:', value);
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+        
+    };
     const handleFormSubmit = async (event) => {
         console.log('here I am')
         event.preventDefault();
@@ -51,11 +91,77 @@ export default function AddBook({ name }) {
             }));
 
             setSearchedBooks(bookData);
+            // setSavedBookIds(bookData.bookId)
             setSearchInput('');
         } catch (err) {
             console.error(err);
         }
     };
+
+
+    const handleFormSubmit2  = async (event) => {
+    event.preventDefault();
+
+    try {
+        console.log("before Mutation: ", formState )
+
+        const { info } = await addBook({
+            variables: { 
+                teacherId,
+                bookInfo: {...formState} },
+        });
+        // console.log("AFTER");
+        console.log("data from add book: ", formState);
+        console.log("bookinfo submission:", info)
+
+        setFormState({
+                title: '',
+                authors: '',
+                ISBN: '',
+                description: '',
+        })
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+
+
+    const handleAddBook = async (bookId) => {
+        console.log('HANDLE Add BOok, bookId', bookId);
+        const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
+        console.log('HANDLE Add BOok, bookToSave', bookToSave);
+        try {
+            const {data} = await addBook({
+                variables: {
+                    teacherId,
+                    bookInfo: {
+                        title: bookToSave.title,
+                        authors: bookToSave.authors,
+                        description: bookToSave.description,
+                        bookId: bookToSave.bookId
+                    }
+                }
+            })
+            console.log("handleAddBook data: ", data)
+            console.log("handleAddBook teacherID: ", teacherId)
+            console.log("handleAddBook bookToSave", bookToSave)
+
+            if (!bookToSave) {
+                throw new Error('Something went wrong addding your book!');
+            }
+
+            setSavedBookIds([...savedBookIds, bookToSave.bookId])
+            console.log("setSavedBookIds savedBookIds", savedBookIds)
+            console.log("handleAddBook bookToSave", bookToSave)
+            console.log("handleAddBook bookToSave", bookToSave)
+        } catch (err) {
+            console.error(err);
+        }
+
+
+    }
+
 
     return (
         <>
@@ -93,7 +199,7 @@ export default function AddBook({ name }) {
                                         className="py-3 px-4 pl-20 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md" />
                                 </div>
                                 <div className="sm:col-span-2 mt-2 sm:flex sm:justify-end m-2">
-                                    <button onClick={handleFormSubmit} className="my-2 bg-lime-700 transition duration-150 ease-in-out hover:bg-lime-600 rounded text-white px-10 py-2">Search</button>
+                                    <button onKeyPress={handleFormSubmit} onClick={handleFormSubmit} className="my-2 bg-lime-700 transition duration-150 ease-in-out hover:bg-lime-600 rounded text-white px-10 py-2">Search</button>
                                 </div>
                             </div>
 
@@ -111,6 +217,8 @@ export default function AddBook({ name }) {
                                                 name="title"
                                                 id="title"
                                                 required
+                                                value = {formState.title}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
@@ -122,8 +230,10 @@ export default function AddBook({ name }) {
                                         <div className="mt-1">
                                             <input
                                                 type="text"
-                                                name="author"
-                                                id="author"
+                                                name="authors"
+                                                id="authors"
+                                                value={formState.authors}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
@@ -140,6 +250,8 @@ export default function AddBook({ name }) {
                                         <div className="mt-1">
                                             <textarea
                                                 id="message"
+                                                value = {formState.description}
+                                                onChange={handleChange2}
                                                 name="description"
                                                 rows={2}
                                                 className="pt-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border border-gray-300 rounded-md"
@@ -157,6 +269,7 @@ export default function AddBook({ name }) {
                                                 id="copies"
                                                 name="copies"
                                                 type="text"
+
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
@@ -172,15 +285,18 @@ export default function AddBook({ name }) {
                                         </div>
                                         <div className="mt-1">
                                             <input
-                                                name="isbn"
+                                                name="ISBN"
                                                 id="isbn"
                                                 type='text'
+                                                value = {formState.isbn}
+                                                onChange={handleChange2}
                                                 className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
                                     </div>
                                     <div className="sm:col-span-6 sm:flex sm:justify-end">
-                                        <button onClick={handleFormSubmit} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
+                                        <button onClick={handleFormSubmit2} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
+
 
                                     </div>
                                 </form>
@@ -190,16 +306,23 @@ export default function AddBook({ name }) {
                 </div>
             </section>
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
+            {console.log('searchedBooks:', searchedBooks)}
                 {searchedBooks.map((item) => (
                     <SearchResults
                         key={item.bookId}
+                        resultId={item.bookId}
                         title={item.title}
                         author={item.authors}
                         image={item.image}
                         description={item.description}
+                        handleAddBook={handleAddBook}
                     />
                 ))}
             </div>
         </>
     )
+// } in case
 }
+
+//                {console.log("SearchBooks: ", searchedBooks)}
+// {console.log("SearchBooks 0: ", searchedBooks[0].bookId)}
