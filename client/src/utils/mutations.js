@@ -121,3 +121,20 @@ export const REMOVE_BOOK = gql`
     }
   }
 `;
+
+export const REMOVE_STUDENT = gql`
+mutation removeStudent($teacherId: ID!, $studentInfo: StudentInfo!) {
+  removeStudent(teacherId: $teacherId, studentInfo: $studentInfo) {
+    _id
+    firstName
+    lastName
+    email
+    students {
+        _id
+        firstName
+        lastName
+        comments
+    }
+  }
+}
+`;
