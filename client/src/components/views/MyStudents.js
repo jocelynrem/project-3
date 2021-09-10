@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gql, useMutation, useQuery } from '@apollo/client';
@@ -36,22 +37,7 @@ const MyStudents = ({ name }) => {
     const handleClose = () => {
         setOpen(false);
     };
-    
-    const [removeStudent, { error, stuinfo }] = useMutation(REMOVE_STUDENT)
-    
-    const handleDeleteStudent = async (event) => {
-        console.log(event.target.id)
-        console.log(data.findtheteacher.students)
-        const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
-        console.log('studentData:', studentData)
 
-        await removeStudent({
-            variables: {
-                teacherId,
-                studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName}
-            },
-        });
-    }
     return (
         <>
             <div className="relative bg-white pb-16 text-center">
@@ -65,30 +51,18 @@ const MyStudents = ({ name }) => {
                         </div>
                     </div>
                     <div className="mt-4">
-                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
                             {data.findtheteacher.students.map((student) => {
                                 return (
-                                    <div key={student._id} className="pt-6">
-                                        <div className="flow-root bg-gray-100 rounded-lg px-6 pb-8">
-                                            <div className="-mt-6">
-                                                <div>
-                                                    <span className="inline-flex items-center justify-center p-3 bg-lime-500 rounded-md shadow-lg">
-                                                        <h3 className="text-lg font-medium text-gray-900 tracking-tight">{student.firstName} {student.lastName}</h3>
-                                                    </span>
-                                                </div>
-
-                                                <p className="my-5 py-5 text-base text-gray-600">
-                                                    {student.comments}
-                                                </p>
-                                            </div>
-                                            <div className='flex justify-end'>
-                                                <svg onClick= {handleDeleteStudent} id={student._id} style= {{cursor: 'pointer'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path id={student._id} style= {{cursor: 'pointer'}} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </div>
-                                        </div>
+                                    <div className="bg-white shadow overflow-hidden sm:rounded-lg" key={student.id}>
+                                        <StudentCard
+                                            firstName={student.firstName}
+                                            lastName={student.lastName}
+                                            comments={student.comments}
+                                            id={student._id}
+                                        />
                                     </div>
-                                );
+                                )
                             })}
                         </div>
                     </div>
@@ -225,6 +199,86 @@ const StudentModal = () => {
                     <div className="my-3 p-3 bg-orange text-white">
                         {error.message}
                     </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+const StudentCard = ({ comments, firstName, lastName, id, }) => {
+    const teacherId = localStorage.getItem('teacher_id');
+    const { loading, data } = useQuery(GET_FINDTHETEACHER, {
+        variables: { id: teacherId },
+    });
+    const [removeStudent, { error, stuinfo }] = useMutation(REMOVE_STUDENT)
+
+    const handleDeleteStudent = async (event) => {
+        console.log(event.target.id)
+        console.log(data.findtheteacher.students)
+        const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
+        console.log('studentData:', studentData)
+
+        await removeStudent({
+            variables: {
+                teacherId,
+                studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName }
+            },
+        });
+    }
+    const [show, setShow] = useState(null);
+    return (
+        <div className="bg-white shadow overflow-hidden sm:rounded-lg" key={id}>
+            <div className="p-4 sm:px-6 bg-gray-200">
+                <h3 className="text-xl leading-6 font-medium text-gray-900">{firstName} {lastName} </h3>
+            </div>
+            <div className="border-t border-blue-900 pt-1 sm:px-6">
+                <dl className="grid grid-cols-1 gap-x-4 mt-5 gap-y-2 sm:grid-cols-1">
+                    <div className="sm:col-span-1">
+                        <dt className="font-medium uppercase text-blue-800">Currently Reading</dt>
+                        <dd className="mt-1 text-sm text-gray-900">Bathtime for Biscuit</dd>
+                    </div>
+                    <div className='flex justify-between'>
+                        <div className="sm:col-span-2 inline-flex">
+                            <dt className="font-medium text-left text-lime-600">Notes</dt>
+                            <div className="cursor-pointer">
+                                {show == 0 ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" onClick={() => setShow(null)} aria-label="Show" className="icon icon-tabler icon-tabler-chevron-down" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#718096" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" onClick={() => setShow(0)} aria-label="Hide" className=" icon icon-tabler icon-tabler-chevron-up" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#718096" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <polyline points="6 15 12 9 18 15" />
+                                    </svg>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className=''>
+                            <svg onClick={handleDeleteStudent} id={id} style={{ cursor: 'pointer' }} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path id={id} style={{ cursor: 'pointer' }} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </div>
+                    </div>
+                </dl>
+            </div>
+            <div className="border-t border-blue-900 mx-4 py-2 sm:px-6 text-left">
+                {show == 0 && (
+                    <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-1">
+                        <div>
+                            <dt className="text-sm font-medium text-gray-500">09/20/2021</dt>
+                            <dd className="mt-1 text-sm text-gray-900">
+                                {comments}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-sm font-medium text-gray-500">09/18/2021</dt>
+                            <dd className="mt-1 text-sm text-gray-900">
+                                Progress monitored for letter sounds
+                            </dd>
+                        </div>
+                    </dl>
                 )}
             </div>
         </div>
