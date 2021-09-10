@@ -1,7 +1,12 @@
 import books from "../../images/CA101-16.png";
 import BooksOut from "../BooksOut";
 
-export default function Dashboard({ name }) {
+export default function Dashboard({ name, data }) {
+    console.log('number of books:', data.findtheteacher.books.length)
+    console.log('data:', data)
+
+    console.log (name)
+
     return (
         <>
             <div className="w-full flex items-center justify-center">
@@ -15,7 +20,7 @@ export default function Dashboard({ name }) {
                     <div className="flex items-center mt-7 px-3">
                         <div className="text-center pr-7 border-r">
                             <p className="text-dk-gray">Total Books</p>
-                            <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-md-green">280</p>
+                            <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-md-green">{data.findtheteacher.books.length}</p>
                         </div>
                         <div className="ml-7 text-center pr-7 border-r">
                             <p className="text-dk-gray">Books Checked Out</p>
