@@ -67,7 +67,7 @@ mutation modifyTeacher($id: String!, $firstName: String!, $lastName: String!, $e
 }`;
 
 export const ADD_BOOK = gql`
-  mutation addBook($teacherId: ID!, $bookInfo: BookInput!) {
+  mutation addBook($teacherId: ID!, $bookInfo: BookInfo!) {
     addBook(teacherId: $teacherId, bookInfo: $bookInfo) {
       _id
       firstName
@@ -76,9 +76,12 @@ export const ADD_BOOK = gql`
       books {
           _id
           title
-          author
+          authors
           ISBN
           description
+          bookId
+          copiesAvailable
+          copiesCheckedOut
       }
     }
   }

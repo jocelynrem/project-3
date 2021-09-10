@@ -1,15 +1,35 @@
+import { gql, useMutation } from '@apollo/client';
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchResults from '../SearchResults.js';
+
+import {ADD_BOOK} from '../../utils/mutations'
+import {getSavedBookIds, saveBookIds} from '../../utils/localStorage'
+// import Auth from '../utils/auth';
 
 export default function AddBook({ name }) {
 
+    const teacherId = localStorage.getItem('teacher_id');
 
     const [searchInput, setSearchInput] = useState('');
     // const [searchResults, setSearchResults] = useState('');
     const [optionState, setOptionState] = useState('ISBN');
-    const [searchedBooks, setSearchedBooks] = useState([]);
+    const [searchedBooks, setSearchedBooks] = useState([])  
+                
     console.log('optionState:', optionState)
+
+    const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+
+    const [addBook, { error, data}] = useMutation(ADD_BOOK)
+    // console.log('data from AddBooks:', data);
+
+
+    useEffect(() => {
+        return () => saveBookIds(savedBookIds);
+    });
+
+    console.log("savedBookIds: ", savedBookIds);
+
     const handleChange = (event) => setOptionState(event.target.value);
 
     const handleFormSubmit = async (event) => {
@@ -51,11 +71,47 @@ export default function AddBook({ name }) {
             }));
 
             setSearchedBooks(bookData);
+            // setSavedBookIds(bookData.bookId)
             setSearchInput('');
         } catch (err) {
             console.error(err);
         }
     };
+
+    const handleAddBook = async (bookId) => {
+        console.log('HANDLE Add BOok, bookId', bookId);
+        const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
+        console.log('HANDLE Add BOok, bookToSave', bookToSave);
+        try {
+            const {data} = await addBook({
+                variables: {
+                    teacherId,
+                    bookInfo: {
+                        title: bookToSave.title,
+                        authors: bookToSave.authors,
+                        description: bookToSave.description,
+                        bookId: bookToSave.bookId
+                    }
+                }
+            })
+            console.log("handleAddBook data: ", data)
+            console.log("handleAddBook teacherID: ", teacherId)
+            console.log("handleAddBook bookToSave", bookToSave)
+
+            if (!bookToSave) {
+                throw new Error('Something went wrong addding your book!');
+            }
+
+            setSavedBookIds([...savedBookIds, bookToSave.bookId])
+            console.log("setSavedBookIds savedBookIds", savedBookIds)
+            console.log("handleAddBook bookToSave", bookToSave)
+            console.log("handleAddBook bookToSave", bookToSave)
+        } catch (err) {
+            console.error(err);
+        }
+
+
+    }
 
     return (
         <>
@@ -190,16 +246,22 @@ export default function AddBook({ name }) {
                 </div>
             </section>
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
+
                 {searchedBooks.map((item) => (
                     <SearchResults
                         key={item.bookId}
+                        resultId={item.bookId}
                         title={item.title}
                         author={item.authors}
                         image={item.image}
                         description={item.description}
+                        handleAddBook={handleAddBook}
                     />
                 ))}
             </div>
         </>
     )
 }
+
+//                {console.log("SearchBooks: ", searchedBooks)}
+// {console.log("SearchBooks 0: ", searchedBooks[0].bookId)}
