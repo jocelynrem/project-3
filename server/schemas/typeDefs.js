@@ -82,7 +82,8 @@ const typeDefs = gql`
     addTeacher(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addBook(teacherId: ID!, bookInfo: BookInfo!): Teacher
     addStudent(teacherId: ID!, studentInfo: StudentInfo!): Teacher
-    modifyTeacher(id: String!, firstName: String!, lastName: String!, email: String!): Auth 
+    modifyTeacher(id: String!, firstName: String!, lastName: String!, email: String!): Auth
+    removeStudent(teacherId: ID!, studentInfo: StudentInfo!): Teacher 
   }
 `;
 
