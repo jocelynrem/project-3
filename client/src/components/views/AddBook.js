@@ -93,7 +93,7 @@ export default function AddBook({ name }) {
                                         className="py-3 px-4 pl-20 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md" />
                                 </div>
                                 <div className="sm:col-span-2 mt-2 sm:flex sm:justify-end m-2">
-                                    <button onClick={handleFormSubmit} className="my-2 bg-lime-700 transition duration-150 ease-in-out hover:bg-lime-600 rounded text-white px-10 py-2">Search</button>
+                                    <button onKeyPress={handleFormSubmit} onClick={handleFormSubmit} className="my-2 bg-lime-700 transition duration-150 ease-in-out hover:bg-lime-600 rounded text-white px-10 py-2">Search</button>
                                 </div>
                             </div>
 
@@ -180,7 +180,7 @@ export default function AddBook({ name }) {
                                         </div>
                                     </div>
                                     <div className="sm:col-span-6 sm:flex sm:justify-end">
-                                        <button onClick={handleFormSubmit} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
+                                        <button onKeyPress={handleFormSubmit} onClick={handleFormSubmit} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
 
                                     </div>
                                 </form>

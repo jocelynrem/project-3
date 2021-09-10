@@ -202,7 +202,7 @@ const StudentModal = () => {
                                         className="text-gray-600 focus:outline-none focus:border focus:border-lt-green bg-white font-normal w-64 h-10 flex items-center pl-2 text-sm border-gray-300 rounded border shadow"
                                         placeholder="Comments" />
                                 </div>
-                                <button className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Add</button>
+                                <button onKeyPress={handleFormSubmit} className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Add</button>
 
                             </div>
                         </div>

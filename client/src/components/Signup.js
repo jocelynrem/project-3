@@ -126,7 +126,7 @@ function Signup(props) {
                                                 placeholder="Password"
                                             />
                                         </div>
-                                        <button type='submit'
+                                        <button onKeyPress={handleFormSubmit} type='submit'
                                             className="mt-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-dark hover:bg-lt-green focus:outline-none focus:ring-2 focus:ring-lt-green"
                                         >
                                             Submit

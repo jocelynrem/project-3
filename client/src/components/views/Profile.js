@@ -15,8 +15,15 @@ export default function Profile({ firstName, lastName, email, id }) {
         email
     });
     const [modifyTeacher, { error, data }] = useMutation(MODIFY_TEACHER);
+    
+    // const handleKeyPress = (event) => {
+    //     if (event.keyCode === 13) {
+    //         handleFormSubmit();
+    //     }
+    // }
+    
     const handleChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
 
         setFormState({
             ...formState,
@@ -54,7 +61,7 @@ export default function Profile({ firstName, lastName, email, id }) {
             <h1 className=''> Edit User Information: </h1>
             <p className='m-2'><b>Please enter the updated first name, last name, and email for this account. </b></p>
             {data ? (
-                <Link to="/dashboard">Success! Redirecting to Your Dashboard.</Link>
+                <Link to="/dashboard"></Link>
             ) : (
                 <form onSubmit={handleFormSubmit}>
                     <div className="items-center justify-center pb-5">
@@ -92,7 +99,7 @@ export default function Profile({ firstName, lastName, email, id }) {
                                     className="text-gray-600 focus:outline-none focus:border focus:border-lt-green bg-white font-normal w-64 h-10 flex items-center pl-2 text-sm border-gray-300 rounded border shadow" placeholder="Email" />
                             </div>
                         </div>
-                        <button className="m-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Update</button>
+                        <button onKeyPress={handleFormSubmit} className="m-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Update</button>
                     </div>
                 </form>
             )}
