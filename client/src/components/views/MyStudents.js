@@ -6,7 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
-import { ADD_STUDENT } from "../../utils/mutations";
+import { ADD_STUDENT, REMOVE_STUDENT } from "../../utils/mutations";
 import { GET_FINDTHETEACHER } from "../../utils/queries"
 
 const useStyles = makeStyles((theme) => ({
@@ -36,10 +36,21 @@ const MyStudents = ({ name }) => {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const handleDeleteStudent = (event) => {
+    
+    const [removeStudent, { error, stuinfo }] = useMutation(REMOVE_STUDENT)
+    
+    const handleDeleteStudent = async (event) => {
         console.log(event.target.id)
+        console.log(data.findtheteacher.students)
+        const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
+        console.log('studentData:', studentData)
 
+        await removeStudent({
+            variables: {
+                teacherId,
+                studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName}
+            },
+        });
     }
     return (
         <>
