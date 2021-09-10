@@ -36,6 +36,11 @@ const MyStudents = ({ name }) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleDeleteStudent = (event) => {
+        console.log(event.target.id)
+
+    }
     return (
         <>
             <div className="relative bg-white pb-16 text-center">
@@ -52,7 +57,7 @@ const MyStudents = ({ name }) => {
                         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                             {data.findtheteacher.students.map((student) => {
                                 return (
-                                    <div key={student.id} className="pt-6">
+                                    <div key={student._id} className="pt-6">
                                         <div className="flow-root bg-gray-100 rounded-lg px-6 pb-8">
                                             <div className="-mt-6">
                                                 <div>
@@ -66,8 +71,8 @@ const MyStudents = ({ name }) => {
                                                 </p>
                                             </div>
                                             <div className='flex justify-end'>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                <svg onClick= {handleDeleteStudent} id={student._id} style= {{cursor: 'pointer'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path id={student._id} style= {{cursor: 'pointer'}} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                             </div>
                                         </div>
