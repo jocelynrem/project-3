@@ -26,6 +26,7 @@ query findme($id: ID!) {
       bookId
       copiesAvailable
       copiesCheckedOut
+      description
     }
   }
 }

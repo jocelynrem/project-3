@@ -70,7 +70,9 @@ export default function DashboardContainer() {
                 />
             );
         }
-        return <Dashboard name={data.findtheteacher.firstName} />;
+        return <Dashboard 
+        name={data.findtheteacher.firstName}
+        data= {data} />;
     };
     const handlePageChange = (page) => setcurrentView(page);
     const loggedIn = Auth.loggedIn();
