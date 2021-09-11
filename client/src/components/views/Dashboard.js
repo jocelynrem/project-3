@@ -2,10 +2,10 @@ import books from "../../images/CA101-16.png";
 import BooksOut from "../BooksOut";
 
 export default function Dashboard({ name, data }) {
-    console.log('number of books:', data.findtheteacher.books.length)
-    console.log('data:', data)
+    // console.log('number of books:', data.findtheteacher.books.length)
+    // console.log('data:', data)
 
-    console.log(name)
+    // console.log(name)
 
     return (
         <>

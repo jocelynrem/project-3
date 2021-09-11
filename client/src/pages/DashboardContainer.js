@@ -16,13 +16,13 @@ export default function DashboardContainer() {
     const [currentView, setcurrentView] = useState('Dashboard');
 
     const teacherId = localStorage.getItem('teacher_id');
-    console.log('this is the teachers Id from DashContainer:', teacherId);
+    // console.log('this is the teachers Id from DashContainer:', teacherId);
     const { loading, data } = useQuery(GET_FINDTHETEACHER, {
         variables: { id: teacherId },
     });
 
-    console.log('loading from DashContainer:', loading);
-    console.log('data from DashContainer:', data);
+    // console.log('loading from DashContainer:', loading);
+    // console.log('data from DashContainer:', data);
 
     if (loading) {
         return <div className='container mx-auto sm:p-5 md:p-10'>
@@ -76,7 +76,7 @@ export default function DashboardContainer() {
     };
     const handlePageChange = (page) => setcurrentView(page);
     const loggedIn = Auth.loggedIn();
-    console.log('loggedIn:', loggedIn)
+    // console.log('loggedIn:', loggedIn)
 
     return (
 

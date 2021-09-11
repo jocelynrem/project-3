@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../../src/utils/auth';
 
 export default function Profile({ firstName, lastName, email, id }) {
-    console.log('id:', id);
+    // console.log('id:', id);
     const [searchInput, setSearchInput] = useState('');
     const teacherId = localStorage.getItem('teacher_id');
     const [formState, setFormState] = useState({
@@ -32,26 +32,26 @@ export default function Profile({ firstName, lastName, email, id }) {
     };
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log("formState from profile: ", formState);
+        // console.log("formState from profile: ", formState);
 
         try {
-            console.log("before Mutation")
+            // console.log("before Mutation")
             const { data } = await modifyTeacher({
                 variables: { ...formState },
             });
-            console.log("AFTER");
-            console.log("data from profile: ", data);
-            console.log("id from teacher:", data.modifyTeacher.teacher._id)
+            // console.log("AFTER");
+            // console.log("data from profile: ", data);
+            // console.log("id from teacher:", data.modifyTeacher.teacher._id)
             // Auth.login(data.addTeacher.token);
             // Auth.login(data.modifyTeacher);
 
         } catch (error) {
-            console.log('error hit')
+            // console.log('error hit')
             console.error(error);
         }
     }
-    console.log('this is the teachers Id from Profile:', teacherId)
-    console.log('name and last name', lastName)
+    // console.log('this is the teachers Id from Profile:', teacherId)
+    // console.log('name and last name', lastName)
     return (
         <>
             <h1 className=''>{firstName}'s Profile</h1>

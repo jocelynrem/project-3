@@ -43,7 +43,7 @@ export default function Home() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log('formState from Home: ', teacherFormData);
+        // console.log('formState from Home: ', teacherFormData);
 
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -56,7 +56,7 @@ export default function Home() {
                 variables: { ...teacherFormData },
             });
 
-            console.log("login datta", data);
+            // console.log("login datta", data);
             //   Auth.login(data.login.token);
             Auth.login(data.login)
 

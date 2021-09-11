@@ -10,7 +10,7 @@ export default function MyLibrary({ name }) {
     const { loading, data } = useQuery(GET_FINDTHETEACHER, {
         variables: { id: teacherId },
     });
-    console.log(console.log('books:', data.findtheteacher.books))
+    // console.log(console.log('books:', data.findtheteacher.books))
 
     return (
         <>

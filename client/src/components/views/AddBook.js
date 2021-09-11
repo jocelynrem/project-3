@@ -39,12 +39,12 @@ export default function AddBook({ name }) {
         description: '',
         copiesAvailable: ''
     });
-    console.log('formState!!!!!!!!!!!!!!:', formState)
+    // console.log('formState!!!!!!!!!!!!!!:', formState)
 
     const handleChange2 = (event) => {
         const { name, value } = event.target;
-        console.log('name:', name);
-        console.log('value:', value);
+        // console.log('name:', name);
+        // console.log('value:', value);
         setFormState({
             ...formState,
             [name]: value,
@@ -52,7 +52,7 @@ export default function AddBook({ name }) {
 
     };
     const handleFormSubmit = async (event) => {
-        console.log('here I am')
+        // console.log('here I am')
         event.preventDefault();
 
         if (!searchInput) {
@@ -61,25 +61,25 @@ export default function AddBook({ name }) {
 
         try {
             let response = '';
-            console.log("optionState during hadleformsubmit:", optionState)
-            console.log('response before fetchign:', response)
+            // console.log("optionState during hadleformsubmit:", optionState)
+            // console.log('response before fetchign:', response)
             if (optionState === 'ISBN') {
-                console.log('query from isbn')
+                // console.log('query from isbn')
                 response = await searchGoogleBooksbyISBN(searchInput);
             }
             else {
-                console.log('query by title')
+                // console.log('query by title')
                 response = await searchGoogleBooksbyTitle(searchInput);
             }
 
-            console.log('response after fetchign:', response)
+            // console.log('response after fetchign:', response)
 
             if (!response.ok) {
                 throw new Error('something went wrong!');
             }
 
             const { items } = await response.json();
-            console.log('items!!!!!!:', items)
+            // console.log('items!!!!!!:', items)
 
             const bookData = items.map((book) => ({
                 bookId: book.id,
@@ -100,10 +100,10 @@ export default function AddBook({ name }) {
 
     const handleFormSubmit2 = async (event) => {
         event.preventDefault();
-        console.log('event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:', event)
+        // console.log('event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:', event)
 
         try {
-            console.log("before Mutation: !!!!!!!!!!!!!!!!!!!!!", formState);
+            // console.log("before Mutation: !!!!!!!!!!!!!!!!!!!!!", formState);
 
             const { info } = await addBook({
                 variables: {
@@ -118,8 +118,8 @@ export default function AddBook({ name }) {
                 },
             });
             // console.log("AFTER");
-            console.log("data from add book: ", formState);
-            console.log("bookinfo submission:", info)
+            // console.log("data from add book: ", formState);
+            // console.log("bookinfo submission:", info)
 
             setFormState({
                 title: '',
@@ -182,8 +182,8 @@ export default function AddBook({ name }) {
                     ISBN: '',
                     description: bookToSave.description,
                 })
-            console.log('WHAT IS FORMSTATE NOW?!?! ', formState);
-            console.log('WHAT IS bookToSave NOW?!?! ', bookToSave.title, bookToSave.author, bookToSave.description);
+            // console.log('WHAT IS FORMSTATE NOW?!?! ', formState);
+            // console.log('WHAT IS bookToSave NOW?!?! ', bookToSave.title, bookToSave.author, bookToSave.description);
             if (!bookToSave) {
                 throw new Error('Something went wrong populating your book info!')
             }
@@ -324,20 +324,21 @@ export default function AddBook({ name }) {
                 </div>
             </section>
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
-                {console.log('searchedBooks:', searchedBooks)}
-                {searchedBooks.map((item) => (
-                    <SearchResults
-                        key={item.bookId}
-                        resultId={item.bookId}
-                        title={item.title}
-                        author={item.authors}
-                        image={item.image}
-                        description={item.description}
-                        handleAddBook={handleAddBook}
-                    />
+            {searchedBooks.map((item) => (
+                <SearchResults
+                key={item.bookId}
+                resultId={item.bookId}
+                title={item.title}
+                author={item.authors}
+                image={item.image}
+                description={item.description}
+                handleAddBook={handleAddBook}
+                />
                 ))}
-            </div>
-        </>
-    )
-}
-
+                </div>
+                </>
+                )
+            }
+            
+            
+            // {console.log('searchedBooks:', searchedBooks)}

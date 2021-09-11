@@ -109,22 +109,22 @@ const StudentModal = (props) => {
 
     const [addStudent, { error, stuinfo }] = useMutation(ADD_STUDENT);
 
-    console.log('data from MyStudents:', data);
+    // console.log('data from MyStudents:', data);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            console.log("before Mutation")
+            // console.log("before Mutation")
             const { info } = await addStudent({
                 variables: {
                     teacherId,
                     studentInfo: { ...formState }
                 },
             });
-            console.log("AFTER");
-            console.log("data from add Student: ", formState);
-            console.log("name from student:", info)
+            // console.log("AFTER");
+            // console.log("data from add Student: ", formState);
+            // console.log("name from student:", info)
 
             setFormState({
                 firstName: '',
@@ -232,10 +232,10 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
     const [removeStudent, { error, stuinfo }] = useMutation(REMOVE_STUDENT)
 
     const handleDeleteStudent = async (event) => {
-        console.log(event.target.id)
-        console.log(data.findtheteacher.students)
+        // console.log(event.target.id)
+        // console.log(data.findtheteacher.students)
         const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
-        console.log('studentData:', studentData)
+        // console.log('studentData:', studentData)
 
         await removeStudent({
             variables: {
