@@ -306,6 +306,7 @@ export default function AddBook({ name }) {
                                             <input
                                                 id="copiesAvailable"
                                                 name="copiesAvailable"
+                                                value={formState.copiesAvailable}
                                                 type="text"
                                                 className="px-4 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
