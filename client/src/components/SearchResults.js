@@ -8,13 +8,13 @@ const SearchResults = props => {
     const [show, setShow] = useState(null);
     const [tooltipStatus, setTooltipStatus] = useState(0);
 
+    // {console.log("WHAT IS THIS PROPS>KEY: ", props.resultId)}
 
     return (
         <>
             <ul
                 className='sm:rounded-tr-lg sm:rounded-bl-lg relative bg-white p-6 m-2'>
                 <div key={props.resultId}>
-                    {console.log("WHAT IS THIS PROPS>KEY: ", props.resultId)}
                     <span className='rounded-lg p-3'>
                         <img src={props.image} alt='book cover' className="h-18 float-left pr-4" aria-hidden="true" />
                         <div className="mt-2">
