@@ -16,7 +16,6 @@ export default function AddBook({ name }) {
     const [searchedBooks, setSearchedBooks] = useState([])
 
     console.log('optionState:', optionState)
-    // console.log("current formstate: ", formState )
     const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
     const [addBook, { error, bookInfo }] = useMutation(ADD_BOOK);
@@ -38,9 +37,9 @@ export default function AddBook({ name }) {
         authors: '',
         ISBN: '',
         description: '',
-        copiesAvailable: '',
+        copiesAvailable: ''
     });
-    console.log('formState:', formState)
+    console.log('formState!!!!!!!!!!!!!!:', formState)
 
     const handleChange2 = (event) => {
         const { name, value } = event.target;
@@ -104,7 +103,7 @@ export default function AddBook({ name }) {
         console.log('event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:', event)
 
         try {
-            console.log("before Mutation: ", formState.authors.join());
+            console.log("before Mutation: !!!!!!!!!!!!!!!!!!!!!", formState);
 
             const { info } = await addBook({
                 variables: {
@@ -307,6 +306,7 @@ export default function AddBook({ name }) {
                                                 id="copiesAvailable"
                                                 name="copiesAvailable"
                                                 value={formState.copiesAvailable}
+                                                onChange={handleChange2}
                                                 type="text"
                                                 className="px-4 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
