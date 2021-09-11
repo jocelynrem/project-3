@@ -5,7 +5,7 @@ export default function Dashboard({ name, data }) {
     console.log('number of books:', data.findtheteacher.books.length)
     console.log('data:', data)
 
-    console.log (name)
+    console.log(name)
 
     return (
         <>
@@ -33,7 +33,7 @@ export default function Dashboard({ name, data }) {
                     </div>
                 </div>
             </div>
-            <BooksOut />
+            {/* <BooksOut /> */}
         </>
     );
 }
