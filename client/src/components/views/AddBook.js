@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import SearchResults from '../SearchResults.js';
 // import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from "../../utils/mutations";
-import {getSavedBookIds, saveBookIds} from '../../utils/localStorage'
+import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
 
 
 export default function AddBook({ name }) {
@@ -109,7 +109,7 @@ export default function AddBook({ name }) {
             const { info } = await addBook({
                 variables: {
                     teacherId,
-                    bookInfo: { 
+                    bookInfo: {
                         title: formState.title,
                         authors: formState.authors.join(),
                         description: formState.description,
@@ -242,9 +242,9 @@ export default function AddBook({ name }) {
                             </div>
 
                             {/* Manual Inputs */}
-                            <div className="py-3 px-6 sm:px-10 lg:col-span-2 xl:p-12 bg-gray-100">
+                            <div className="px-3 sm:px-10 lg:col-span-2 pt-2 bg-gray-100">
                                 <h3 className="text-xl font-semibold text-gray-900">2. Manually Enter a Book</h3>
-                                <form action="#" method="POST" className="mt-6 grid grid-cols-1 gap-y-4 sm:grid-cols-6 sm:gap-x-8">
+                                <form action="#" method="POST" className="mt-3 grid grid-cols-1 gap-y-4 sm:grid-cols-6 sm:gap-x-8">
                                     <div className="sm:col-span-3">
                                         <label className="block text-sm font-medium text-gray-900">
                                             Title
@@ -299,7 +299,7 @@ export default function AddBook({ name }) {
                                         </div>
                                     </div>
                                     <div className="sm:col-span-1">
-                                        <label className="block text-sm font-medium text-gray-900">
+                                        <label className="flex text-sm font-medium text-gray-900">
                                             Copies
                                         </label>
                                         <div className="mt-1">
@@ -307,36 +307,14 @@ export default function AddBook({ name }) {
                                                 id="copies"
                                                 name="copiesAvailable"
                                                 type="text"
-                                                value={formState.copiesAvailable}
-                                                onChange={handleChange2}
-                                                className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
+                                                className="px-4 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
                                             />
                                         </div>
                                     </div>
-                                    <div className="sm:col-span-2">
-                                        <div className="flex justify-between">
-                                            <label className="block text-sm font-medium text-gray-900">
-                                                ISBN
-                                            </label>
-                                            <span className="text-sm text-gray-400">
-                                                Optional
-                                            </span>
-                                        </div>
-                                        <div className="mt-1">
-                                            <input
-                                                name="ISBN"
-                                                id="isbn"
-                                                type='text'
-                                                value={formState.isbn}
-                                                onChange={handleChange2}
-                                                className="px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="sm:col-span-6 sm:flex sm:justify-end">
-                                        <button onClick={handleFormSubmit2} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">Submit</button>
-
-
+                                    <div className="sm:col-span-2 flex sm:justify-end md:justify-start sm:mt-0 md:mt-6 max-h-12">
+                                        <button onClick={handleFormSubmit2} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -360,8 +338,5 @@ export default function AddBook({ name }) {
             </div>
         </>
     )
-    // } in case
 }
 
-//                {console.log("SearchBooks: ", searchedBooks)}
-// {console.log("SearchBooks 0: ", searchedBooks[0].bookId)}
