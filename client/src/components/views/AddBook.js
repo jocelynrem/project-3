@@ -28,7 +28,7 @@ export default function AddBook({ name }) {
         return () => saveBookIds(savedBookIds);
     });
 
-    console.log("savedBookIds: ", savedBookIds);
+    // console.log("savedBookIds: ", savedBookIds);
 
 
     const handleChange = (event) => setOptionState(event.target.value);
@@ -40,10 +40,12 @@ export default function AddBook({ name }) {
         description: '',
         copiesAvailable: '',
     });
+    console.log('formState:', formState)
+
     const handleChange2 = (event) => {
         const { name, value } = event.target;
-        // console.log('name:', name);
-        // console.log('value:', value);
+        console.log('name:', name);
+        console.log('value:', value);
         setFormState({
             ...formState,
             [name]: value,
@@ -99,16 +101,17 @@ export default function AddBook({ name }) {
 
     const handleFormSubmit2 = async (event) => {
         event.preventDefault();
+        console.log('event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:', event)
 
         try {
-            console.log("before Mutation: ", formState);
+            console.log("before Mutation: ", formState.authors.join());
 
             const { info } = await addBook({
                 variables: {
                     teacherId,
                     bookInfo: {
                         title: formState.title,
-                        authors: formState.authors,
+                        authors: formState.authors.join(),
                         description: formState.description,
                         ISBN: formState.ISBN,
                         copiesAvailable: parseInt(formState.copiesAvailable)
@@ -133,39 +136,68 @@ export default function AddBook({ name }) {
     }
 
 
+    // const handleAddBook = async (bookId) => {
+    //     console.log('HANDLE Add BOok, bookId', bookId);
+    //     const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
+    //     console.log('HANDLE Add BOok, bookToSave', bookToSave);
+    //     try {
+    //         const { data } = await addBook({
+    //             variables: {
+    //                 teacherId,
+    //                 bookInfo: {
+    //                     title: bookToSave.title,
+    //                     authors: bookToSave.authors,
+    //                     description: bookToSave.description,
+    //                     bookId: bookToSave.bookId
+    //                 }
+    //             }
+    //         })
+    //         console.log("handleAddBook data: ", data)
+    //         console.log("handleAddBook teacherID: ", teacherId)
+    //         console.log("handleAddBook bookToSave", bookToSave)
+
+    //         if (!bookToSave) {
+    //             throw new Error('Something went wrong addding your book!');
+    //         }
+
+    //         setSavedBookIds([...savedBookIds, bookToSave.bookId])
+    //         console.log("setSavedBookIds savedBookIds", savedBookIds)
+    //         console.log("handleAddBook bookToSave", bookToSave)
+    //         console.log("handleAddBook bookToSave", bookToSave)
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+
+
+    // }
+
     const handleAddBook = async (bookId) => {
-        console.log('HANDLE Add BOok, bookId', bookId);
+       
         const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
-        console.log('HANDLE Add BOok, bookToSave', bookToSave);
+        
         try {
-            const { data } = await addBook({
-                variables: {
-                    teacherId,
-                    bookInfo: {
-                        title: bookToSave.title,
-                        authors: bookToSave.authors,
-                        description: bookToSave.description,
-                        bookId: bookToSave.bookId
-                    }
-                }
+            await 
+            setFormState({
+                title: bookToSave.title,
+                authors: [bookToSave.authors],
+                ISBN: '',
+                description: bookToSave.description,
             })
-            console.log("handleAddBook data: ", data)
-            console.log("handleAddBook teacherID: ", teacherId)
-            console.log("handleAddBook bookToSave", bookToSave)
-
+            console.log('WHAT IS FORMSTATE NOW?!?! ', formState);
+            console.log('WHAT IS bookToSave NOW?!?! ', bookToSave.title, bookToSave.author, bookToSave.description);
             if (!bookToSave) {
-                throw new Error('Something went wrong addding your book!');
+                throw new Error ('Something went wrong populating your book info!')
             }
+            // setFormState({
+            //     title: '',
+            //     authors: '',
+            //     ISBN: '',
+            //     description: '',
+            // })
 
-            setSavedBookIds([...savedBookIds, bookToSave.bookId])
-            console.log("setSavedBookIds savedBookIds", savedBookIds)
-            console.log("handleAddBook bookToSave", bookToSave)
-            console.log("handleAddBook bookToSave", bookToSave)
         } catch (err) {
             console.error(err);
         }
-
-
     }
 
 

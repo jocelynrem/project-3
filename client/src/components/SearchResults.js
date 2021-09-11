@@ -5,7 +5,6 @@ import { HiSave } from "react-icons/hi";
 const SearchResults = ({ resultId, image, title, author, description, handleAddBook }) => {
 
     const [show, setShow] = useState(null);
-
     return (
         <>
             <ul className='sm:rounded-tr-lg sm:rounded-bl-lg relative bg-white p-4 m-2' key={resultId}>
