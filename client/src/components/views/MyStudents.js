@@ -8,7 +8,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { HiOutlineTrash, HiX } from "react-icons/hi";
 
-
 import { ADD_STUDENT, REMOVE_STUDENT } from "../../utils/mutations";
 import { GET_FINDTHETEACHER } from "../../utils/queries"
 
