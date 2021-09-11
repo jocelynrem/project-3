@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 
 import { GET_FINDTHETEACHER } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
@@ -23,7 +24,7 @@ export default function MyLibrary({ name }) {
                         <tr className="border-b border-gray-300 dark:border-gray-700">
                             <th className="py-5 sm:pl-10 pl-2 w-1/5 text-base text-gray-800 dark:text-gray-100">Title</th>
                             <th className="py-5 w-1/5 text-base text-gray-800 dark:text-gray-100">Author</th>
-                            <th className="py-5 w-2/5 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Description</th>
+                            <th className="py-5 w-2/5 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-center">Description</th>
                             <th className="py-5 w-1/5 text-base text-gray-800 dark:text-gray-100 pr-2 sm:pr-10 text-right">Available Copies</th>
 
                         </tr>
@@ -35,7 +36,7 @@ export default function MyLibrary({ name }) {
                                 <td className="pr-2 py-5 text-gray-800 dark:text-gray-100 text-xs sm:text-sm">{item.authors}</td>
                                 <td className="py-2 text-green-400 pr-2 sm:pr-10 text-xs sm:text-sm text-right">
                                     <div className="">
-                                        <div className="flex justify-end">
+                                        <div className="flex justify-center">
                                             <div className="cursor-pointer">
                                                 {show == 0 ? (
                                                     <svg xmlns="http://www.w3.org/2000/svg" onClick={() => setShow(null)} aria-label="Show" className="icon icon-tabler icon-tabler-chevron-down" width={22} height={22} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#718096" fill="none" strokeLinecap="round" strokeLinejoin="round">
