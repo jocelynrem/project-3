@@ -33,13 +33,13 @@ function Signup(props) {
         console.log("formState from signup: ", formState);
 
         try {
-            console.log("before Mutation")
+            // console.log("before Mutation")
             const { data } = await addTeacher({
                 variables: { ...formState },
             });
-            console.log("AFTER");
-            console.log("data from singup: ", data);
-            console.log("id from teacher:", data.addTeacher.teacher._id)
+            // console.log("AFTER");
+            // console.log("data from singup: ", data);
+            // console.log("id from teacher:", data.addTeacher.teacher._id)
             // Auth.login(data.addTeacher.token);
             Auth.login(data.addTeacher);
 
