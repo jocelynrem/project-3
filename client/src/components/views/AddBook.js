@@ -172,21 +172,21 @@ export default function AddBook({ name }) {
     // }
 
     const handleAddBook = async (bookId) => {
-       
+
         const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
-        
+
         try {
-            await 
-            setFormState({
-                title: bookToSave.title,
-                authors: [bookToSave.authors],
-                ISBN: '',
-                description: bookToSave.description,
-            })
+            await
+                setFormState({
+                    title: bookToSave.title,
+                    authors: [bookToSave.authors],
+                    ISBN: '',
+                    description: bookToSave.description,
+                })
             console.log('WHAT IS FORMSTATE NOW?!?! ', formState);
             console.log('WHAT IS bookToSave NOW?!?! ', bookToSave.title, bookToSave.author, bookToSave.description);
             if (!bookToSave) {
-                throw new Error ('Something went wrong populating your book info!')
+                throw new Error('Something went wrong populating your book info!')
             }
             // setFormState({
             //     title: '',
@@ -304,7 +304,7 @@ export default function AddBook({ name }) {
                                         </label>
                                         <div className="mt-1">
                                             <input
-                                                id="copies"
+                                                id="copiesAvailable"
                                                 name="copiesAvailable"
                                                 type="text"
                                                 className="px-4 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md"
