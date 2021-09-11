@@ -88,6 +88,7 @@ const resolvers = {
         { new: true },
       )
     },
+
     removeStudent: async (parent, { teacherId, studentInfo }) => {
       console.log("Delete Student - teacherId: ", teacherId);
       console.log("delete Student - studentInfo: ", studentInfo);
