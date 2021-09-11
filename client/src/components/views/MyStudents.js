@@ -1,11 +1,12 @@
 /* eslint-disable eqeqeq */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { HiOutlineTrash, HiX } from "react-icons/hi";
 
 import { ADD_STUDENT, REMOVE_STUDENT } from "../../utils/mutations";
 import { GET_FINDTHETEACHER } from "../../utils/queries"
@@ -89,7 +90,10 @@ const MyStudents = ({ name }) => {
     );
 };
 
-const StudentModal = () => {
+const StudentModal = (props) => {
+    const closeModal = () => {
+        props.onClose()
+    }
     const teacherId = localStorage.getItem('teacher_id');
 
     const [formState, setFormState] = useState({
@@ -149,11 +153,25 @@ const StudentModal = () => {
                 ) : (
                     <form onSubmit={handleFormSubmit}>
                         <div className="rounded border-gray-300  border-dashed border-2 p-5 bg-gray-100">
-                            <p className="text-gray-800 font-bold text-lg leading-tight tracking-normal">
-                                Add Students
-                            </p>
+                            <div className="flex justify-between">
+                                <div>
+                                    <p className="text-gray-800 font-bold text-lg">
+                                        Add Students
+                                    </p>
+                                </div>
+                                <div className="sm:block">
+                                    <button
+                                        type="button"
+                                        className="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        onClick={closeModal}
+                                    >
+                                        <span className="sr-only">Close</span>
+                                        <HiX className="h-6 w-6" aria-hidden="true" />
+                                    </button>
+                                </div>
+                            </div>
                             <div className="">
-                                <div className="mt-4 md:mr-16">
+                                <div className="mt-4">
                                     <input
                                         id="firstName"
                                         name="firstName"
@@ -165,7 +183,7 @@ const StudentModal = () => {
                                         className="text-gray-600 focus:outline-none focus:border focus:border-lt-green bg-white font-normal w-64 h-10 flex items-center pl-2 text-sm border-gray-300 rounded border shadow"
                                         placeholder="First Name" />
                                 </div>
-                                <div className="mt-4 md:mr-16">
+                                <div className="mt-4">
                                     <input
                                         id="lastName"
                                         name="lastName"
@@ -177,7 +195,7 @@ const StudentModal = () => {
                                         className="text-gray-600 focus:outline-none focus:border focus:border-lt-green bg-white font-normal w-64 h-10 flex items-center pl-2 text-sm border-gray-300 rounded border shadow"
                                         placeholder="Last Name" />
                                 </div>
-                                <div className="mt-4 md:mr-16">
+                                <div className="mt-4 ">
                                     <input
                                         id="comments"
                                         name="comments"
@@ -189,8 +207,9 @@ const StudentModal = () => {
                                         className="text-gray-600 focus:outline-none focus:border focus:border-lt-green bg-white font-normal w-64 h-10 flex items-center pl-2 text-sm border-gray-300 rounded border shadow"
                                         placeholder="Comments" />
                                 </div>
-                                <button onKeyPress={handleFormSubmit} className="my-2 bg-dark transition duration-150 ease-in-out hover:bg-lt-green rounded text-white px-5 py-1 text-xs">Add</button>
-
+                                <div className="flex justify-end">
+                                    <button onKeyPress={handleFormSubmit} className="mt-3 bg-blue-700 transition duration-150 ease-in-out hover:bg-blue-900 rounded text-white px-7 py-1 text-sm">Add</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -226,11 +245,27 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
         });
     }
     const [show, setShow] = useState(null);
+
     return (
         <div className="bg-white shadow overflow-hidden sm:rounded-lg" key={id}>
-            <div className="p-4 sm:px-6 bg-gray-200">
-                <h3 className="text-xl leading-6 font-medium text-gray-900">{firstName} {lastName} </h3>
+            <div className="p-4 sm:px-6 bg-gray-200 inline-flex w-full justify-between">
+                <div>
+                    <h3 className="text-xl leading-6 font-medium text-gray-900">{firstName} {lastName} </h3>
+                </div>
+                <div className='text-gray-400'>
+                    <button
+                        onClick={handleDeleteStudent}
+                        id={id}
+                        style={{ cursor: 'pointer' }}
+                        type="button"
+                        className="inline-flex items-center px-1 py-1 border border-transparent shadow-sm text-xs rounded-sm text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
+                    >
+                        <HiOutlineTrash className="-ml-0.5 mr-1 h-4 w-4" aria-hidden="true" />
+                        Student
+                    </button>
+                </div>
             </div>
+
             <div className="border-t border-blue-900 pt-1 sm:px-6">
                 <dl className="grid grid-cols-1 gap-x-4 mt-5 gap-y-2 sm:grid-cols-1">
                     <div className="sm:col-span-1">
@@ -253,12 +288,6 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
                                     </svg>
                                 )}
                             </div>
-                        </div>
-
-                        <div className=''>
-                            <svg onClick={handleDeleteStudent} id={id} style={{ cursor: 'pointer' }} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path id={id} style={{ cursor: 'pointer' }} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
                         </div>
                     </div>
                 </dl>

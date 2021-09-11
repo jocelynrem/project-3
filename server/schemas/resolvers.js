@@ -1,4 +1,4 @@
-const {Teacher} = require('../models'); //const { TestModel, Book, Teacher, Student, Log } = require('../models');
+const { Teacher } = require('../models'); //const { TestModel, Book, Teacher, Student, Log } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -60,25 +60,35 @@ const resolvers = {
       // return user;
     },
 
-    addBook: async (parent, {teacherId, bookInfo}) => {
+    addBook: async (parent, { teacherId, bookInfo }) => {
       console.log("teacherId: ", teacherId);
       console.log("bookinfo: ", bookInfo);
       return Teacher.findByIdAndUpdate(
-        {_id: teacherId},
-        {$push: {books: bookInfo}},
-        {new: true},
+        { _id: teacherId },
+        { $push: { books: bookInfo } },
+        { new: true },
       )
     },
 
-    addStudent: async (parent, {teacherId, studentInfo}) => {
+    addStudent: async (parent, { teacherId, studentInfo }) => {
       console.log("ADDSTUDENT - teacherId: ", teacherId);
       console.log("ADDSTUDENT - studentInfo: ", studentInfo);
       return Teacher.findByIdAndUpdate(
-        {_id: teacherId},
-        {$push: {students: studentInfo}},
-        {new: true},
+        { _id: teacherId },
+        { $push: { students: studentInfo } },
+        { new: true },
       )
     },
+    removeStudent: async (parent, { teacherId, studentInfo }) => {
+      console.log("Delete Student - teacherId: ", teacherId);
+      console.log("delete Student - studentInfo: ", studentInfo);
+      return Teacher.findByIdAndUpdate(
+        { _id: teacherId },
+        { $pull: { students: studentInfo } },
+        { new: true },
+      )
+    },
+
     removeStudent: async (parent, {teacherId, studentInfo}) => {
       console.log("Delete Student - teacherId: ", teacherId);
       console.log("delete Student - studentInfo: ", studentInfo);
@@ -98,11 +108,11 @@ const resolvers = {
     //       );
     //     return bookAdd;
     //   }
-      
+
     //   throw new AuthenticationError('Please login to Add a book')
     // }
-    modifyTeacher: async (parent, {id, email, firstName, lastName}) => { 
-    console.log('id from what is passed to this mutation:', id)      
+    modifyTeacher: async (parent, { id, email, firstName, lastName }) => {
+      console.log('id from what is passed to this mutation:', id)
       const teacher = await Teacher.findOneAndUpdate({
         _id: id
       }, {
@@ -110,7 +120,7 @@ const resolvers = {
         firstName,
         lastName,
       },
-      {new: true}
+        { new: true }
       );
       const token = signToken(teacher);
       return { token, teacher };
