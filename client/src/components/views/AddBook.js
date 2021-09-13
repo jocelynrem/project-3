@@ -324,21 +324,22 @@ export default function AddBook({ name }) {
                 </div>
             </section>
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
-            {searchedBooks.map((item) => (
-                <SearchResults
-                key={item.bookId}
-                resultId={item.bookId}
-                title={item.title}
-                author={item.authors}
-                image={item.image}
-                description={item.description}
-                handleAddBook={handleAddBook}
-                />
+                {searchedBooks.map((item) => (
+                    <SearchResults
+                        key={item.bookId}
+                        resultId={item.bookId}
+                        title={item.title}
+                        author={item.authors}
+                        image={item.image}
+                        description={item.description}
+                        handleAddBook={handleAddBook}
+                        copiesAvailable={item.copiesAvailable}
+                    />
                 ))}
-                </div>
-                </>
-                )
-            }
-            
-            
+            </div>
+        </>
+    )
+}
+
+
             // {console.log('searchedBooks:', searchedBooks)}
