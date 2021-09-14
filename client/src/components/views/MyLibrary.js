@@ -23,7 +23,6 @@ export default function MyLibrary({ name }) {
                             <th className="py-2 w-2/9 text-left">Author</th>
                             <th className="py-2 w-1/9 pr-2 sm:pr-10 text-right">Copies</th>
                             <th className="py-2 w-3/9 pr-2 sm:pr-10 text-center">Description</th>
-
                         </tr>
                     </thead>
                     <tbody>

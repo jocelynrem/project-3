@@ -5,6 +5,8 @@ import SearchResults from '../SearchResults.js';
 // import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from "../../utils/mutations";
 import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function AddBook({ name }) {
@@ -51,6 +53,8 @@ export default function AddBook({ name }) {
         });
 
     };
+    const notify = () => toast("Book Saved!");
+
     const handleFormSubmit = async (event) => {
         // console.log('here I am')
         event.preventDefault();
@@ -97,9 +101,9 @@ export default function AddBook({ name }) {
         }
     };
 
-
     const handleFormSubmit2 = async (event) => {
         event.preventDefault();
+        notify(0)
         // console.log('event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:', event)
 
         try {
@@ -198,7 +202,6 @@ export default function AddBook({ name }) {
             console.error(err);
         }
     }
-
 
     return (
         <>
@@ -316,6 +319,11 @@ export default function AddBook({ name }) {
                                         <button onClick={handleFormSubmit2} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">
                                             Submit
                                         </button>
+                                        <ToastContainer
+                                            autoClose={1500}
+                                            hideProgressBar={true}
+                                            transition={Zoom}
+                                        />
                                     </div>
                                 </form>
                             </div>
@@ -324,21 +332,22 @@ export default function AddBook({ name }) {
                 </div>
             </section>
             <div id='search-results' className="bg-blue-900 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-1">
-            {searchedBooks.map((item) => (
-                <SearchResults
-                key={item.bookId}
-                resultId={item.bookId}
-                title={item.title}
-                author={item.authors}
-                image={item.image}
-                description={item.description}
-                handleAddBook={handleAddBook}
-                />
+                {searchedBooks.map((item) => (
+                    <SearchResults
+                        key={item.bookId}
+                        resultId={item.bookId}
+                        title={item.title}
+                        author={item.authors}
+                        image={item.image}
+                        description={item.description}
+                        handleAddBook={handleAddBook}
+                        copiesAvailable={item.copiesAvailable}
+                    />
                 ))}
-                </div>
-                </>
-                )
-            }
-            
-            
+            </div>
+        </>
+    )
+}
+
+
             // {console.log('searchedBooks:', searchedBooks)}

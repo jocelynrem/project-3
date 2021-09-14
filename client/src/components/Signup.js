@@ -4,8 +4,6 @@ import { ADD_TEACHER } from '../utils/mutations'
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 
-//Maybe change name to SignUP?
-
 function Signup(props) {
     const closeModal = () => {
         props.onClose()

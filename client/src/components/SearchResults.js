@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { HiSave } from "react-icons/hi";
 
-const SearchResults = ({ resultId, image, title, author, description, handleAddBook }) => {
+const SearchResults = ({ resultId, image, title, author, description, handleAddBook, copiesAvailable }) => {
 
     const [show, setShow] = useState(null);
     return (
@@ -13,11 +13,12 @@ const SearchResults = ({ resultId, image, title, author, description, handleAddB
                         Add
                     </p>
                     <input
-                        id="copies"
-                        name="copies"
-                        maxLength='3'
-                        size='4'
-                        className="shadow-sm mx-1 focus:ring-lime-600 focus:border-lime-600 border-lime-300 rounded-md"
+                        id={copiesAvailable}
+                        name={copiesAvailable}
+                        type="text"
+                        maxLength="3"
+                        size="4"
+                        className="text-blue-900 shadow-sm mx-1 focus:ring-lime-600 focus:border-lime-600 border-lime-300 rounded-md"
                     />
                     <p className="flex text-sm font-medium">
                         copies to my library
