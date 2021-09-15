@@ -174,7 +174,8 @@ export default function AddBook({ name }) {
 
     // }
 
-    const handleAddBook = async (bookId) => {
+    const handleAddBook = async (bookId, copiesAvail) => {
+    console.log('copiesAvail!!!!!!!!!!!!!!!!!!!!:', copiesAvail)
 
         const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
 
@@ -185,6 +186,7 @@ export default function AddBook({ name }) {
                     authors: [bookToSave.authors],
                     ISBN: '',
                     description: bookToSave.description,
+                    copiesAvailable: copiesAvail
                 })
             // console.log('WHAT IS FORMSTATE NOW?!?! ', formState);
             // console.log('WHAT IS bookToSave NOW?!?! ', bookToSave.title, bookToSave.author, bookToSave.description);
@@ -341,7 +343,6 @@ export default function AddBook({ name }) {
                         image={item.image}
                         description={item.description}
                         handleAddBook={handleAddBook}
-                        copiesAvailable={item.copiesAvailable}
                     />
                 ))}
             </div>

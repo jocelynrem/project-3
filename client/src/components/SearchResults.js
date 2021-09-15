@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { HiSave } from "react-icons/hi";
 
-const SearchResults = ({ resultId, image, title, author, description, handleAddBook, copiesAvailable }) => {
+const SearchResults = ({ resultId, image, title, author, description, handleAddBook}) => {
 
+
+    const [copiesAvail, setcopiesAvail] = useState('');
     const [show, setShow] = useState(null);
     return (
         <>
@@ -13,8 +15,12 @@ const SearchResults = ({ resultId, image, title, author, description, handleAddB
                         Add
                     </p>
                     <input
-                        id={copiesAvailable}
-                        name={copiesAvailable}
+                        id={copiesAvail}
+                        name={copiesAvail}
+                        onChange={(e) => {
+                            setcopiesAvail(e.target.value);
+                            console.log(e.target.value)
+                        }}
                         type="text"
                         maxLength="3"
                         size="4"
@@ -24,7 +30,7 @@ const SearchResults = ({ resultId, image, title, author, description, handleAddB
                         copies to my library
                     </p>
                     <span
-                        onClick={() => handleAddBook(resultId)}
+                        onClick={() => handleAddBook(resultId, copiesAvail)}
                         className="text-lime-500 hover:text-lime-400 cursor-pointer pr-3"
                         aria-hidden="true">
                         <HiSave className="h-8 w-8 ml-1" />
