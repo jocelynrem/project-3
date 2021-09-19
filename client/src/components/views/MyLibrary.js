@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 
 import { GET_FINDTHETEACHER } from '../../utils/queries';

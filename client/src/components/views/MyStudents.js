@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -55,8 +56,9 @@ const MyStudents = ({ name }) => {
                         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
                             {data.findtheteacher.students.map((student) => {
                                 return (
-                                    <div className="bg-white shadow overflow-hidden sm:rounded-lg" key={student.id}>
+                                    <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                                         <StudentCard
+                                            key={student.id}
                                             firstName={student.firstName}
                                             lastName={student.lastName}
                                             comments={student.comments}

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { gql, useMutation } from '@apollo/client';
 import { searchGoogleBooksbyTitle, searchGoogleBooksbyISBN } from '../../utils/API.js';
 import { useState, useEffect } from 'react';
 import SearchResults from '../SearchResults.js';
 import { ADD_BOOK } from "../../utils/mutations";
 import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { ToastContainer, toast, Flip, Success } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -13,23 +14,17 @@ export default function AddBook({ name }) {
     const teacherId = localStorage.getItem('teacher_id');
     const [searchInput, setSearchInput] = useState('');
     // const [searchResults, setSearchResults] = useState('');
-    const [optionState, setOptionState] = useState('ISBN');
+    const [optionState, setOptionState] = useState('TITLE');
     const [searchedBooks, setSearchedBooks] = useState([])
 
-    console.log('optionState:', optionState)
+    // console.log('optionState:', optionState)
     const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
     const [addBook, { error, bookInfo }] = useMutation(ADD_BOOK);
-    //     const [addBook, { error, data}] = useMutation(ADD_BOOK)
-    // console.log('data from AddBooks:', data);
-
 
     useEffect(() => {
         return () => saveBookIds(savedBookIds);
     });
-
-    // console.log("savedBookIds: ", savedBookIds);
-
 
     const handleChange = (event) => setOptionState(event.target.value);
 
@@ -38,21 +33,19 @@ export default function AddBook({ name }) {
         authors: '',
         ISBN: '',
         description: '',
-        copiesAvailable: ''
+        copiesAvailable: '',
+        copiesAvail: ''
     });
-    // console.log('formState!!!!!!!!!!!!!!:', formState)
 
     const handleChange2 = (event) => {
         const { name, value } = event.target;
-        // console.log('name:', name);
-        // console.log('value:', value);
+
         setFormState({
             ...formState,
             [name]: value,
         });
 
     };
-    const notify = () => toast("Book Saved!");
 
     const handleFormSubmit = async (event) => {
         // console.log('here I am')
@@ -95,6 +88,7 @@ export default function AddBook({ name }) {
             setSearchedBooks(bookData);
             // setSavedBookIds(bookData.bookId)
             setSearchInput('');
+
         } catch (err) {
             console.error(err);
         }
@@ -102,12 +96,9 @@ export default function AddBook({ name }) {
 
     const handleFormSubmit2 = async (event) => {
         event.preventDefault();
-        notify(0)
-        // console.log('event!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:', event)
 
         try {
-            // console.log("before Mutation: !!!!!!!!!!!!!!!!!!!!!", formState);
-
+            notify(0)
             const { info } = await addBook({
                 variables: {
                     teacherId,
@@ -120,9 +111,6 @@ export default function AddBook({ name }) {
                     }
                 },
             });
-            // console.log("AFTER");
-            // console.log("data from add book: ", formState);
-            // console.log("bookinfo submission:", info)
 
             setFormState({
                 title: '',
@@ -138,12 +126,12 @@ export default function AddBook({ name }) {
     }
 
     const handleAddBook = async (bookId, copiesAvail) => {
-    // console.log('copiesAvail!!!!!!!!!!!!!!!!!!!!:', copiesAvail)
 
         const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
 
         try {
             console.log(teacherId)
+            notify(0)
             await addBook({
                 variables: {
                     teacherId,
@@ -158,11 +146,16 @@ export default function AddBook({ name }) {
             if (!bookToSave) {
                 throw new Error('Something went wrong populating your book info!')
             }
+            setFormState({
+                copiesAvail: '',
+            })
 
         } catch (err) {
             console.error(err);
         }
     }
+
+    const notify = () => toast.success("Book Saved!");
 
     return (
         <>
@@ -192,7 +185,7 @@ export default function AddBook({ name }) {
                                         id="bookSearch"
                                         type='text'
                                         name='searchInput'
-                                        value={searchInput}
+                                        // value={searchInput}
                                         onChange={(e) => {
                                             setSearchInput(e.target.value);
                                             console.log(e.target.value)
@@ -200,7 +193,12 @@ export default function AddBook({ name }) {
                                         className="py-3 px-4 pl-20 w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border-gray-300 rounded-md" />
                                 </div>
                                 <div className="sm:col-span-2 mt-2 sm:flex sm:justify-end m-2">
-                                    <button onKeyPress={handleFormSubmit} onClick={handleFormSubmit} className="my-2 bg-lime-700 transition duration-150 ease-in-out hover:bg-lime-600 rounded text-white px-10 py-2">Search</button>
+                                    <button
+                                        onKeyPress={handleFormSubmit}
+                                        onClick={handleFormSubmit}
+                                        className="my-2 bg-lime-700 transition duration-150 ease-in-out hover:bg-lime-600 rounded text-white px-10 py-2">
+                                        Search
+                                    </button>
                                 </div>
                             </div>
 
@@ -257,7 +255,6 @@ export default function AddBook({ name }) {
                                                 rows={2}
                                                 className="pt-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-lime-600 focus:border-lime-600 border border-gray-300 rounded-md"
                                                 aria-describedby="message-max"
-                                                defaultValue={''}
                                             />
                                         </div>
                                     </div>
@@ -281,9 +278,17 @@ export default function AddBook({ name }) {
                                             Submit
                                         </button>
                                         <ToastContainer
+                                            position="bottom-right"
                                             autoClose={1500}
-                                            hideProgressBar={true}
-                                            transition={Zoom}
+                                            hideProgressBar={false}
+                                            newestOnTop={false}
+                                            closeOnClick
+                                            rtl={false}
+                                            pauseOnFocusLoss
+                                            draggable
+                                            pauseOnHover
+                                            Success
+                                            transition={Flip}
                                         />
                                     </div>
                                 </form>
@@ -308,6 +313,3 @@ export default function AddBook({ name }) {
         </>
     )
 }
-
-
-            // {console.log('searchedBooks:', searchedBooks)}

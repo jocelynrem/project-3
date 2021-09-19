@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MODIFY_TEACHER } from '../../utils/mutations'
-import { useMutation } from '@apollo/client';
+import React from 'react';
+// import { Link } from 'react-router-dom';
+// import { MODIFY_TEACHER } from '../../utils/mutations'
+// import { useMutation } from '@apollo/client';
 import ProfileCard from '../ProfileCard';
 import UpdateProfile from '../UpdateProfile';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Auth from '../../../src/utils/auth';
+// import Auth from '../../../src/utils/auth';
 
 export default function Profile({ firstName, lastName, email, id }) {
 
     const [open, setOpen] = React.useState(false);
 
-    const teacherId = localStorage.getItem('teacher_id');
-    const [formState, setFormState] = useState({
-        id,
-        firstName,
-        lastName,
-        email
-    });
+    // const teacherId = localStorage.getItem('teacher_id');
+    // const [formState, setFormState] = useState({
+    //     id,
+    //     firstName,
+    //     lastName,
+    //     email
+    // });
 
     const useStyles = makeStyles((theme) => ({
         modal: {
