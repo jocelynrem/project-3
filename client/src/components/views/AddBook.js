@@ -97,9 +97,9 @@ export default function AddBook({ name }) {
 
     const handleFormSubmit2 = async (event) => {
         event.preventDefault();
-        notify(0)
 
         try {
+            notify(0)
             const { info } = await addBook({
                 variables: {
                     teacherId,

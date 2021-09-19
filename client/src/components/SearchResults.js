@@ -1,8 +1,6 @@
 /* eslint-disable eqeqeq */
 import React, { useState } from "react";
 import { HiSave } from "react-icons/hi";
-import { ToastContainer, toast, Zoom } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const SearchResults = ({ resultId, image, title, author, description, handleAddBook }) => {
 
