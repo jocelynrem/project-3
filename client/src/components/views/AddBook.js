@@ -132,6 +132,7 @@ export default function AddBook({ name }) {
 
         try {
             console.log(teacherId)
+            notify(0)
             await addBook({
                 variables: {
                     teacherId,
@@ -276,8 +277,15 @@ export default function AddBook({ name }) {
                                             Submit
                                         </button>
                                         <ToastContainer
+                                            position="bottom-right"
                                             autoClose={1500}
-                                            hideProgressBar={true}
+                                            hideProgressBar={false}
+                                            newestOnTop={false}
+                                            closeOnClick
+                                            rtl={false}
+                                            pauseOnFocusLoss
+                                            draggable
+                                            pauseOnHover
                                             transition={Zoom}
                                         />
                                     </div>
