@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { HiSave } from "react-icons/hi";
 
-const SearchResults = ({ resultId, image, title, author, description, handleAddBook}) => {
+const SearchResults = ({ resultId, image, title, author, description, handleAddBook }) => {
 
 
     const [copiesAvail, setcopiesAvail] = useState('');
     const [show, setShow] = useState(null);
-    
+
     return (
         <>
             <ul className='sm:rounded-tr-lg sm:rounded-bl-lg relative bg-white p-4 m-2' key={resultId}>
@@ -31,7 +31,9 @@ const SearchResults = ({ resultId, image, title, author, description, handleAddB
                         copies to my library
                     </p>
                     <span
-                        onClick={() => handleAddBook(resultId, copiesAvail)}
+                        onClick={() => {
+                            handleAddBook(resultId, copiesAvail)
+                        }}
                         className="text-lime-500 hover:text-lime-400 cursor-pointer pr-3"
                         aria-hidden="true">
                         <HiSave className="h-8 w-8 ml-1" />
