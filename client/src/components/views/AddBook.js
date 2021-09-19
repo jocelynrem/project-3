@@ -6,7 +6,7 @@ import SearchResults from '../SearchResults.js';
 // import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from "../../utils/mutations";
 import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { ToastContainer, toast, Flip, Success } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -34,7 +34,8 @@ export default function AddBook({ name }) {
         authors: '',
         ISBN: '',
         description: '',
-        copiesAvailable: ''
+        copiesAvailable: '',
+        copiesAvail: ''
     });
 
     const handleChange2 = (event) => {
@@ -46,7 +47,6 @@ export default function AddBook({ name }) {
         });
 
     };
-    const notify = () => toast("Book Saved!");
 
     const handleFormSubmit = async (event) => {
         // console.log('here I am')
@@ -155,6 +155,8 @@ export default function AddBook({ name }) {
             console.error(err);
         }
     }
+
+    const notify = () => toast.success("Book Saved!");
 
     return (
         <>
@@ -286,7 +288,8 @@ export default function AddBook({ name }) {
                                             pauseOnFocusLoss
                                             draggable
                                             pauseOnHover
-                                            transition={Zoom}
+                                            Success
+                                            transition={Flip}
                                         />
                                     </div>
                                 </form>
