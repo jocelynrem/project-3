@@ -59,7 +59,6 @@ export default function Home() {
             // console.log("login datta", data);
             //   Auth.login(data.login.token);
             Auth.login(data.login)
-            console.log('data.login:', data.login)
 
         } catch (e) {
             console.error(e);
