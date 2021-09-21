@@ -8,6 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { HiOutlineTrash, HiX } from "react-icons/hi";
+import swal from 'sweetalert';
 
 import { ADD_STUDENT, REMOVE_STUDENT } from "../../utils/mutations";
 import { GET_FINDTHETEACHER } from "../../utils/queries"
@@ -234,17 +235,58 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
     const [removeStudent, { error, stuinfo }] = useMutation(REMOVE_STUDENT)
 
     const handleDeleteStudent = async (event) => {
+
         // console.log(event.target.id)
         // console.log(data.findtheteacher.students)
         const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
         // console.log('studentData:', studentData)
-
-        await removeStudent({
-            variables: {
-                teacherId,
-                studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName }
-            },
-        });
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete this student all their data?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    removeStudent({
+                        variables: {
+                            teacherId,
+                            studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName }
+                        },
+                    });
+                    swal("Student has been deleted", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Student Saved");
+                }
+            });
+        // await removeStudent({
+        //     variables: {
+        //         teacherId,
+        //         studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName }
+        //     },
+        // });
+    }
+    const notify = () => {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete this student all their data?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    handleDeleteStudent();
+                    swal("Student has been deleted", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Student Saved");
+                }
+            });
     }
     const [show, setShow] = useState(null);
 

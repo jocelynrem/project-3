@@ -6,7 +6,7 @@ import SearchResults from '../SearchResults.js';
 // import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from "../../utils/mutations";
 import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
-import { ToastContainer, toast, Flip, Success } from 'react-toastify';
+import swal from 'sweetalert';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -126,7 +126,7 @@ export default function AddBook({ name }) {
 
     }
 
-    const handleAddBook = async (bookId, copiesAvail) => {
+    const handleAddBook = async (bookId, copiesAvail, setcopiesAvail) => {
 
         const bookToSave = searchedBooks.find((book) => book.bookId === bookId)
 
@@ -147,16 +147,15 @@ export default function AddBook({ name }) {
             if (!bookToSave) {
                 throw new Error('Something went wrong populating your book info!')
             }
-            setFormState({
-                copiesAvail: '',
-            })
+
+            setcopiesAvail('')
 
         } catch (err) {
             console.error(err);
         }
     }
 
-    const notify = () => toast.success("Book Saved!");
+    const notify = () => swal("Good job!", "The book was added to your library", "success");
 
     return (
         <>
@@ -278,19 +277,6 @@ export default function AddBook({ name }) {
                                         <button onClick={handleFormSubmit2} className="mb-2 bg-blue-900 transition duration-150 ease-in-out hover:bg-blue-700 rounded text-white px-10 py-2">
                                             Submit
                                         </button>
-                                        <ToastContainer
-                                            position="bottom-right"
-                                            autoClose={1500}
-                                            hideProgressBar={false}
-                                            newestOnTop={false}
-                                            closeOnClick
-                                            rtl={false}
-                                            pauseOnFocusLoss
-                                            draggable
-                                            pauseOnHover
-                                            Success
-                                            transition={Flip}
-                                        />
                                     </div>
                                 </form>
                             </div>
