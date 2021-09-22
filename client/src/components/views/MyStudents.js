@@ -269,25 +269,7 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
         //     },
         // });
     }
-    const notify = () => {
-        swal({
-            title: "Are you sure?",
-            text: "Do you want to delete this student all their data?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    handleDeleteStudent();
-                    swal("Student has been deleted", {
-                        icon: "success",
-                    });
-                } else {
-                    swal("Student Saved");
-                }
-            });
-    }
+
     const [show, setShow] = useState(null);
 
     return (
