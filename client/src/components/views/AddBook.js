@@ -6,8 +6,6 @@ import SearchResults from '../SearchResults.js';
 import { ADD_BOOK } from "../../utils/mutations";
 import { getSavedBookIds, saveBookIds } from '../../utils/localStorage'
 import swal from 'sweetalert';
-import 'react-toastify/dist/ReactToastify.css';
-
 
 export default function AddBook({ name }) {
 
