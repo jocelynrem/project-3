@@ -32,7 +32,7 @@ const SearchResults = ({ resultId, image, title, author, description, handleAddB
                     </p>
                     <span
                         onClick={() => {
-                            handleAddBook(resultId, copiesAvail)
+                            handleAddBook(resultId, copiesAvail, setcopiesAvail)
                         }}
                         className="text-lime-500 hover:text-lime-400 cursor-pointer pr-3"
                         aria-hidden="true">
