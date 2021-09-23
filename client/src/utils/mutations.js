@@ -79,7 +79,6 @@ export const ADD_BOOK = gql`
           authors
           ISBN
           description
-          bookId
           copiesAvailable
           copiesCheckedOut
       }

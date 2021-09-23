@@ -76,11 +76,11 @@ const BooksTable = ({ id, title, copiesAvailable, authors, description }) => {
     const [removeBook, { error, bookinfo }] = useMutation(REMOVE_BOOK)
 
     const handleDeleteBook = async (event) => {
-        console.log('data:', data.findtheteacher.books)
-        console.log("targetId:", event.target.id)
+        // console.log('data:', data.findtheteacher.books)
+        // console.log("targetId:", event.target.id)
 
         const bookData = data.findtheteacher.books.find((book) => book._id === event.target.id)
-        console.log('bookData:', bookData)
+        // console.log('bookData:', bookData)
 
         swal({
             title: "Are you sure?",
