@@ -52,7 +52,6 @@ const typeDefs = gql`
     authors: [String]
     ISBN: String,
     description: String,
-    bookId: String,
     copiesAvailable: Int,
     copiesCheckedOut: Int
   }
@@ -73,6 +72,7 @@ const typeDefs = gql`
     addStudent(teacherId: ID!, studentInfo: StudentInfo!): Teacher
     modifyTeacher(id: String!, firstName: String!, lastName: String!, email: String!): Auth
     removeStudent(teacherId: ID!, studentInfo: StudentInfo!): Teacher 
+    removeBook(teacherId: ID!, bookInfo: BookInfo!): Teacher 
   }
 `;
 

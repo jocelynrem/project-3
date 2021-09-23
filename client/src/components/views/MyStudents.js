@@ -26,17 +26,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyStudents = ({ name }) => {
+    const classes = useStyles();
+
     const teacherId = localStorage.getItem('teacher_id');
 
     const { loading, data } = useQuery(GET_FINDTHETEACHER, {
         variables: { id: teacherId },
     });
-    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -236,10 +236,10 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
 
     const handleDeleteStudent = async (event) => {
 
-        // console.log(event.target.id)
-        // console.log(data.findtheteacher.students)
+        console.log('student - id', event.target.id)
+        console.log("students - data", data.findtheteacher.students)
         const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
-        // console.log('studentData:', studentData)
+        console.log('studentData:', studentData)
         swal({
             title: "Are you sure?",
             text: "Do you want to delete this student all their data?",
@@ -262,12 +262,6 @@ const StudentCard = ({ comments, firstName, lastName, id, }) => {
                     swal("Student Saved");
                 }
             });
-        // await removeStudent({
-        //     variables: {
-        //         teacherId,
-        //         studentInfo: { firstName: studentData.firstName, lastName: studentData.lastName }
-        //     },
-        // });
     }
 
     const [show, setShow] = useState(null);

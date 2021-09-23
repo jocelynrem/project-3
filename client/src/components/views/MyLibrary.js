@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 
-import { GET_FINDTHETEACHER } from '../../utils/queries';
 import { useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 import { HiOutlineTrash } from "react-icons/hi";
@@ -11,6 +10,8 @@ import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
 import LibraryCard from '../LibraryCard';
 import swal from 'sweetalert';
+
+import { GET_FINDTHETEACHER } from '../../utils/queries';
 import { REMOVE_BOOK } from "../../utils/mutations";
 
 const useStyles = makeStyles(() => ({
@@ -23,6 +24,7 @@ const useStyles = makeStyles(() => ({
 
 export default function MyLibrary({ name }) {
     const teacherId = localStorage.getItem('teacher_id');
+
     const { loading, data } = useQuery(GET_FINDTHETEACHER, {
         variables: { id: teacherId },
     });
@@ -40,13 +42,13 @@ export default function MyLibrary({ name }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.findtheteacher.books.map((item) => (
+                        {data.findtheteacher.books.map((book) => (
                             <BooksTable
-                                bookId={item.bookId}
-                                authors={item.authors}
-                                title={item.title}
-                                description={item.description}
-                                copiesAvailable={item.copiesAvailable}
+                                id={book._id}
+                                authors={book.authors}
+                                title={book.title}
+                                description={book.description}
+                                copiesAvailable={book.copiesAvailable}
                             />
                         ))}
                     </tbody>
@@ -56,7 +58,7 @@ export default function MyLibrary({ name }) {
     )
 }
 
-const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) => {
+const BooksTable = ({ id, title, copiesAvailable, authors, description }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -67,11 +69,19 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
         setOpen(false);
     };
 
-    const [removeBook, { error, stuinfo }] = useMutation(REMOVE_BOOK)
+    const teacherId = localStorage.getItem('teacher_id');
+    const { loading, data } = useQuery(GET_FINDTHETEACHER, {
+        variables: { id: teacherId },
+    });
+    const [removeBook, { error, bookinfo }] = useMutation(REMOVE_BOOK)
 
     const handleDeleteBook = async (event) => {
+        console.log('data:', data.findtheteacher.books)
+        console.log("targetId:", event.target.id)
 
-        // const studentData = data.findtheteacher.students.find((student) => student._id === event.target.id)
+        const bookData = data.findtheteacher.books.find((book) => book._id === event.target.id)
+        console.log('bookData:', bookData)
+
         swal({
             title: "Are you sure?",
             text: "Do you want to delete this book",
@@ -83,7 +93,8 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
                 if (willDelete) {
                     removeBook({
                         variables: {
-                            bookId,
+                            teacherId,
+                            bookInfo: { title: bookData.title, authors: bookData.authors }
                         },
                     });
                     swal("Book has been deleted", {
@@ -97,7 +108,7 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
 
     return (
         <>
-            <tr key={bookId} className=''>
+            <tr key={id} className=''>
                 <td className="w-3/9 pl-2 pr-5 py-2 text-gray-800 font-semibold text-xs sm:text-sm">
                     <button
                         type='button'
@@ -122,7 +133,7 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
                         <div className={classes.paper}>
                             <LibraryCard
                                 onClose={handleClose}
-                                bookId={bookId}
+                                id={id}
                                 authors={authors}
                                 title={title}
                                 description={description}
@@ -136,7 +147,7 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
                     <div className='text-gray-400'>
                         <button
                             onClick={handleDeleteBook}
-                            id={bookId}
+                            id={id}
                             style={{ cursor: 'pointer' }}
                             type="button"
                             className="inline-flex items-center px-1 py-1 border border-transparent shadow-sm text-xs rounded-sm text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
