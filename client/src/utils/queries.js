@@ -23,7 +23,6 @@ query findme($id: ID!) {
       title
       authors
       ISBN
-      bookId
       copiesAvailable
       copiesCheckedOut
       description

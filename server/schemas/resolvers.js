@@ -88,6 +88,15 @@ const resolvers = {
         { new: true },
       )
     },
+    removeBook: async (parent, { teacherId, bookInfo }) => {
+      console.log("Delete Book - teacherId: ", teacherId);
+      console.log("delete Book - bookInfo: ", bookInfo);
+      return Teacher.findByIdAndUpdate(
+        { _id: teacherId },
+        { $pull: { books: bookInfo } },
+        { new: true },
+      )
+    },
     // addBook: async (parent, {data}, context) => {
 
     //   if (context.teacher) {

@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import { HiX } from "react-icons/hi";
 
-const LibraryCard = ({ bookId, title, authors, description, copiesAvailable, onClose }) => {
+const LibraryCard = ({ id, title, authors, description, copiesAvailable, onClose }) => {
 
     const closeModal = () => {
         onClose()
@@ -10,7 +10,7 @@ const LibraryCard = ({ bookId, title, authors, description, copiesAvailable, onC
     return (
         <>
             <div className="flex container mx-auto bg-blue-900 w-8/12 pb-6 pt-1 px-6">
-                <div className="" key={bookId}>
+                <div className="" key={id}>
                     <div className="flex justify-end pb-1">
                         <button
                             type="button"

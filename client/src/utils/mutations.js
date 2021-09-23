@@ -105,18 +105,20 @@ export const ADD_STUDENT = gql`
 `;
 
 export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+  mutation removeBook($teacherId: ID!, $bookInfo: BookInfo!) {
+    removeBook(teacherId: $teacherId, bookInfo: $bookInfo) {
       _id
-      username
+      firstName
+      lastName
       email
-      savedBooks {
-        bookId
-        authors
-        image
-        description
-        title
-        link
+      books {
+          _id
+          title
+          authors
+          ISBN
+          description
+          copiesAvailable
+          copiesCheckedOut
       }
     }
   }
