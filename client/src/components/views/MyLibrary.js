@@ -13,18 +13,12 @@ import LibraryCard from '../LibraryCard';
 import swal from 'sweetalert';
 import { REMOVE_BOOK } from "../../utils/mutations";
 
-
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     modal: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-    },
+    }
 }));
 
 export default function MyLibrary({ name }) {
@@ -32,7 +26,6 @@ export default function MyLibrary({ name }) {
     const { loading, data } = useQuery(GET_FINDTHETEACHER, {
         variables: { id: teacherId },
     });
-    // console.log(console.log('books:', data.findtheteacher.books))
 
     return (
         <>
@@ -60,7 +53,6 @@ export default function MyLibrary({ name }) {
                 </table>
             </div>
         </>
-
     )
 }
 
@@ -76,7 +68,6 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
     };
 
     const [removeBook, { error, stuinfo }] = useMutation(REMOVE_BOOK)
-
 
     const handleDeleteBook = async (event) => {
 
@@ -102,7 +93,6 @@ const BooksTable = ({ bookId, title, copiesAvailable, authors, description }) =>
                     swal("Book Saved");
                 }
             });
-
     }
 
     return (
